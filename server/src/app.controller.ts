@@ -1,6 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { NestLogger } from '@abmao/nest-logs';
 
+@NestLogger()
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
