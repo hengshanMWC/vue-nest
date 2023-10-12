@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "init": "pnpm i && npm run prepare",
-    "dev": "vite",
+    "start": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "commit": "cz",
     "prepare": "husky install",
