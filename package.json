@@ -13,7 +13,7 @@
     "test:e2e": "playwright test",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext=js,ts,vue,mjs,cjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "pinia": "^2.1.6",
@@ -51,6 +51,6 @@
     "vue-tsc": "^1.8.11"
   },
   "lint-staged": {
-    "**/*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": "pnpm lint"
+    "**/*.{vue,cjs,mjs,ts,cts,mts}": "pnpm lint"
   }
 }
