@@ -1,10 +1,19 @@
 import { NestFactory } from '@nestjs/core';
+import { mw as requestIpMw } from 'request-ip';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
-import { join } from 'path';
+import { ValidationPipe } from '@nestjs/common';
+import { isAbsolute, join, normalize } from 'path';
 import rateLimit from 'express-rate-limit';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
+import { logger } from './common/libs/log4js/logger.middleware';
+import { Logger } from './common/libs/log4js/log4j.util';
+import { json, urlencoded } from 'express';
+import { TransformInterceptor } from './common/libs/log4js/transform.interceptor';
+import { ExceptionsFilter } from './common/libs/log4js/exceptions-filter';
+import { HttpExceptionsFilter } from './common/libs/log4js/http-exceptions-filter';
+import Chalk from 'chalk';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -34,8 +43,53 @@ async function bootstrap() {
     }),
   );
 
+  // 获取真实 ip
+  app.use(requestIpMw({ attributeName: 'ip' }));
+
+  // 全局验证
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      enableDebugMessages: true, // 开发环境
+      disableErrorMessages: false,
+      forbidUnknownValues: false,
+    }),
+  );
+
+  // 日志
+  app.use(json());
+  app.use(urlencoded({ extended: true }));
+  app.use(logger);
+  // 使用全局拦截器打印出参
+  app.useGlobalInterceptors(new TransformInterceptor());
+  // 所有异常
+  app.useGlobalFilters(new ExceptionsFilter());
+  app.useGlobalFilters(new HttpExceptionsFilter());
+  // 获取配置端口
+  const port = config.get<number>('app.port') || 8080;
+
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
-  await app.listen(3000);
+  await app.listen(port);
+
+  const fileUploadLocationConfig =
+    config.get<string>('app.file.location') || '../upload';
+  const fileUploadBastPath = normalize(
+    isAbsolute(fileUploadLocationConfig)
+      ? `${fileUploadLocationConfig}`
+      : join(process.cwd(), `${fileUploadLocationConfig}`),
+  );
+  Logger.log(
+    Chalk.green(`Nest-Admin 服务启动成功 `),
+    '\n',
+    Chalk.green('上传文件存储路径'),
+    `        ${fileUploadBastPath}`,
+    '\n',
+    Chalk.green('服务地址'),
+    `                http://localhost:${port}${prefix}/`,
+    '\n',
+    Chalk.green('swagger 文档地址        '),
+    `http://localhost:${port}${prefix}/docs/`,
+  );
 }
 bootstrap();

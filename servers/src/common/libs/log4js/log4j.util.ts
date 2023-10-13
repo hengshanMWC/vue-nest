@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Path from 'path';
-import Log4js from 'log4js';
+import { normalize, isAbsolute, join, basename } from 'path';
+import { addLayout, LoggingEvent, configure, getLogger } from 'log4js';
 import Util from 'util';
 import dayjs from 'dayjs'; // 处理时间的工具
 import * as StackTrace from 'stacktrace-js';
@@ -8,11 +8,10 @@ import Chalk from 'chalk';
 import config from '../../../config/index';
 
 const appLogDirConfig = config().app.logger.dir;
-
-const baseLogPath = Path.normalize(
-  Path.isAbsolute(appLogDirConfig)
+const baseLogPath = normalize(
+  isAbsolute(appLogDirConfig)
     ? appLogDirConfig
-    : Path.join(process.cwd(), appLogDirConfig),
+    : join(process.cwd(), appLogDirConfig),
 );
 
 const env = process.env.NODE_ENV;
@@ -39,8 +38,8 @@ export class ContextTrace {
   ) {}
 }
 
-Log4js.addLayout('Nest-Admin', (logConfig: any) => {
-  return (logEvent: Log4js.LoggingEvent): string => {
+addLayout('Nest-Admin', (logConfig: any) => {
+  return (logEvent: LoggingEvent): string => {
     let moduleName = '';
     let position = '';
 
@@ -180,10 +179,10 @@ const getConfigure = () => {
 };
 
 // 注入配置
-Log4js.configure(getConfigure());
+configure(getConfigure());
 
 // 实例化
-const logger = Log4js.getLogger();
+const logger = getLogger();
 logger.level = LoggerLevel.TRACE;
 
 export class Logger {
@@ -220,7 +219,7 @@ export class Logger {
   }
 
   static access(...args) {
-    const loggerCustom = Log4js.getLogger('http');
+    const loggerCustom = getLogger('http');
     loggerCustom.info(Logger.getStackTrace(), ...args);
   }
 
@@ -232,7 +231,7 @@ export class Logger {
     const lineNumber: number = stackInfo.lineNumber;
     const columnNumber: number = stackInfo.columnNumber;
     const fileName: string = stackInfo.fileName;
-    const basename: string = Path.basename(fileName);
-    return `${basename}(line: ${lineNumber}, column: ${columnNumber}): \n`;
+    const baseName: string = basename(fileName);
+    return `${baseName}(line: ${lineNumber}, column: ${columnNumber}): \n`;
   }
 }
