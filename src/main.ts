@@ -1,4 +1,5 @@
 import 'normalize.css/normalize.css'
+import './styles/tailwind.css';
 import './styles/main.css'
 
 

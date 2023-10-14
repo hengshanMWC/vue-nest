@@ -8,7 +8,12 @@ module.exports = {
     'eslint:recommended',
     '@vue/eslint-config-typescript'
   ],
-  ignorePatterns: ['commitlint.config.js'],
+  ignorePatterns: [
+    'commitlint.config.js',
+    'postcss.config.js',
+    'stylelint.config.js',
+    'tailwind.config.js',
+  ],
   parserOptions: {
     ecmaVersion: 'latest'
   },
