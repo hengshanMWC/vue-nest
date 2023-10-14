@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import Logo from '@/assets/logo.svg'
+import Logo from '@/assets/images/logo.svg'
 </script>
 
 <template>
