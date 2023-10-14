@@ -10,7 +10,10 @@ defineProps<{
     <h3>
       You’ve successfully created a project with
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. What's next?
+      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a> +
+      <a href="https://www.mysql.com/" target="_blank" rel="noopener">MySQL</a> +
+      <a href="https://nestjs.com/" target="_blank" rel="noopener">NestJs</a>.
+      What's next?
     </h3>
   </div>
 </template>
@@ -33,6 +36,7 @@ h3 {
 }
 
 @media (min-width: 1024px) {
+
   .greetings h1,
   .greetings h3 {
     text-align: left;
