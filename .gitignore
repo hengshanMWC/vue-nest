@@ -48,3 +48,7 @@ playwright-report/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Generated type
+auto-imports.d.ts
+components.d.ts
+

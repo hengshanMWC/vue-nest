@@ -16,7 +16,12 @@
     "lint": "eslint . --ext=js,ts,vue,mjs,cjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "-": "^0.0.1",
+    "axios": "^1.5.1",
     "pinia": "^2.1.6",
+    "unplugin-auto-import": "^0.16.6",
+    "unplugin-vue-components": "^0.25.2",
+    "vite-svg-loader": "^4.0.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
