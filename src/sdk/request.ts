@@ -1,4 +1,5 @@
-// import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
+export const service = axios.create()
 // import { ElMessageBox, ElNotification } from 'element-plus'
 // import appConfig from '@/config/index'
 

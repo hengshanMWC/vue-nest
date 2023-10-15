@@ -4,7 +4,7 @@ import zhCN from './zhCN'
 import zhTW from './zhTW'
 import jaJP from './jaJP'
 import { LOCALES } from '@/constant'
-import { getLocale } from '@/sdk/locale'
+import { getLocale } from '@/sdk'
 const i18n = createI18n({
   locale: getLocale(),
   fallbackLocale: LOCALES.EN_US,
