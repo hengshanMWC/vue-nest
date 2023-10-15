@@ -4,15 +4,14 @@ import './styles/main.css'
 
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router'
+import store from './stores';
+import { i18n } from './locales';
 
 const app = createApp(App)
 
-app.use(createPinia())
-app.use(router)
+app.use(router).use(store).use(i18n)
 
 // 关于 tailwind 的 preflight 样式
 const meta = document.createElement('meta')

@@ -24,6 +24,9 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": "off",
     "curly": "off",
     "no-new-func": 0,
+
+    'vue/multi-word-component-names': 'off',
+
     // 希望打开的
     "prefer-promise-reject-errors": "off",
     "@typescript-eslint/no-unused-vars": "off"

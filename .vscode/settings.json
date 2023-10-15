@@ -1,0 +1,4 @@
+{
+  "vue-i18n.i18nPaths": "src/locales",
+  "vue-i18n.sourceLocale": "en-US",
+}
