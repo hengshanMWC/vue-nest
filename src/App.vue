@@ -12,8 +12,8 @@ import Logo from '@/assets/images/logo.svg'
       <HelloWorld msg="You did it!" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">{{ $t('global.home') }}</RouterLink>
+        <RouterLink to="/about">{{ $t('global.about') }}</RouterLink>
       </nav>
     </div>
   </header>
