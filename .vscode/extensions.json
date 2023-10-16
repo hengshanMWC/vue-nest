@@ -4,6 +4,7 @@
     "Vue.vscode-typescript-vue-plugin",
     "ms-playwright.playwright",
     "dbaeumer.vscode-eslint",
-    "lokalise.i18n-ally"
+    "lokalise.i18n-ally",
+    "bradlc.vscode-tailwindcss"
   ]
 }

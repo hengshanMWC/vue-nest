@@ -13,6 +13,7 @@ declare module 'vue' {
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    Locales: typeof import('./src/components/Locales.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']

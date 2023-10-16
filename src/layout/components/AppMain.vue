@@ -20,7 +20,7 @@ const key = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .app-main {
   min-height: 100vh;
   width: 100%;
@@ -28,18 +28,4 @@ const key = computed(() => {
   position: relative;
   overflow: hidden;
 }
-
-// .fixed-header + .app-main {
-//   height: 100vh;
-//   overflow: auto;
-// }
-
-// .hasTagsView {
-//   .app-main {
-//     min-height: calc(100vh - var(--header-height));
-//   }
-//   .fixed-header + .app-main {
-//     padding-top: var(--header-height);
-//   }
-// }
 </style>

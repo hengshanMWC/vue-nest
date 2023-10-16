@@ -1,7 +1,3 @@
-@import './base.scss';
-@import './transition.scss';
-@import './variables.scss';
-
 a,
 .green {
   text-decoration: none;
