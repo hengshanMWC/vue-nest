@@ -10,10 +10,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
 import { Sunny, Moon } from '@vicons/ionicons5'
 import { storeToRefs } from 'pinia';
-import type { CSSProperties } from 'vue';
 import { useSettingStore } from '@/stores/modules/setting';
 import { ENUM_THEME } from '@/constant';
 

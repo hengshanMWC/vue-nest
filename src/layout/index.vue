@@ -10,6 +10,4 @@ import { AppMain, Header } from './components/index'
 
 </script>
 
-<style scoped>
-.container {}
-</style>
+<style scoped></style>

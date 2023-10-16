@@ -17,9 +17,9 @@ export default defineConfig((env: ConfigEnv) => {
       vue(),
       /** 将 SVG 静态图转化为 Vue 组件 */
       svgLoader(),
-      // 需自动加载组件
+      // 自动按需加载
       AutoImport({
-        resolvers: [NaiveUiResolver()]
+        imports: ['vue']
       }),
       Components({
         resolvers: [NaiveUiResolver()]

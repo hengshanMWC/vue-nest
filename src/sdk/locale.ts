@@ -18,7 +18,6 @@ const handleStoreLangFlag = () => {
     return langFlag;
   }
 };
-
 const handleUrlLangFlag = () => {
   const value = getURLSearchParams(LANG_FLAG);
   const langFlag = typeof value === 'object' ? '' : value;

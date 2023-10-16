@@ -1,12 +1,11 @@
-import { watch, ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { ENUM_THEME, LOCALES, THEME } from '@/constant'
 import { getLocale, setStoreLangFlag } from '@/sdk'
 import { getLocales } from '@/locales'
 interface HandleSetting {
-  themeRef: Ref<ENUM_THEME>,
+  themeRef: RefValue<ENUM_THEME>,
   setTheme: (type: ENUM_THEME) => void,
-  locale: Ref<LOCALES>,
+  locale: RefValue<LOCALES>,
 }
 
 export const useSettingStore = defineStore<'setting', HandleSetting>('setting', () => {
