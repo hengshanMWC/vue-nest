@@ -1,6 +1,8 @@
-import type { LocalesApi, NLocaleApi } from '@/types'
+import type { LocalesApi, NLocaleApi, ThemeValue } from '@/types'
 import { zhCN, dateZhCN, enUS, dateEnUS, zhTW, dateZhTW, jaJP, dateJaJP } from 'naive-ui'
-import { LOCALES } from '.'
+import { ENUM_THEME, LOCALES } from '.'
+import { darkTheme } from 'naive-ui'
+
 export const NAIVE_UI_LOCALES: LocalesApi<NLocaleApi> = {
   [LOCALES.EN_US]: {
     locale: enUS,
@@ -18,4 +20,9 @@ export const NAIVE_UI_LOCALES: LocalesApi<NLocaleApi> = {
     locale: jaJP,
     dateLocale: dateJaJP
   },
+} as const
+
+export const THEME_LIST: Record<ENUM_THEME, ThemeValue> = {
+  [ENUM_THEME.DEFAULT]: null,
+  [ENUM_THEME.DARK]: darkTheme,
 } as const

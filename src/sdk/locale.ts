@@ -21,7 +21,6 @@ const handleStoreLangFlag = () => {
 
 const handleUrlLangFlag = () => {
   const value = getURLSearchParams(LANG_FLAG);
-  console.log('asd', value)
   const langFlag = typeof value === 'object' ? '' : value;
   console.log(LANG_FLAG, langFlag);
   if (LEGAL_LOCALES.includes(langFlag as LOCALES)) {

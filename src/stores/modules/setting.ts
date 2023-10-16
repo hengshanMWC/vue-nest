@@ -1,27 +1,24 @@
 import { watch, ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
-import { darkTheme } from 'naive-ui'
-import { ENUM_THEME, LOCALES } from '@/constant'
-import type { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface'
+import { ENUM_THEME, LOCALES, THEME } from '@/constant'
 import { getLocale, setStoreLangFlag } from '@/sdk'
 import { getLocales } from '@/locales'
-type ThemeValue = BuiltInGlobalTheme | null
 interface HandleSetting {
-  themeData: Ref<ThemeValue>,
+  themeRef: Ref<ENUM_THEME>,
   setTheme: (type: ENUM_THEME) => void,
   locale: Ref<LOCALES>,
 }
 
-const themeList: Record<ENUM_THEME, ThemeValue> = {
-  [ENUM_THEME.DEFAULT]: null,
-  [ENUM_THEME.DARK]: darkTheme,
-} as const
-
 export const useSettingStore = defineStore<'setting', HandleSetting>('setting', () => {
   // 主题
-  const themeData = ref<ThemeValue>(null)
+  const themeStorage = localStorage.getItem(THEME) as ENUM_THEME
+  const themeRef = ref<ENUM_THEME>(themeStorage ? themeStorage : ENUM_THEME.DEFAULT)
+  watch(themeRef, (value) => {
+    localStorage.setItem(THEME, value)
+  })
   function setTheme (type: ENUM_THEME) {
-    themeData.value = themeList[type]
+    themeRef.value = type
+    localStorage.setItem(THEME, type)
   }
 
   // 国际化
@@ -32,7 +29,7 @@ export const useSettingStore = defineStore<'setting', HandleSetting>('setting', 
   })
 
   return { 
-    themeData,
+    themeRef,
     setTheme,
 
     locale,
