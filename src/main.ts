@@ -6,12 +6,12 @@ import './styles/index.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './stores';
-import { i18n } from './locales';
+import createStore from './stores';
+import { createLocales } from './locales';
 
 const app = createApp(App)
 
-app.use(router).use(store).use(i18n)
+app.use(router).use(createStore()).use(createLocales())
 
 // 关于 tailwind 的 preflight 样式
 const meta = document.createElement('meta')

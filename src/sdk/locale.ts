@@ -68,7 +68,7 @@ const handleDefaultLanguage = () => {
   return DEFAULT_LOCALE;
 };
 
-function getLocale() {
+function getLocale(): LOCALES {
   const arr = [
     handleStoreLangFlag,
     handleUrlLangFlag,
@@ -81,7 +81,7 @@ function getLocale() {
     value = arr[i]();
     if (value) break;
   }
-  return value;
+  return value as LOCALES;
 }
 
 const setStoreLangFlag = (value: LOCALES) => {

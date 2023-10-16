@@ -1,5 +1,5 @@
 <template>
-  <n-layout-header class="header" position="absolute">
+  <n-layout-header class="header flex-sb z-[1] fixed pr-5 pl-5 bottom-link" position="absolute">
     <!-- logo -->
     <div></div>
     <div>
@@ -15,10 +15,8 @@ import Locales from '@/components/Locales.vue'
 <style scoped>
 .header {
   height: var(--header-height);
-  background-color: rgba(255, 255, 255, .8);
-  z-index: 1;
-  position: fixed;
-  display: flex;
-  align-items: center;
+  background-color: rgba(255, 255, 255, .1);
+  backdrop-filter: blur(8px);
+  --tw-backdrop-blur: blur(8px);
 }
 </style>

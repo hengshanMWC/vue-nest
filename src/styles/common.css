@@ -1,0 +1,9 @@
+/* 上下居中，左右各两边 */
+.flex-sb {
+  @apply flex items-center justify-between
+}
+
+/* 底部边框 */
+.bottom-link {
+  border-bottom: 1px solid var(--n-border-color)
+}
