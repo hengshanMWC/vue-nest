@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { ENUM_THEME, LOCALES, THEME } from '@/constant'
+import { ENUM_THEME, LOCALES_ENUM, THEME } from '@/constant'
 import { getLocale, setStoreLangFlag } from '@/sdk'
 import { getLocales } from '@/locales'
 interface HandleSetting {
   themeRef: RefValue<ENUM_THEME>,
   setTheme: (type: ENUM_THEME) => void,
-  locale: RefValue<LOCALES>,
+  locale: RefValue<LOCALES_ENUM>,
 }
 
 export const useSettingStore = defineStore<'setting', HandleSetting>('setting', () => {
@@ -21,7 +21,7 @@ export const useSettingStore = defineStore<'setting', HandleSetting>('setting', 
   }
 
   // 国际化
-  const locale = ref<LOCALES>(getLocale())
+  const locale = ref<LOCALES_ENUM>(getLocale())
   watch(locale, (value) => {
     getLocales().global.locale = value
     setStoreLangFlag(value)

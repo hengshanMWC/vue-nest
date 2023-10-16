@@ -6,7 +6,7 @@
  * - 更新语言的时候需要更新此列表内的所有参数
  */
 
-import { LOCALES, DEFAULT_LOCALE, LEGAL_LOCALES, LANG_FLAG } from "@/constant";
+import { LOCALES_ENUM, DEFAULT_LOCALE, LEGAL_LOCALES, LANG_FLAG } from "@/constant";
 import { getURLSearchParams } from "@/utils/url";
 import { isNull } from "lodash-es";
 
@@ -14,7 +14,7 @@ const handleStoreLangFlag = () => {
   const value = localStorage.getItem(LANG_FLAG);
   const langFlag = isNull(value) ? '' : value;
   console.log(LANG_FLAG, langFlag);
-  if (LEGAL_LOCALES.includes(langFlag as LOCALES)) {
+  if (LEGAL_LOCALES.includes(langFlag as LOCALES_ENUM)) {
     return langFlag;
   }
 };
@@ -22,7 +22,7 @@ const handleUrlLangFlag = () => {
   const value = getURLSearchParams(LANG_FLAG);
   const langFlag = typeof value === 'object' ? '' : value;
   console.log(LANG_FLAG, langFlag);
-  if (LEGAL_LOCALES.includes(langFlag as LOCALES)) {
+  if (LEGAL_LOCALES.includes(langFlag as LOCALES_ENUM)) {
     return langFlag;
   }
 };
@@ -48,17 +48,17 @@ const handleSystemLanguage = () => {
 };
 
 // 各浏览器对 navigator 对象中几个与语言相关的属性的返回值存在差异, 需要兼容处理
-function parseNavigatorLanguage(language: string): LOCALES {
+function parseNavigatorLanguage(language: string): LOCALES_ENUM {
   const CHINESE_LANGUAGE_GROUP = ['zh-hk', 'zh-tw', 'zh-sg'];
   const JA_GROUP = ['ja-jp', 'ja'];
   if (CHINESE_LANGUAGE_GROUP.includes(language)) {
-    return LOCALES.ZH_TW
+    return LOCALES_ENUM.ZH_TW
   } else if (JA_GROUP.includes(language)) {
-    return LOCALES.JA_JP;
+    return LOCALES_ENUM.JA_JP;
   } else if (language === 'zh-cn') {
-    return LOCALES.ZH_CN;
+    return LOCALES_ENUM.ZH_CN;
   } else {
-    return language as LOCALES
+    return language as LOCALES_ENUM
   }
 }
 
@@ -67,7 +67,7 @@ const handleDefaultLanguage = () => {
   return DEFAULT_LOCALE;
 };
 
-function getLocale(): LOCALES {
+function getLocale(): LOCALES_ENUM {
   const arr = [
     handleStoreLangFlag,
     handleUrlLangFlag,
@@ -80,10 +80,10 @@ function getLocale(): LOCALES {
     value = arr[i]();
     if (value) break;
   }
-  return value as LOCALES;
+  return value as LOCALES_ENUM;
 }
 
-const setStoreLangFlag = (value: LOCALES) => {
+const setStoreLangFlag = (value: LOCALES_ENUM) => {
   localStorage.setItem(LANG_FLAG, value);
 }
 

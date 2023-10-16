@@ -1,7 +1,7 @@
 import { NestedObject, translateRun } from './utils/i18nTranslate'
 import { readJsonFiles } from "./utils/readJsons"
 import { HttpProxyAgent } from 'http-proxy-agent';
-import { DEFAULT_LOCALE, LEGAL_LOCALES, LOCALES } from '../src/constant';
+import { DEFAULT_LOCALE, LEGAL_LOCALES, LOCALES_ENUM } from '../src/constant';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
 const agent = new HttpProxyAgent('http://127.0.0.1:7890');
@@ -18,7 +18,7 @@ async function main () {
   await Promise.all(taskList)
 }
 
-async function runTranslate (targetLocale: LOCALES, jsonContentList: Record<string, NestedObject>) {
+async function runTranslate (targetLocale: LOCALES_ENUM, jsonContentList: Record<string, NestedObject>) {
   return Object.keys(jsonContentList).map(async key =>  {
     const translateRunJson = await translateRun(jsonContentList[key], {
       from: DEFAULT_LOCALE,

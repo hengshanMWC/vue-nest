@@ -1,7 +1,7 @@
 /** 枚举 */
 
 // 语言
-export enum LOCALES {
+export enum LOCALES_ENUM {
   EN_US = 'en-US',
   ZH_CN = 'zh-CN',
   ZH_TW = 'zh-TW',

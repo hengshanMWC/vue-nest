@@ -8,29 +8,29 @@
 
 <script lang="ts" setup>
 import { Earth } from '@vicons/ionicons5'
-import { LOCALES } from '@/constant'
+import { LOCALES_ENUM } from '@/constant'
 import { useSettingStore } from '@/stores/modules/setting';
 import { storeToRefs } from 'pinia';
 
 const { locale } = storeToRefs(useSettingStore())
-function handleSelect(value: LOCALES) {
+function handleSelect(value: LOCALES_ENUM) {
   locale.value = value
 }
 const options = [
   {
-    key: LOCALES.EN_US,
+    key: LOCALES_ENUM.EN_US,
     label: 'English',
   },
   {
-    key: LOCALES.ZH_CN,
+    key: LOCALES_ENUM.ZH_CN,
     label: '简体中文',
   },
   {
-    key: LOCALES.ZH_TW,
+    key: LOCALES_ENUM.ZH_TW,
     label: '繁体中文',
   },
   {
-    key: LOCALES.JA_JP,
+    key: LOCALES_ENUM.JA_JP,
     label: '日本語',
   },
 ]
