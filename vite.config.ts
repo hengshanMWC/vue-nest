@@ -38,6 +38,9 @@ export default defineConfig((env: ConfigEnv) => {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       }
     },
+    optimizeDeps: {
+      exclude: ['vue', 'axios', 'vue-router', 'vue-i18n']
+    },
     server: {
       cors: true,
       proxy: {
