@@ -6,7 +6,9 @@
     "src/**/*",
     "src/**/*.vue",
     "src/**/*.ts",
-    "src/**/*.json"
+    "src/**/*.json",
+    "components.d.ts",
+    "auto-imports.d.ts"
   ],
   "exclude": [
     "src/**/__tests__/*"

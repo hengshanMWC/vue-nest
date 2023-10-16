@@ -7,3 +7,8 @@ export enum LOCALES {
   ZH_TW = 'zh-TW',
   JA_JP = 'ja-JP'
 }
+
+export enum ENUM_THEME {
+  DEFAULT = 'default', // 默认
+  DARK = 'dark', // 黑夜主题
+}
