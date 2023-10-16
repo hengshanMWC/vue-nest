@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { darkTheme } from 'naive-ui'
 import { ENUM_THEME, LOCALES } from '@/constant'
 import type { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface'
-import { getLocale } from '@/sdk'
+import { getLocale, setStoreLangFlag } from '@/sdk'
 import { getLocales } from '@/locales'
 type ThemeValue = BuiltInGlobalTheme | null
 interface HandleSetting {
@@ -28,6 +28,7 @@ export const useSettingStore = defineStore<'setting', HandleSetting>('setting', 
   const locale = ref<LOCALES>(getLocale())
   watch(locale, (value) => {
     getLocales().global.locale = value
+    setStoreLangFlag(value)
   })
 
   return { 

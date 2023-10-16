@@ -1,5 +1,5 @@
 <template>
-  <n-dropdown trigger="hover" :options="options" :value="store.locale" @select="handleSelect">
+  <n-dropdown trigger="hover" :options="options" :value="locale" @select="handleSelect">
     <n-icon :size="38" class="cursor-pointer">
       <Earth></Earth>
     </n-icon>
@@ -10,10 +10,11 @@
 import { Earth } from '@vicons/ionicons5'
 import { LOCALES } from '@/constant'
 import { useSettingStore } from '@/stores/modules/setting';
+import { storeToRefs } from 'pinia';
 
-const store = useSettingStore()
+const { locale } = storeToRefs(useSettingStore())
 function handleSelect(value: LOCALES) {
-  store.locale = value
+  locale.value = value
 }
 const options = [
   {

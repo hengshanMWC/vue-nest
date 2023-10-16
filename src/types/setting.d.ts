@@ -1,5 +1,9 @@
 import type { LOCALES } from "@/constant";
+import type { NLocale, NDateLocale } from 'naive-ui'
 
-export type LocalesKey = keyof typeof LOCALES;
+export type LocalesApi<T = any> = Record<LOCALES, T>
 
-export type LocalesApi<T = any> = Record<LocalesKey, T>
+export interface NLocaleApi {
+  locale: NLocale
+  dateLocale: NDateLocale
+}
