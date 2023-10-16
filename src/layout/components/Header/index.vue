@@ -1,9 +1,13 @@
 <template>
-  <n-layout-header class="header flex-sb z-[1] fixed pr-10 pl-10 bottom-link" position="absolute">
+  <n-layout-header class="header flex-sb z-[1] fixed pr-8 pl-8 bottom-link" position="absolute">
     <!-- logo -->
-    <div></div>
     <div class="flex">
-      <div v-for="(value, index) in rightComponents" :key="index" class="flex items-center box-interval">
+      <div v-for="(value, index) in leftComponents" :key="index" class="arrange-boxs box-interval">
+        <component :is="value"></component>
+      </div>
+    </div>
+    <div class="flex">
+      <div v-for="(value, index) in rightComponents" :key="index" class="arrange-boxs box-interval">
         <component :is="value"></component>
       </div>
     </div>
@@ -13,6 +17,8 @@
 <script lang="ts" setup>
 import Locales from '@/components/Locales.vue'
 import ThemeSwitch from '@/components/ThemeSwitch.vue'
+import Logo from './Logo.vue'
+const leftComponents = [Logo]
 const rightComponents = [Locales, ThemeSwitch]
 </script>
 
@@ -22,6 +28,10 @@ const rightComponents = [Locales, ThemeSwitch]
   background-color: rgba(255, 255, 255, .1);
   backdrop-filter: blur(8px);
   --tw-backdrop-blur: blur(8px);
+
+  .arrange-boxs {
+    @apply flex items-center
+  }
 
   .box-interval:not(:last-child) {
     @apply mr-4

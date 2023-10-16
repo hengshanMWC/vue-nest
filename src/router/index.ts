@@ -1,27 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import IndexView from '../views/IndexView.vue'
+import IndexView from '../views/HomeView.vue'
 import Layout from '../layout/index.vue'
+import { HOME_PAGE_NAME } from '@/constant/common'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      redirect: '/index',
-      name: 'layout',
+      redirect: '/' + HOME_PAGE_NAME,
       component: Layout,
       children: [
         {
-          path: '/index',
-          name: 'index',
+          path: '/' + HOME_PAGE_NAME,
+          name: HOME_PAGE_NAME,
           component: IndexView,
         }
       ]
     },
     {
-      path: '/home',
-      name: 'home',
-      component: () => import('../views/HomeView.vue')
+      path: '/api',
+      name: 'api',
+      component: () => import('../views/ApiView.vue')
     },
     {
       path: '/about',
