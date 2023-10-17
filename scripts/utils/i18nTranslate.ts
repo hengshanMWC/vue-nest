@@ -44,7 +44,8 @@ const unflattenObject = (obj: JsonObject) => {
 	return result
 }
 
-const googleTranslator = (text: string, translateOptions: TranslateOptions) => translate(text, translateOptions)
+const googleTranslator = (text: string, translateOptions: TranslateOptions) =>
+	translate(text, translateOptions)
 type Chunk = Array<{ key: string; value: string }>
 
 export interface Options {
@@ -52,7 +53,11 @@ export interface Options {
 	targetJson?: NestedObject
 }
 // 定义翻译方法
-const translateRun = async (inputJson: NestedObject, options: Options | null, translateOptions: TranslateOptions) => {
+const translateRun = async (
+	inputJson: NestedObject,
+	options: Options | null,
+	translateOptions: TranslateOptions
+) => {
 	const { targetJson } = options || {}
 	const forInputJson = flattenObject(inputJson)
 	const forTargetJson = targetJson ? flattenObject(targetJson) : {}

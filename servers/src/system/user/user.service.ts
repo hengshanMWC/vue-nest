@@ -100,7 +100,10 @@ export class UserService {
 		const checkPassword = await compare(password, user.password)
 		if (!checkPassword) return ResultData.fail(AppHttpCode.USER_PASSWORD_INVALID, '帐号或密码错误')
 		if (user.status === 0)
-			return ResultData.fail(AppHttpCode.USER_ACCOUNT_FORBIDDEN, '您已被禁用，如需正常使用请联系管理员')
+			return ResultData.fail(
+				AppHttpCode.USER_ACCOUNT_FORBIDDEN,
+				'您已被禁用，如需正常使用请联系管理员'
+			)
 		// 生成 token
 		const data = this.genToken({ id: user.id })
 		return ResultData.ok(data)
@@ -115,10 +118,18 @@ export class UserService {
 	 * 更新或重置用户密码
 	 * @reset 是否重置, false 则使用传入的 password 更新
 	 */
-	async updatePassword(userId: string, password: string, reset: boolean, currUser: UserEntity): Promise<ResultData> {
+	async updatePassword(
+		userId: string,
+		password: string,
+		reset: boolean,
+		currUser: UserEntity
+	): Promise<ResultData> {
 		const existing = await this.userRepo.findOne({ where: { id: userId } })
 		if (!existing)
-			return ResultData.fail(AppHttpCode.USER_NOT_FOUND, `用户不存在或已删除，${reset ? '重置' : '更新'}失败`)
+			return ResultData.fail(
+				AppHttpCode.USER_NOT_FOUND,
+				`用户不存在或已删除，${reset ? '重置' : '更新'}失败`
+			)
 		if (existing.type === UserType.SUPER_ADMIN && currUser.type === UserType.ORDINARY_USER) {
 			return ResultData.fail(AppHttpCode.USER_FORBIDDEN_UPDATE, '您不可修改超管信息喔')
 		}
@@ -130,7 +141,8 @@ export class UserService {
 		const { affected } = await this.userManager.transaction(async (transactionalEntityManager) => {
 			return await transactionalEntityManager.update<UserEntity>(UserEntity, userId, user)
 		})
-		if (!affected) ResultData.fail(AppHttpCode.SERVICE_ERROR, `${reset ? '重置' : '更新'}失败，请稍后重试`)
+		if (!affected)
+			ResultData.fail(AppHttpCode.SERVICE_ERROR, `${reset ? '重置' : '更新'}失败，请稍后重试`)
 		return ResultData.ok()
 	}
 

@@ -11,5 +11,8 @@ const configFileNameObj = {
 
 const env = process.env.NODE_ENV
 export default () => {
-	return load(readFileSync(join(__dirname, `./${configFileNameObj[env]}.yml`), 'utf8')) as Record<string, any>
+	return load(readFileSync(join(__dirname, `./${configFileNameObj[env]}.yml`), 'utf8')) as Record<
+		string,
+		any
+	>
 }

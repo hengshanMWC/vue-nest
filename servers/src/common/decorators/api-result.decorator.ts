@@ -10,7 +10,11 @@ const baseTypeNames = ['String', 'Number', 'Boolean']
  * @param isArray data 是否是数组
  * @param isPager 设置为 true, 则 data 类型为 { list, total } , false data 类型是纯数组
  */
-export const ApiResult = <TModel extends Type<any>>(model?: TModel, isArray?: boolean, isPager?: boolean) => {
+export const ApiResult = <TModel extends Type<any>>(
+	model?: TModel,
+	isArray?: boolean,
+	isPager?: boolean
+) => {
 	let items = null
 	const modelIsBaseType = model && baseTypeNames.includes(model.name)
 	if (modelIsBaseType) {

@@ -1,4 +1,7 @@
-import { RedisModule as liaoliaoRedisModule, RedisModuleAsyncOptions } from '@liaoliaots/nestjs-redis'
+import {
+	RedisModule as liaoliaoRedisModule,
+	RedisModuleAsyncOptions
+} from '@liaoliaots/nestjs-redis'
 import { DynamicModule, Global, Module } from '@nestjs/common'
 
 import { RedisService } from './redis.service'

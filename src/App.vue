@@ -1,5 +1,9 @@
 <template>
-	<n-config-provider :locale="naiveLocales.locale" :date-locale="naiveLocales.dateLocale" :theme="THEME_LIST[themeRef]">
+	<n-config-provider
+		:locale="naiveLocales.locale"
+		:date-locale="naiveLocales.dateLocale"
+		:theme="THEME_LIST[themeRef]"
+	>
 		<RouterView />
 	</n-config-provider>
 </template>

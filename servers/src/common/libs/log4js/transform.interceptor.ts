@@ -5,7 +5,10 @@ import { Logger } from './log4j.util'
 
 @Injectable()
 export class TransformInterceptor implements NestInterceptor {
-	intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
+	intercept(
+		context: ExecutionContext,
+		next: CallHandler<any>
+	): Observable<any> | Promise<Observable<any>> {
 		const req = context.getArgByIndex(1).req
 		return next.handle().pipe(
 			map((data) => {

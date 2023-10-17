@@ -5,7 +5,9 @@ import { isString, isArray, pick } from 'lodash-es'
  * @param {string|string[]} query 可选
  * @returns
  */
-export function getURLSearchParams(query: string | string[]): string | string[] | Record<string, string> {
+export function getURLSearchParams(
+	query: string | string[]
+): string | string[] | Record<string, string> {
 	const searchParams = new URLSearchParams(window.location.search).entries()
 	const result = [...searchParams].reduce((obj: Record<string, string>, curr) => {
 		obj[curr[0]] = curr[1]

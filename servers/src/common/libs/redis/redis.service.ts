@@ -62,7 +62,11 @@ export class RedisService {
 	 * @param data
 	 * @params expire 单位 秒
 	 */
-	async hmset(key: string, data: Record<string, string | number | boolean>, expire?: number): Promise<number | any> {
+	async hmset(
+		key: string,
+		data: Record<string, string | number | boolean>,
+		expire?: number
+	): Promise<number | any> {
 		if (!key || !data) return 0
 		const result = await this.client.hmset(key, data)
 		if (expire) {

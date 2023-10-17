@@ -7,7 +7,12 @@ import { join } from 'path'
 import { TranslateOptions } from '@vitalets/google-translate-api/src/types'
 
 type Agent = TranslateOptions['fetchOptions']['agent']
-async function translatesRun(fromLocale: string, sourceLocalePath: string, toLocaleList: string[], agent?: Agent) {
+async function translatesRun(
+	fromLocale: string,
+	sourceLocalePath: string,
+	toLocaleList: string[],
+	agent?: Agent
+) {
 	const jsonContentList = await readJsonFiles(sourceLocalePath)
 	const taskList = toLocaleList
 		.filter((locale) => locale !== DEFAULT_LOCALE)

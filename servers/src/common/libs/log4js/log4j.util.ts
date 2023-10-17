@@ -8,7 +8,9 @@ import Chalk from 'chalk'
 import config from '../../../config/index'
 
 const appLogDirConfig = config().app.logger.dir
-const baseLogPath = normalize(isAbsolute(appLogDirConfig) ? appLogDirConfig : join(process.cwd(), appLogDirConfig))
+const baseLogPath = normalize(
+	isAbsolute(appLogDirConfig) ? appLogDirConfig : join(process.cwd(), appLogDirConfig)
+)
 
 const env = process.env.NODE_ENV
 // 日志级别
@@ -88,7 +90,9 @@ addLayout('Nest-Admin', (logConfig: any) => {
 				break
 		}
 
-		return `${Chalk.green(typeOutput)}${dateOutput}  ${Chalk.yellow(moduleOutput)}${levelOutput}${positionOutput}`
+		return `${Chalk.green(typeOutput)}${dateOutput}  ${Chalk.yellow(
+			moduleOutput
+		)}${levelOutput}${positionOutput}`
 	}
 })
 

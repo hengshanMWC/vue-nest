@@ -9,7 +9,8 @@ export class ExceptionsFilter implements ExceptionFilter {
 		const response = ctx.getResponse()
 		const request = ctx.getRequest()
 
-		const status = exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR
+		const status =
+			exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR
 		const logFormat = `
 ##############################################################################################################
 Request original url: ${request.originalUrl}
