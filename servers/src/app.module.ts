@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { TestModule } from './system/test/test.module';
+import { UserModule } from './system/user/user.module';
+import { AuthModule } from './system/auth/auth.module';
 import { StaticModule } from './system/static/static.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config';
@@ -35,9 +36,10 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
         } as TypeOrmModuleOptions;
       },
     }),
-    // 业务
-    TestModule,
+    // 业务支持
     StaticModule,
+    UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
