@@ -51,7 +51,7 @@ const googleTranslator = (text: string, translateOptions: TranslateOptions) => t
 )
 type Chunk = Array<{key: string, value: string}>
 
-interface Options {
+export interface Options {
   // 传目标数据是增量，不传是全量
   targetJson?: NestedObject
 }

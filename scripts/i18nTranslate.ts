@@ -4,21 +4,24 @@ import { HttpProxyAgent } from 'http-proxy-agent';
 import { DEFAULT_LOCALE, LEGAL_LOCALES, LOCALES_ENUM } from '../src/constant';
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-const agent = new HttpProxyAgent('http://127.0.0.1:7890');
+import { TranslateOptions } from '@vitalets/google-translate-api/src/types';
 
-// 读取 json 文案文件
-const sourceLocalePath = join(__dirname, '../src/locales/lang', DEFAULT_LOCALE)
-
-const jsonFIlePathReplaceRegExp = new RegExp(DEFAULT_LOCALE, 'g')
-async function main () {
+type Agent = TranslateOptions['fetchOptions']['agent']
+async function translatesRun (
+  fromLocale: string, 
+  sourceLocalePath: string, 
+  toLocaleList: string[], 
+  agent?: Agent
+) {
   const jsonContentList = await readJsonFiles(sourceLocalePath)
-  const taskList = LEGAL_LOCALES
+  const taskList = toLocaleList
     .filter(locale => locale !== DEFAULT_LOCALE)
-    .map(locale => runTranslate(locale, jsonContentList))
+    .map(locale => rollTranslate(fromLocale, locale, jsonContentList, agent))
   await Promise.all(taskList)
 }
 
-async function runTranslate (targetLocale: LOCALES_ENUM, jsonContentList: Record<string, NestedObject>) {
+async function rollTranslate (fromLocale: string, targetLocale: string, jsonContentList: Record<string, NestedObject>, agent?: Agent) {
+  const jsonFIlePathReplaceRegExp = new RegExp(fromLocale, 'g')
   return Object.keys(jsonContentList).map(async key =>  {
     const targetPath = key.replace(jsonFIlePathReplaceRegExp, targetLocale)
     const targetContent = await readFile(targetPath, 'utf8')
@@ -26,7 +29,7 @@ async function runTranslate (targetLocale: LOCALES_ENUM, jsonContentList: Record
     const translateRunJson = await translateRun(jsonContentList[key], {
       targetJson
     }, {
-      from: DEFAULT_LOCALE,
+      from: fromLocale,
       to: targetLocale,
       fetchOptions: {agent}
     })
@@ -34,4 +37,14 @@ async function runTranslate (targetLocale: LOCALES_ENUM, jsonContentList: Record
   })
 }
 
-main()
+
+const agent = new HttpProxyAgent('http://127.0.0.1:7890');
+// 读取 json 文案文件
+const sourceLocalePath = join(__dirname, '../src/locales/lang', DEFAULT_LOCALE)
+
+translatesRun(
+  DEFAULT_LOCALE,
+  sourceLocalePath,
+  LEGAL_LOCALES.filter(locale => locale !== DEFAULT_LOCALE),
+  agent
+)
