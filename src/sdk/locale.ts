@@ -69,11 +69,11 @@ const handleDefaultLanguage = () => {
 
 function getLocale(): LOCALES_ENUM {
   const arr = [
-    handleStoreLangFlag,
-    handleUrlLangFlag,
-    handleBrowserLanguage,
-    handleSystemLanguage,
-    handleDefaultLanguage,
+    handleStoreLangFlag, // 本地储存
+    handleUrlLangFlag, // url query
+    handleBrowserLanguage, // 浏览器
+    handleSystemLanguage, // 系统
+    handleDefaultLanguage, // 默认
   ];
   let value;
   for (let i = 0; i < arr.length; i++) {
