@@ -50,24 +50,33 @@ const googleTranslator = (text: string, translateOptions: TranslateOptions) => t
   translateOptions
 )
 type Chunk = Array<{key: string, value: string}>
+
+interface Options {
+  targetJson: NestedObject
+}
 // 定义翻译方法
-const translateRun = async (inputJson: NestedObject, options: TranslateOptions) => {
-  const forJson = flattenObject(inputJson)
+const translateRun = async (inputJson: NestedObject, { targetJson }: Options, translateOptions: TranslateOptions) => {
+  const forInputJson = flattenObject(inputJson)
+  const forTargetJson = flattenObject(targetJson)
   let chunkValuesLength = 0
   let chunk: Chunk= []
   const chunks: Chunk[] = []
-  const sourceKeyValues = Object.entries(forJson)
+  const sourceKeyValues = Object.entries(forInputJson)
   sourceKeyValues.forEach(([key, value]) => {
-    const valueLength = value.length as number
-    // Google 翻译单次最大字符长度 5000 字, 5 为占位分隔符长度
-    if (chunkValuesLength + valueLength + 5 >= 5000) {
-      chunks.push(chunk)
-      chunkValuesLength = 0
-      chunk = []
-    } else {
-      chunk.push({ key, value })
-      chunkValuesLength += (valueLength + 5)
+    // 目标json有数据则跳过翻译
+    if (!forTargetJson[key]) {
+      const valueLength = value.length as number
+      // Google 翻译单次最大字符长度 5000 字, 5 为占位分隔符长度
+      if (chunkValuesLength + valueLength + 5 >= 5000) {
+        chunks.push(chunk)
+        chunkValuesLength = 0
+        chunk = []
+      } else {
+        chunk.push({ key, value })
+        chunkValuesLength += (valueLength + 5)
+      }
     }
+    
   })
   if (chunk.length > 0) {// 遍历完后检查不满 5000 字符的遗留
     chunks.push(chunk)
@@ -78,7 +87,7 @@ const translateRun = async (inputJson: NestedObject, options: TranslateOptions) 
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i]
     const mergeText = chunk.map(v => v.value).join('\n###\n')// 合并文案
-    const { text } = await googleTranslator(mergeText, options)
+    const { text } = await googleTranslator(mergeText, translateOptions)
     const resultValues = text.split(/\n *# *# *# *\n/).map((v) => v.trim())// 拆分文案
     if (chunk.length !== resultValues.length) {
       throw new Error('翻译前文案碎片长度和翻译后的不一致')
@@ -87,12 +96,11 @@ const translateRun = async (inputJson: NestedObject, options: TranslateOptions) 
       resultJson[key] = resultValues[index]
     })
   }
-  return unflattenObject(resultJson)
+  return unflattenObject({
+    ...forTargetJson,
+    ...resultJson
+  })
 }
-// 将翻译结果写入硬盘
-// translateRun(sourceJson).then(resultJson => {
-//   fs.writeFileSync('./zh.json', JSON.stringify(resultJson))
-// })
 
 export {
   translateRun
