@@ -13,7 +13,7 @@ import LogoSvg from '@/assets/images/logo.svg'
 
       <nav>
         <RouterLink to="/http">{{ $t('global.api') }}</RouterLink>
-        <RouterLink to="/about">{{ $t('global.about') }}</RouterLink>
+        <RouterLink to="/user">{{ $t('global.user') }}</RouterLink>
       </nav>
     </div>
   </header>
