@@ -1,7 +1,7 @@
 <template>
-	<div class="user">
-		<h1>{{ $t('demo.this-is-an-about-page') }}</h1>
-	</div>
+  <div class="user">
+    <h1>{{ $t('demo.this-is-an-about-page') }}</h1>
+  </div>
 </template>
 
 <style>

@@ -5,18 +5,22 @@ import LogoSvg from '@/assets/images/logo.svg'
 </script>
 
 <template>
-	<header>
-		<LogoSvg width="125" height="125" class="logo"></LogoSvg>
+  <header>
+    <LogoSvg width="125" height="125" class="logo" />
 
-		<div class="wrapper">
-			<HelloWorld msg="You did it!" />
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
 
-			<nav>
-				<RouterLink to="/http">{{ $t('global.api') }}</RouterLink>
-				<RouterLink to="/user">{{ $t('global.user') }}</RouterLink>
-			</nav>
-		</div>
-	</header>
+      <nav>
+        <RouterLink to="/http">
+          {{ $t('global.api') }}
+        </RouterLink>
+        <RouterLink to="/user">
+          {{ $t('global.user') }}
+        </RouterLink>
+      </nav>
+    </div>
+  </header>
 </template>
 
 <style scoped>

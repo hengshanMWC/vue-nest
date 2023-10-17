@@ -1,26 +1,27 @@
-<template>
-	<n-layout-header class="header flex-sb z-[1] fixed pr-8 pl-8 bottom-link" position="absolute">
-		<!-- logo -->
-		<div class="flex">
-			<div v-for="(value, index) in leftComponents" :key="index" class="arrange-boxs box-interval">
-				<component :is="value"></component>
-			</div>
-		</div>
-		<div class="flex">
-			<div v-for="(value, index) in rightComponents" :key="index" class="arrange-boxs box-interval">
-				<component :is="value"></component>
-			</div>
-		</div>
-	</n-layout-header>
-</template>
-
 <script lang="ts" setup>
+import Logo from './Logo.vue'
 import Locales from '@/components/Locales.vue'
 import ThemeSwitch from '@/components/ThemeSwitch.vue'
-import Logo from './Logo.vue'
+
 const leftComponents = [Logo]
 const rightComponents = [Locales, ThemeSwitch]
 </script>
+
+<template>
+  <n-layout-header class="header flex-sb z-[1] fixed pr-8 pl-8 bottom-link" position="absolute">
+    <!-- logo -->
+    <div class="flex">
+      <div v-for="(value, index) in leftComponents" :key="index" class="arrange-boxs box-interval">
+        <component :is="value" />
+      </div>
+    </div>
+    <div class="flex">
+      <div v-for="(value, index) in rightComponents" :key="index" class="arrange-boxs box-interval">
+        <component :is="value" />
+      </div>
+    </div>
+  </n-layout-header>
+</template>
 
 <style scoped>
 .header {

@@ -1,6 +1,7 @@
 import { createPinia } from 'pinia'
+
 function createStore() {
-	return createPinia()
+  return createPinia()
 }
 
 export default createStore

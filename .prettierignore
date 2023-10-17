@@ -1,5 +1,0 @@
-# Ignore files/folders for formating
-.vscode
-node_modules
-dist
-package-lock.json

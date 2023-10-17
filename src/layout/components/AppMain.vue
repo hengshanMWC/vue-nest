@@ -1,23 +1,23 @@
-<template>
-	<n-layout-content class="app-main">
-		<router-view v-slot="{ Component }">
-			<transition name="scale-slide">
-				<!-- <keep-alive> -->
-				<component class="main-content" :is="Component" :key="key" />
-				<!-- </keep-alive> -->
-			</transition>
-		</router-view>
-	</n-layout-content>
-</template>
-
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const key = computed(() => {
-	return route.path
+  return route.path
 })
 </script>
+
+<template>
+  <n-layout-content class="app-main">
+    <router-view v-slot="{ Component }">
+      <transition name="scale-slide">
+        <!-- <keep-alive> -->
+        <component :is="Component" :key="key" class="main-content" />
+        <!-- </keep-alive> -->
+      </transition>
+    </router-view>
+  </n-layout-content>
+</template>
 
 <style scoped>
 .app-main {

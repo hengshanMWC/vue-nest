@@ -15,10 +15,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint:fix": "eslint --fix \"{src,scripts}/**/*.{ts,tsx,js,vue}\" --ignore-path .gitignore",
-		"prettier:fix": "prettier --write \"(src|scripts)/**/*.(vue|js|ts)\"",
-		"format": "pnpm prettier:fix && pnpm lint:fix",
-		"format:servers": "cd ./servers && pnpm format",
-		"format:all": "pnpm format && pnpm format:servers"
+    "format:servers": "cd ./servers && pnpm format",
+    "format:all": "pnpm lint:fix && pnpm format:servers"
   },
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
@@ -38,6 +36,7 @@
     }
   },
   "devDependencies": {
+    "@antfu/eslint-config-vue": "^0.43.1",
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "@playwright/test": "^1.38.0",
@@ -48,8 +47,6 @@
     "@types/node": "^18.17.17",
     "@vitalets/google-translate-api": "^9.2.0",
     "@vitejs/plugin-vue": "^4.3.4",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.1",
     "@vue/tsconfig": "^0.4.0",
     "autoprefixer": "^10.4.16",
@@ -63,7 +60,6 @@
     "lint-staged": "^14.0.1",
     "npm-run-all2": "^6.0.6",
     "postcss": "^8.4.31",
-    "prettier": "^3.0.3",
     "stylelint": "^15.10.3",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^34.0.0",

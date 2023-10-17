@@ -4,7 +4,6 @@
     "Vue.vscode-typescript-vue-plugin",
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
     "lokalise.i18n-ally",
     "ms-playwright.playwright"
