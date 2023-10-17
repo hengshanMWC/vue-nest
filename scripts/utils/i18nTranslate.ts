@@ -52,12 +52,14 @@ const googleTranslator = (text: string, translateOptions: TranslateOptions) => t
 type Chunk = Array<{key: string, value: string}>
 
 interface Options {
-  targetJson: NestedObject
+  // 传目标数据是增量，不传是全量
+  targetJson?: NestedObject
 }
 // 定义翻译方法
-const translateRun = async (inputJson: NestedObject, { targetJson }: Options, translateOptions: TranslateOptions) => {
+const translateRun = async (inputJson: NestedObject, options: Options | null, translateOptions: TranslateOptions) => {
+  const { targetJson } = options || {}
   const forInputJson = flattenObject(inputJson)
-  const forTargetJson = flattenObject(targetJson)
+  const forTargetJson = targetJson ? flattenObject(targetJson) : {}
   let chunkValuesLength = 0
   let chunk: Chunk= []
   const chunks: Chunk[] = []
