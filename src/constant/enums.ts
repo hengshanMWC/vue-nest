@@ -2,13 +2,13 @@
 
 // 语言
 export enum LOCALES_ENUM {
-  EN_US = 'en-US',
-  ZH_CN = 'zh-CN',
-  ZH_TW = 'zh-TW',
-  JA_JP = 'ja-JP'
+	EN_US = 'en-US',
+	ZH_CN = 'zh-CN',
+	ZH_TW = 'zh-TW',
+	JA_JP = 'ja-JP'
 }
 
 export enum ENUM_THEME {
-  DEFAULT = 'default', // 默认
-  DARK = 'dark', // 黑夜主题
+	DEFAULT = 'default', // 默认
+	DARK = 'dark' // 黑夜主题
 }

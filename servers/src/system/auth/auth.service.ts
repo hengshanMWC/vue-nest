@@ -1,16 +1,16 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common'
 
-import { UserService } from '../user/user.service';
-import { UserEntity } from 'src/common/entities/db/user/user.entity';
+import { UserService } from '../user/user.service'
+import { UserEntity } from 'src/common/entities/db/user/user.entity'
 
 @Injectable()
 export class AuthService {
-  constructor(
-    @Inject(UserService)
-    private readonly userService: UserService,
-  ) {}
+	constructor(
+		@Inject(UserService)
+		private readonly userService: UserService
+	) {}
 
-  async validateUser(payload: { id: string }): Promise<UserEntity> {
-    return await this.userService.findOneById(payload.id);
-  }
+	async validateUser(payload: { id: string }): Promise<UserEntity> {
+		return await this.userService.findOneById(payload.id)
+	}
 }

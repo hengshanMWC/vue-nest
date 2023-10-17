@@ -1,6 +1,6 @@
 export interface TestDataApi {
-  testName: string;
-  describe?: string;
+	testName: string
+	describe?: string
 }
 
-export type TestDataKeyList = keyof TestDataApi;
+export type TestDataKeyList = keyof TestDataApi
