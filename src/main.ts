@@ -1,11 +1,11 @@
 import 'normalize.css/normalize.css'
-import './styles/tailwind.css';
+import './styles/tailwind.css'
 import './styles/index.css'
 
 import App from './App.vue'
 import router from './router'
-import createStore from './stores';
-import { createLocales } from './locales';
+import createStore from './stores'
+import { createLocales } from './locales'
 
 const app = createApp(App)
 

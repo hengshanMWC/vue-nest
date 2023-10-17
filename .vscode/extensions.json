@@ -2,9 +2,11 @@
   "recommendations": [
     "Vue.volar",
     "Vue.vscode-typescript-vue-plugin",
-    "ms-playwright.playwright",
+    "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
     "lokalise.i18n-ally",
-    "bradlc.vscode-tailwindcss"
+    "ms-playwright.playwright"
   ]
 }

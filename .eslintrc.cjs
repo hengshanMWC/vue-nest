@@ -6,7 +6,9 @@ module.exports = {
   'extends': [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
-    '@vue/eslint-config-typescript'
+    '@vue/eslint-config-typescript',
+    '@vue/prettier',
+    '@vue/eslint-config-prettier/skip-formatting'
   ],
   ignorePatterns: [
     'commitlint.config.js',
