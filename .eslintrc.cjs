@@ -22,12 +22,13 @@ module.exports = {
   "rules": {
     "no-console": "off",
     "promise/param-names": "off",
-    "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/no-use-before-define": "off",
     "curly": "off",
     "no-new-func": 0,
 
     'vue/multi-word-component-names': 'off',
+
+		"@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-use-before-define": "off",
 
     // 希望打开的
     "prefer-promise-reject-errors": "off",
