@@ -7,7 +7,12 @@
  */
 
 import { isNull } from 'lodash-es'
-import { DEFAULT_LOCALE, LANG_FLAG, LEGAL_LOCALES, LOCALES_ENUM } from '@/constant'
+import {
+  DEFAULT_LOCALE,
+  LANG_FLAG,
+  LEGAL_LOCALES,
+  LOCALES_ENUM,
+} from '@/constant'
 import { getURLSearchParams } from '@/utils/url'
 
 function handleStoreLangFlag() {
@@ -28,7 +33,9 @@ function handleUrlLangFlag() {
 }
 
 function handleBrowserLanguage() {
-  const language = (navigator.language || navigator.browserLanguage).toLowerCase()
+  const language = (
+    navigator.language || navigator.browserLanguage
+  ).toLowerCase()
   const browserLang = parseNavigatorLanguage(language)
   console.log('browserLang', browserLang)
   if (LEGAL_LOCALES.includes(browserLang)) {

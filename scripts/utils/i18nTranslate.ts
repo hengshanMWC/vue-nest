@@ -56,9 +56,11 @@ export interface Options {
   targetJson?: NestedObject
 }
 // 定义翻译方法
-async function translateRun(inputJson: NestedObject,
+async function translateRun(
+  inputJson: NestedObject,
   options: Options | null,
-  translateOptions: TranslateOptions) {
+  translateOptions: TranslateOptions,
+) {
   const { targetJson } = options || {}
   const forInputJson = flattenObject(inputJson)
   const forTargetJson = targetJson ? flattenObject(targetJson) : {}

@@ -1,4 +1,14 @@
-import { darkTheme, dateEnUS, dateJaJP, dateZhCN, dateZhTW, enUS, jaJP, zhCN, zhTW } from 'naive-ui'
+import {
+  darkTheme,
+  dateEnUS,
+  dateJaJP,
+  dateZhCN,
+  dateZhTW,
+  enUS,
+  jaJP,
+  zhCN,
+  zhTW,
+} from 'naive-ui'
 import { ENUM_THEME, LOCALES_ENUM } from '.'
 import type { LocalesApi, NLocaleApi, ThemeValue } from '@/types'
 

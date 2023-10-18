@@ -6,10 +6,10 @@
 
 <style>
 @media (min-width: 1024px) {
-	.user {
-		min-height: 100vh;
-		display: flex;
-		align-items: center;
-	}
+  .user {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
 }
 </style>

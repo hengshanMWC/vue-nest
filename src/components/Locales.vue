@@ -29,7 +29,12 @@ const options = [
 </script>
 
 <template>
-  <n-dropdown trigger="hover" :options="options" :value="locale" @select="handleSelect">
+  <n-dropdown
+    trigger="hover"
+    :options="options"
+    :value="locale"
+    @select="handleSelect"
+  >
     <n-icon :size="38" class="cursor-pointer">
       <Earth />
     </n-icon>
@@ -37,6 +42,5 @@ const options = [
 </template>
 
 <style scoped>
-.container {
-}
+.container {}
 </style>

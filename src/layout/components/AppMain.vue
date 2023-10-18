@@ -21,10 +21,10 @@ const key = computed(() => {
 
 <style scoped>
 .app-main {
-	min-height: 100vh;
-	width: 100%;
-	padding: calc(var(--header-height) + 7px) 7px 7px 7px;
-	position: relative;
-	overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  padding: calc(var(--header-height) + 7px) 7px 7px 7px;
+  position: relative;
+  overflow: hidden;
 }
 </style>
