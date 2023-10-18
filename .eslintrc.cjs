@@ -20,6 +20,7 @@ module.exports = {
     'no-new-func': 0,
     'no-fallthrough': 'off',
     'n/prefer-global/process': 'off',
+    'indent': 'off',
 
     'promise/param-names': 'off',
 
@@ -32,6 +33,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-require-imports': 'off',
     '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/indent': 'off',
 
     '@stylistic/js/no-tabs': 'off',
 

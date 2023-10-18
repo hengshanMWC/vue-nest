@@ -1,7 +1,7 @@
 declare interface Navigator {
-  browserLanguage: string;
-  userLanguage: string;
-  systemLanguage: string;
+  browserLanguage: string
+  userLanguage: string
+  systemLanguage: string
 }
 
 /**
