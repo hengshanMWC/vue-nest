@@ -6,9 +6,9 @@ import { BaseEntity } from '../../base/base.entity'
 const { testName, describe } = getTestEntityColumns()
 @Entity(getTestEntityName())
 export class TestEntity extends BaseEntity implements TestDataApi {
-	@Column(testName)
-	testName: string
+  @Column(testName)
+  testName: string
 
-	@Column(describe)
-	describe?: string
+  @Column(describe)
+  describe?: string
 }

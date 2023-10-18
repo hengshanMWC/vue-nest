@@ -1,4 +1,4 @@
 export class UpdatePasswordDto {
-	userId: string
-	password: string
+  userId: string
+  password: string
 }

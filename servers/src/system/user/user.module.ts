@@ -11,22 +11,22 @@ import { BaseController } from './base.controller'
 import { UserController } from './user.controller'
 import { UserEntity } from 'src/common/entities/db/user/user.entity'
 @Module({
-	imports: [
-		TypeOrmModule.forFeature([UserEntity]),
-		forwardRef(() => AuthModule),
-		JwtModule.registerAsync({
-			imports: [ConfigModule],
-			useFactory: async (config: ConfigService) => ({
-				secret: config.get('jwt.secretkey'),
-				signOptions: {
-					expiresIn: config.get('jwt.expiresin')
-				}
-			}),
-			inject: [ConfigService]
-		})
-	],
-	providers: [UserService],
-	controllers: [BaseController, UserController],
-	exports: [UserService]
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    forwardRef(() => AuthModule),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (config: ConfigService) => ({
+        secret: config.get('jwt.secretkey'),
+        signOptions: {
+          expiresIn: config.get('jwt.expiresin')
+        }
+      }),
+      inject: [ConfigService]
+    })
+  ],
+  providers: [UserService],
+  controllers: [BaseController, UserController],
+  exports: [UserService]
 })
 export class UserModule {}

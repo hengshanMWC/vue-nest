@@ -15,29 +15,29 @@ import { UserEntity } from 'src/common/entities/db/user/user.entity'
 @ApiTags('登录注册')
 @Controller()
 export class BaseController {
-	constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-	@Post('register')
-	@ApiOperation({ summary: '用户注册' })
-	@ApiResult(UserEntity)
-	@AllowAnon()
-	async create(@Body() user: CreateUserDto): Promise<ResultData> {
-		return await this.userService.create(user)
-	}
+  @Post('register')
+  @ApiOperation({ summary: '用户注册' })
+  @ApiResult(UserEntity)
+  @AllowAnon()
+  async create(@Body() user: CreateUserDto): Promise<ResultData> {
+    return await this.userService.create(user)
+  }
 
-	@Post('login')
-	@ApiOperation({ summary: '登录' })
-	@ApiResult(CreateTokenDto)
-	@AllowAnon()
-	async login(@Body() dto: LoginUser): Promise<ResultData> {
-		return await this.userService.login(dto.account, dto.password)
-	}
+  @Post('login')
+  @ApiOperation({ summary: '登录' })
+  @ApiResult(CreateTokenDto)
+  @AllowAnon()
+  async login(@Body() dto: LoginUser): Promise<ResultData> {
+    return await this.userService.login(dto.account, dto.password)
+  }
 
-	@Post('/update/token')
-	@ApiOperation({ summary: '刷新token' })
-	@ApiResult(CreateTokenDto)
-	@ApiBearerAuth()
-	async updateToken(@Req() req): Promise<ResultData> {
-		return await this.userService.updateToken(req.user.id)
-	}
+  @Post('/update/token')
+  @ApiOperation({ summary: '刷新token' })
+  @ApiResult(CreateTokenDto)
+  @ApiBearerAuth()
+  async updateToken(@Req() req): Promise<ResultData> {
+    return await this.userService.updateToken(req.user.id)
+  }
 }

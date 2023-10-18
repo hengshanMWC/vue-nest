@@ -5,10 +5,10 @@ import { join } from 'path'
 
 @Controller()
 export class StaticController {
-	constructor(private readonly appService: StaticService) {}
+  constructor(private readonly appService: StaticService) {}
 
-	@Get()
-	views(@Res() res: Response) {
-		res.sendFile(join(__dirname, '../views', 'index.html'))
-	}
+  @Get()
+  views(@Res() res: Response) {
+    res.sendFile(join(__dirname, '../views', 'index.html'))
+  }
 }

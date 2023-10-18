@@ -5,12 +5,12 @@ import { UserEntity } from 'src/common/entities/db/user/user.entity'
 
 @Injectable()
 export class AuthService {
-	constructor(
-		@Inject(UserService)
-		private readonly userService: UserService
-	) {}
+  constructor(
+    @Inject(UserService)
+    private readonly userService: UserService
+  ) {}
 
-	async validateUser(payload: { id: string }): Promise<UserEntity> {
-		return await this.userService.findOneById(payload.id)
-	}
+  async validateUser(payload: { id: string }): Promise<UserEntity> {
+    return await this.userService.findOneById(payload.id)
+  }
 }
