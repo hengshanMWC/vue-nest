@@ -11,3 +11,7 @@ export type GetBaseEntityName<K extends KeyType> =
   () => BaseEntityData<K>['name']
 export type GetBaseEntityColumns<K extends KeyType> =
   () => BaseEntityData<K>['columns']
+export interface BaseFuncGroup<K extends KeyType> {
+  getEntityName: GetBaseEntityName<K>
+  getEntityColumns: GetBaseEntityColumns<K>
+}
