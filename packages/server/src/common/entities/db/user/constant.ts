@@ -1,12 +1,11 @@
 import { UserType } from 'src/common/enums/common.enum'
 import {
-  GetBaseEntityColumns,
   GetBaseEntityData,
-  GetBaseEntityName,
 } from '../../interface'
+import { createEntitiesFunc } from '../../utils'
 import { UserStructureKeyList } from './interface'
 
-export const getUserEntityData: GetBaseEntityData<UserStructureKeyList> = () => {
+const getUserEntityData: GetBaseEntityData<UserStructureKeyList> = () => {
   return {
     name: 'sys_user',
     columns: {
@@ -63,13 +62,12 @@ export const getUserEntityData: GetBaseEntityData<UserStructureKeyList> = () => 
     },
   }
 }
-
-export const getUserEntityName: GetBaseEntityName<UserStructureKeyList> = () => {
-  return getUserEntityData().name
-}
-
-export const getUserEntityColumns: GetBaseEntityColumns<
-  UserStructureKeyList
-> = () => {
-  return getUserEntityData().columns
+const {
+  getEntityName: getUserEntityName,
+  getEntityColumns: getUserEntityColumns,
+} = createEntitiesFunc<UserStructureKeyList>(getUserEntityData)
+export {
+  getUserEntityName,
+  getUserEntityColumns,
+  getUserEntityData,
 }
