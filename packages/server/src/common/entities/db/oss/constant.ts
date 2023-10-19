@@ -41,7 +41,7 @@ export const getOssEntityData: GetBaseEntityData<OssStructureKeyList> = () => {
         nullable: true,
       },
       describes: {
-        name: 'type',
+        name: 'describes',
         type: 'varchar',
         comment: '业务描述字段，可以字符串，也可以是 JSON 字符串',
         nullable: false,

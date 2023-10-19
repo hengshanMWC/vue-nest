@@ -12,7 +12,6 @@ import configuration from './config'
 import { RedisModule } from './common/libs/redis/redis.module'
 import { OssModule } from './system/oss/oss.module'
 import { JwtAuthGuard } from './common/guards/auth.guard'
-import { TestModule } from './system/test/test.module'
 
 @Module({
   imports: [
@@ -81,7 +80,6 @@ import { TestModule } from './system/test/test.module'
       },
       true,
     ),
-    TestModule,
     // 基础模块
     // StaticModule,
     UserModule,
