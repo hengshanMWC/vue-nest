@@ -6,7 +6,6 @@
     "dbaeumer.vscode-eslint",
     "bradlc.vscode-tailwindcss",
     "lokalise.i18n-ally",
-    "antfu.iconify",
     "ms-playwright.playwright",
   ]
 }
