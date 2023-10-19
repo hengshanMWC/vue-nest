@@ -1,12 +1,13 @@
+import path from 'node:path'
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { RedisClientOptions } from '@liaoliaots/nestjs-redis'
 import { APP_GUARD } from '@nestjs/core'
+import { ServeStaticModule, ServeStaticModuleOptions } from '@nestjs/serve-static'
 import { UserModule } from './system/user/user.module'
 import { AuthModule } from './system/auth/auth.module'
 
-// import { StaticModule } from './system/static/static.module'
 import configuration from './config'
 import { RedisModule } from './common/libs/redis/redis.module'
 import { OssModule } from './system/oss/oss.module'
@@ -22,26 +23,26 @@ import { TestModule } from './system/test/test.module'
       isGlobal: true,
     }),
     // 服务静态化, 生产环境最好使用 nginx 做资源映射， 可以根据环境配置做区分
-    // ServeStaticModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   inject: [ConfigService],
-    //   useFactory: (config: ConfigService) => {
-    //     const fileUploadLocationConfig = config.get<string>('app.file.location') || '../static/upload'
-    //     const rootPath = path.isAbsolute(fileUploadLocationConfig)
-    //       ? `${fileUploadLocationConfig}`
-    //       : path.join(process.cwd(), `${fileUploadLocationConfig}`)
-    //     return [
-    //       {
-    //         rootPath,
-    //         exclude: [`${config.get('app.prefix')}`],
-    //         serveRoot: config.get('app.file.serveRoot'),
-    //         serveStaticOptions: {
-    //           cacheControl: true,
-    //         },
-    //       },
-    //     ] as ServeStaticModuleOptions[]
-    //   },
-    // }),
+    ServeStaticModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        const fileUploadLocationConfig = config.get<string>('app.file.location') || './static/upload'
+        const rootPath = path.isAbsolute(fileUploadLocationConfig)
+          ? `${fileUploadLocationConfig}`
+          : path.join(process.cwd(), `${fileUploadLocationConfig}`)
+        return [
+          {
+            rootPath,
+            exclude: [`${config.get('app.prefix')}`],
+            serveRoot: config.get('app.file.serveRoot'),
+            serveStaticOptions: {
+              cacheControl: true,
+            },
+          },
+        ] as ServeStaticModuleOptions[]
+      },
+    }),
     // 数据库
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
