@@ -11,7 +11,7 @@
     "test:e2e": "playwright test",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "format": "eslint --fix \"{src,scripts}/**/*.{ts,tsx,js,vue}\""
+    "format": "eslint --fix \"{src,scripts}/**/*.{ts,tsx,js,vue}\" --ignore-path .gitignore"
   },
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",

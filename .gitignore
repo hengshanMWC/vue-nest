@@ -14,9 +14,6 @@ dist-ssr
 coverage
 *.local
 
-/cypress/videos/
-/cypress/screenshots/
-
 # Editor directories and files
 *.suo
 *.ntvs*
@@ -24,8 +21,6 @@ coverage
 *.sln
 *.sw?
 
-test-results/
-playwright-report/
 
 # compiled output
 /dist
