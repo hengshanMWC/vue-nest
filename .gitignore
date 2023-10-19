@@ -30,7 +30,6 @@ playwright-report/
 # compiled output
 /dist
 /node_modules
-/servers/views
 
 # IDEs and editors
 /.idea

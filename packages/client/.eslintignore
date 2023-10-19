@@ -1,0 +1,9 @@
+.vscode
+dist
+node_modules
+public
+commitlint.config.js
+postcss.config.js
+tailwind.config.js
+src/locales/lang
+playwright.config.ts
