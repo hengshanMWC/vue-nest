@@ -10,8 +10,14 @@ const naiveLocales = reactive<NLocaleApi>(NAIVE_UI_LOCALES[locale.value])
 </script>
 
 <template>
-  <n-config-provider :locale="naiveLocales.locale" :date-locale="naiveLocales.dateLocale" :theme="THEME_LIST[themeRef]">
-    <RouterView />
+  <n-config-provider
+    :locale="naiveLocales.locale"
+    :date-locale="naiveLocales.dateLocale"
+    :theme="THEME_LIST[themeRef]"
+  >
+    <n-dialog-provider>
+      <RouterView />
+    </n-dialog-provider>
   </n-config-provider>
 </template>
 

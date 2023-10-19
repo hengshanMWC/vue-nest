@@ -4,6 +4,8 @@
 module.exports = {
   extends: ['@antfu/eslint-config-vue'],
   rules: {
+    'no-console': 'off',
+
     'vue/multi-word-component-names': 'off',
     'vue/max-attributes-per-line': ['error', {
       singleline: {

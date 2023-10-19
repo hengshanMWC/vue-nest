@@ -10,7 +10,7 @@ import { useSettingStore } from '@/stores/modules/setting'
 let _locales: I18n
 function createLocales() {
   const { locale } = storeToRefs(useSettingStore())
-  _locales = createI18n({
+  return _locales = createI18n({
     locale: locale.value,
     fallbackLocale: LOCALES_ENUM.EN_US,
     messages: {
@@ -20,7 +20,6 @@ function createLocales() {
       [LOCALES_ENUM.JA_JP]: jaJP,
     },
   })
-  return _locales
 }
 function getLocales() {
   return _locales

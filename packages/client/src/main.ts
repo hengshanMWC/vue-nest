@@ -4,7 +4,7 @@ import './styles/index.css'
 
 import App from './App.vue'
 import router from './router'
-import createStore from './stores'
+import { createStore } from './stores'
 import { createLocales } from './locales'
 
 const app = createApp(App)

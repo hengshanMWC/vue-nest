@@ -3,14 +3,11 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { AllowAnon } from 'src/common/decorators/allow-anon.decorator'
 import { UserEntity } from 'src/common/entities/db/user/user.entity'
+import { CreateTokenDto, CreateUserDto, LoginUser } from '@vue-nest/store'
 import { ResultData } from '../../common/utils/result'
 import { ApiResult } from '../../common/decorators/api-result.decorator'
 
 import { UserService } from './user.service'
-
-import { LoginUser } from './dto/login-user.dto'
-import { CreateUserDto } from './dto/create-user.dto'
-import { CreateTokenDto } from './dto/create-token.dto'
 
 @ApiTags('登录注册')
 @Controller()

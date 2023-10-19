@@ -10,3 +10,7 @@ declare interface Navigator {
  * 要么引入，要么用RefValue这个别名
  */
 type RefValue<T = any> = Ref<T>
+
+declare interface Window {
+  $dialog: ReturnType<typeof import('naive-ui')['useDialog']>
+}

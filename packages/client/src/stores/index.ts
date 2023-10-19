@@ -1,7 +1,15 @@
-import { createPinia } from 'pinia'
+import { type Pinia, createPinia } from 'pinia'
 
+let _store: Pinia
 function createStore() {
-  return createPinia()
+  return _store = createPinia()
 }
 
-export default createStore
+function getStore() {
+  return _store
+}
+
+export {
+  getStore,
+  createStore,
+}

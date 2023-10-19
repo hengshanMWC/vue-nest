@@ -7,18 +7,20 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    Locales: typeof import('./src/components/Locales.vue')['default']
+    HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
+    Locales: typeof import('./../src/components/Locales.vue')['default']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
+    NDialogProvider: typeof import('naive-ui')['NDialogProvider']
     NDropdown: typeof import('naive-ui')['NDropdown']
     NIcon: typeof import('naive-ui')['NIcon']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
+    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NSwitch: typeof import('naive-ui')['NSwitch']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ThemeSwitch: typeof import('./src/components/ThemeSwitch.vue')['default']
-    TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
+    ThemeSwitch: typeof import('./../src/components/ThemeSwitch.vue')['default']
+    TheWelcome: typeof import('./../src/components/TheWelcome.vue')['default']
   }
 }

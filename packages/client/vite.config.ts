@@ -21,9 +21,11 @@ export default defineConfig((env: ConfigEnv) => {
       // 自动按需加载
       AutoImport({
         imports: ['vue'],
+        dts: './typings/auto-imports.d.ts',
       }),
       Components({
         resolvers: [NaiveUiResolver()],
+        dts: './typings/components.d.ts',
       }),
       ...(env.mode === 'production'
         ? [

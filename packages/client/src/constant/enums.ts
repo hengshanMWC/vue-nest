@@ -12,3 +12,9 @@ export enum ENUM_THEME {
   DEFAULT = 'default', // 默认
   DARK = 'dark', // 黑夜主题
 }
+
+export enum CacheKey {
+  TOKEN = 'token',
+  REFRESH_TOKEN = 'refresh-token',
+  REFRESH_TOKEN_EXP = 'rt-exp',
+}
