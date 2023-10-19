@@ -1,11 +1,10 @@
 import {
-  GetBaseEntityColumns,
   GetBaseEntityData,
-  GetBaseEntityName,
 } from '../../interface'
+import { createEntitiesFunc } from '../../utils'
 import { OssStructureKeyList } from './interface'
 
-export const getOssEntityData: GetBaseEntityData<OssStructureKeyList> = () => {
+const getOssEntityData: GetBaseEntityData<OssStructureKeyList> = () => {
   return {
     name: 'sys_oss',
     columns: {
@@ -58,12 +57,13 @@ export const getOssEntityData: GetBaseEntityData<OssStructureKeyList> = () => {
   }
 }
 
-export const getOssEntityName: GetBaseEntityName<OssStructureKeyList> = () => {
-  return getOssEntityData().name
-}
+const {
+  getEntityName: getOssEntityName,
+  getEntityColumns: getOssEntityColumns,
+} = createEntitiesFunc<OssStructureKeyList>(getOssEntityData)
 
-export const getOssEntityColumns: GetBaseEntityColumns<
-  OssStructureKeyList
-> = () => {
-  return getOssEntityData().columns
+export {
+  getOssEntityName,
+  getOssEntityColumns,
+  getOssEntityData,
 }
