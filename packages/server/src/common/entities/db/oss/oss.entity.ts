@@ -38,7 +38,7 @@ export class OssEntity extends BaseEntity implements OssStructureApi {
 
   @ApiProperty({ description: describes.comment })
   @Column(describes)
-  public describes: string
+  public describes?: string
 
   @Exclude({ toPlainOnly: true }) // 输出屏蔽
   @Column(location)

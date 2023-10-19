@@ -1,6 +1,13 @@
-export interface TestDataApi {
-  testName: string
-  describe?: string
+import { UserType } from 'src/common/enums/common.enum'
+
+export interface UserStructureApi {
+  password: string
+  salt: string
+  account: string
+  phoneNum: string
+  email: string
+  avatar?: string
+  type: UserType
 }
 
-export type TestDataKeyList = keyof TestDataApi
+export type UserStructureKeyList = keyof UserStructureApi

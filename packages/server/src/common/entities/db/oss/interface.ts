@@ -5,7 +5,7 @@ export interface OssStructureApi {
   size: number
   type: string
   describes?: string
-  location?: string
+  location: string
 }
 
 export type OssStructureKeyList = keyof OssStructureApi

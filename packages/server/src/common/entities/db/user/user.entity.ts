@@ -5,53 +5,49 @@ import { $enum } from 'ts-enum-util'
 
 import { UserType } from 'src/common/enums/common.enum'
 import { BaseEntity } from '../../base/base.entity'
+import { UserStructureApi } from './interface'
+import { getUserEntityColumns, getUserEntityName } from './constant'
 
-@Entity('sys_user')
-export class UserEntity extends BaseEntity {
+const {
+  password,
+  salt,
+  account,
+  phoneNum,
+  email,
+  avatar,
+  type,
+} = getUserEntityColumns()
+@Entity(getUserEntityName())
+export class UserEntity extends BaseEntity implements UserStructureApi {
   @Exclude({ toPlainOnly: true }) // 输出屏蔽密码
-  @Column({
-    type: 'varchar',
-    length: 200,
-    nullable: false,
-    comment: '用户登录密码',
-  })
+  @Column(password)
   public password: string
 
   @Exclude({ toPlainOnly: true }) // 输出屏蔽盐
-  @Column({ type: 'varchar', length: 200, nullable: false, comment: '盐' })
+  @Column(salt)
   public salt: string
 
-  @ApiProperty({ type: String, description: '用户登录账号' })
-  @Column({ type: 'varchar', length: 32, comment: '用户登录账号' })
+  @ApiProperty({ type: String, description: account.comment })
+  @Column(account)
   public account: string
 
-  @ApiProperty({ type: String, description: '手机号' })
-  @Column({
-    type: 'varchar',
-    name: 'phone_num',
-    default: '',
-    length: 20,
-    comment: '用户手机号码',
-  })
+  @ApiProperty({ type: String, description: phoneNum.comment })
+  @Column(phoneNum)
   public phoneNum: string
 
-  @ApiProperty({ type: String, description: '邮箱' })
-  @Column({ type: 'varchar', comment: '邮箱地址', default: '' })
+  @ApiProperty({ type: String, description: email.comment })
+  @Column(email)
   public email: string
 
-  @ApiProperty({ type: String, description: '头像url' })
-  @Column({ type: 'varchar', comment: '头像地址' })
+  @ApiProperty({ type: String, description: avatar.comment })
+  @Column(avatar)
   public avatar: string
 
   @ApiProperty({
     type: Number,
-    description: '帐号类型：0-超管， 1-普通用户',
+    description: type.comment,
     enum: $enum(UserType).getValues(),
   })
-  @Column({
-    type: 'tinyint',
-    default: UserType.ORDINARY_USER,
-    comment: '帐号类型：0-超管， 1-普通用户',
-  })
+  @Column(type)
   public type: UserType
 }
