@@ -2,17 +2,15 @@ import * as fs from 'node:fs'
 import path from 'node:path'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm'
+import { InjectEntityManager } from '@nestjs/typeorm'
 import { instanceToPlain, plainToInstance } from 'class-transformer'
-import { Between, EntityManager, FindOptionsWhere, Repository } from 'typeorm'
+import { EntityManager } from 'typeorm'
 import * as uuid from 'uuid'
 import mime from 'mime-types'
 
 import { OssEntity } from 'src/common/entities/db/oss/oss.entity'
 import { ResultData } from '../../common/utils/result'
 import { AppHttpCode } from '../../common/enums/code.enum'
-
-import { FindOssDto } from './dto/find-oss.dto'
 
 @Injectable()
 export class OssService {
@@ -23,8 +21,6 @@ export class OssService {
 
   constructor(
     private readonly config: ConfigService,
-    @InjectRepository(OssEntity)
-    private readonly ossRepo: Repository<OssEntity>,
     @InjectEntityManager()
     private readonly ossManager: EntityManager,
   ) {
@@ -85,12 +81,5 @@ export class OssService {
       return ResultData.fail(AppHttpCode.SERVICE_ERROR, '文件存储失败，请稍后重新上传')
     }
     return ResultData.ok(instanceToPlain(result))
-  }
-
-  async findList(search: FindOssDto): Promise<ResultData> {
-    const { size, page, startDay, endDay } = search
-    const where = (startDay && endDay ? { createdAt: Between(`${startDay} 00:00:00`, `${endDay} 23:59:59`) } : {}) as FindOptionsWhere<OssEntity>
-    const res = await this.ossRepo.findAndCount({ order: { id: 'DESC' }, skip: size * (page - 1), take: size, where })
-    return ResultData.ok({ list: instanceToPlain(res[0]), total: res[1] })
   }
 }
