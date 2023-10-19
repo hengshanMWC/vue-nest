@@ -1,17 +1,25 @@
 import { ColumnOptions } from 'typeorm'
 
-export type KeyType = string | number | symbol
-export interface BaseEntityData<K extends KeyType> {
+type KeyType = string | number | symbol
+interface BaseEntityData<K extends KeyType> {
   name?: string
   columns: Record<K, ColumnOptions & { length?: number }>
 }
 // 每个 entities 都要实现这些接口
-export type GetBaseEntityData<K extends KeyType> = () => BaseEntityData<K>
-export type GetBaseEntityName<K extends KeyType> =
+type GetBaseEntityData<K extends KeyType> = () => BaseEntityData<K>
+type GetBaseEntityName<K extends KeyType> =
   () => BaseEntityData<K>['name']
-export type GetBaseEntityColumns<K extends KeyType> =
+type GetBaseEntityColumns<K extends KeyType> =
   () => BaseEntityData<K>['columns']
-export interface BaseFuncGroup<K extends KeyType> {
+interface BaseFuncGroup<K extends KeyType> {
   getEntityName: GetBaseEntityName<K>
   getEntityColumns: GetBaseEntityColumns<K>
+}
+
+export {
+  BaseFuncGroup,
+  GetBaseEntityName,
+  KeyType,
+  GetBaseEntityData,
+  GetBaseEntityColumns,
 }
