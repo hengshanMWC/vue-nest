@@ -1,5 +1,5 @@
 import { getRefreshToken } from '@/utils/cache'
-import { refreshTokenRequest, request } from '@/helpers/request'
+import { refreshTokenRequest } from '@/helpers/request'
 import type { RefreshTokenRequestResult } from '@/sdk'
 
 export function fetchUpdateToken(): RefreshTokenRequestResult {
@@ -9,5 +9,5 @@ export function fetchUpdateToken(): RefreshTokenRequestResult {
 }
 
 // export function login(params: LoginUserDto): ApiResult<CreateTokenDto> {
-return request.post(params)
+// return request.post(params)
 // }
