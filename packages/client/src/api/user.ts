@@ -1,9 +1,13 @@
-import type { CreateTokenDto, ResultDataApi } from '@vue-nest/store'
-import { request } from '@/sdk'
 import { getRefreshToken } from '@/utils/cache'
+import { refreshTokenRequest, request } from '@/helpers/request'
+import type { RefreshTokenRequestResult } from '@/sdk'
 
-export function updateToken(): Promise<ResultDataApi<CreateTokenDto>> {
-  return request.post('/update/token', {
+export function fetchUpdateToken(): RefreshTokenRequestResult {
+  return refreshTokenRequest.post('/update/token', {
     headers: { Authorization: `Bearer ${getRefreshToken()}` },
   })
 }
+
+// export function login(params: LoginUserDto): ApiResult<CreateTokenDto> {
+return request.post(params)
+// }

@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { AllowAnon } from 'src/helpers/decorators/allow-anon.decorator'
 import { UserEntity } from '@vue-nest/entities'
-import { CreateTokenDto, CreateUserDto, LoginUser } from '@vue-nest/store'
+import { CreateTokenDto, CreateUserDto, LoginUserDto } from '@vue-nest/store'
 import { ResultData } from '../../helpers/utils/result'
 import { ApiResult } from '../../helpers/decorators/api-result.decorator'
 
@@ -26,7 +26,7 @@ export class BaseController {
   @ApiOperation({ summary: '登录' })
   @ApiResult(CreateTokenDto)
   @AllowAnon()
-  async login(@Body() dto: LoginUser): Promise<ResultData> {
+  async login(@Body() dto: LoginUserDto): Promise<ResultData> {
     return await this.userService.login(dto.account, dto.password)
   }
 
