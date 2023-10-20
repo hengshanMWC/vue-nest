@@ -45,11 +45,12 @@ export class OssService {
   }
 
   async create(
-    files: Express.Multer.File[],
+    files: Express.Multer.File | Express.Multer.File[],
     business: string,
     user: { id: string; account: string },
   ): Promise<ResultData> {
-    const ossList = files.map((file) => {
+    const _files = Array.isArray(files) ? files : [files]
+    const ossList = _files.map((file) => {
       // 重新命名文件， uuid, 根据 mimeType 决定 文件扩展名， 直接拿后缀名不可靠
       const newFileName = `${uuid.v4().replace(/-/g, '')}.${mime.extension(file.mimetype)}`
       // const newFileName = `${uuid.v4().replace(/-/g, '')}.${file.originalname.split('.').pop().toLowerCase()}`
