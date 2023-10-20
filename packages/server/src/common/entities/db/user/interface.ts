@@ -1,4 +1,4 @@
-import { UserType } from 'src/common/enums/common.enum'
+import { UserType } from '@vue-nest/store'
 
 export interface UserStructureApi {
   password: string
