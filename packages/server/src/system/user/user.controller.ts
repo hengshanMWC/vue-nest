@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Put, Query, Req } from '@nestjs/common'
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger'
 
-import { ApiResult } from 'src/common/decorators/api-result.decorator'
+import { ApiResult } from 'src/helpers/decorators/api-result.decorator'
 import { UserEntity } from '@vue-nest/entities'
 import { UpdateUserDto } from '@vue-nest/store'
-import { ResultData } from '../../common/utils/result'
+import { ResultData } from '../../helpers/utils/result'
 import { UserService } from './user.service'
 
 @ApiTags('用户账号')

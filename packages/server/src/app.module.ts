@@ -9,9 +9,9 @@ import { UserModule } from './system/user/user.module'
 import { AuthModule } from './system/auth/auth.module'
 
 import configuration from './config'
-import { RedisModule } from './common/libs/redis/redis.module'
+import { RedisModule } from './helpers/libs/redis/redis.module'
 import { OssModule } from './system/oss/oss.module'
-import { JwtAuthGuard } from './common/guards/auth.guard'
+import { JwtAuthGuard } from './helpers/guards/auth.guard'
 
 @Module({
   imports: [

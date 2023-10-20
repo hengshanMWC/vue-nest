@@ -12,11 +12,11 @@ import { json, urlencoded } from 'express'
 import Chalk from 'chalk'
 import { AppModule } from './app.module'
 
-import { logger } from './common/libs/log4js/logger.middleware'
-import { Logger } from './common/libs/log4js/log4j.util'
-import { TransformInterceptor } from './common/libs/log4js/transform.interceptor'
-import { ExceptionsFilter } from './common/libs/log4js/exceptions-filter'
-import { HttpExceptionsFilter } from './common/libs/log4js/http-exceptions-filter'
+import { logger } from './helpers/libs/log4js/logger.middleware'
+import { Logger } from './helpers/libs/log4js/log4j.util'
+import { TransformInterceptor } from './helpers/libs/log4js/transform.interceptor'
+import { ExceptionsFilter } from './helpers/libs/log4js/exceptions-filter'
+import { HttpExceptionsFilter } from './helpers/libs/log4js/http-exceptions-filter'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {

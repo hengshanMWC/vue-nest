@@ -7,13 +7,13 @@ import { compare, genSalt, hash } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import ms from 'ms'
 
-import { ResultData } from 'src/common/utils/result'
+import { ResultData } from 'src/helpers/utils/result'
 import { AppHttpCode, CreateTokenDto, CreateUserDto, RedisKeyPrefix, UpdateUserDto, UserType } from '@vue-nest/store'
-import { RedisService } from 'src/common/libs/redis/redis.service'
+import { RedisService } from 'src/helpers/libs/redis/redis.service'
 
-import { validEmail, validPhone } from 'src/common/utils/validate'
+import { validEmail, validPhone } from 'src/helpers/utils/validate'
 
-import { getRedisKey } from 'src/common/utils/helpers'
+import { getRedisKey } from 'src/helpers/utils/helpers'
 import { UserEntity } from '@vue-nest/entities'
 
 @Injectable()

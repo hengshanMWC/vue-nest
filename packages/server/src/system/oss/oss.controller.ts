@@ -3,9 +3,9 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { OssEntity } from '@vue-nest/entities'
-import { ResultData } from '../../common/utils/result'
+import { ResultData } from '../../helpers/utils/result'
 
-import { ApiResult } from '../../common/decorators/api-result.decorator'
+import { ApiResult } from '../../helpers/decorators/api-result.decorator'
 import { OssService } from './oss.service'
 
 @ApiTags('文件存储')
