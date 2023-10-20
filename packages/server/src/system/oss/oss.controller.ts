@@ -2,10 +2,10 @@ import { Body, Controller, HttpCode, Post, Req, UploadedFile, UseInterceptors } 
 import { FileInterceptor } from '@nestjs/platform-express'
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger'
 
+import { OssEntity } from '@vue-nest/entities'
 import { ResultData } from '../../common/utils/result'
 
 import { ApiResult } from '../../common/decorators/api-result.decorator'
-import { OssEntity } from '../../common/entities/db/oss/oss.entity'
 import { OssService } from './oss.service'
 
 @ApiTags('文件存储')

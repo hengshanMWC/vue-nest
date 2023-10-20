@@ -2,7 +2,7 @@ import { Body, Controller, Post, Req } from '@nestjs/common'
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { AllowAnon } from 'src/common/decorators/allow-anon.decorator'
-import { UserEntity } from 'src/common/entities/db/user/user.entity'
+import { UserEntity } from '@vue-nest/entities'
 import { CreateTokenDto, CreateUserDto, LoginUser } from '@vue-nest/store'
 import { ResultData } from '../../common/utils/result'
 import { ApiResult } from '../../common/decorators/api-result.decorator'

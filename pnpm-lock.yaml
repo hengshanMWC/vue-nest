@@ -4,9 +4,18 @@ importers:
 
   .:
     dependencies:
+      '@vue-nest/store':
+        specifier: workspace:^
+        version: link:packages/store
+      class-transformer:
+        specifier: ^0.5.1
+        version: 0.5.1
       ts-enum-util:
         specifier: ^4.0.2
         version: 4.0.2
+      typeorm:
+        specifier: ^0.3.17
+        version: 0.3.17(ioredis@5.3.2)(mysql2@3.6.1)(ts-node@10.9.1)
     devDependencies:
       '@abmao/pkgs':
         specifier: latest
@@ -166,6 +175,15 @@ importers:
         specifier: ^1.8.11
         version: 1.8.11(typescript@5.2.2)
 
+  packages/entities:
+    devDependencies:
+      '@vitest/coverage-c8':
+        specifier: ^0.31.0
+        version: 0.31.4(vitest@0.34.6)
+      vite-tsconfig-paths:
+        specifier: ^4.2.1
+        version: 4.2.1(typescript@5.2.2)(vite@4.4.11)
+
   packages/server:
     dependencies:
       '@liaoliaots/nestjs-redis':
@@ -201,18 +219,15 @@ importers:
       '@nestjs/typeorm':
         specifier: ^10.0.0
         version: 10.0.0(@nestjs/common@10.0.0)(@nestjs/core@10.0.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)(typeorm@0.3.17)
-      '@vue-nest/store':
+      '@vue-nest/entities':
         specifier: workspace:^
-        version: link:../store
+        version: link:../entities
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
       chalk:
         specifier: ^4.1.2
         version: 4.1.2
-      class-transformer:
-        specifier: ^0.5.1
-        version: 0.5.1
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
@@ -261,9 +276,6 @@ importers:
       ts-enum-util:
         specifier: ^4.0.2
         version: 4.0.2
-      typeorm:
-        specifier: ^0.3.17
-        version: 0.3.17(ioredis@5.3.2)(mysql2@3.6.1)(ts-node@10.9.1)
       uuid:
         specifier: ^9.0.1
         version: 9.0.1

@@ -8,7 +8,7 @@ import { EntityManager } from 'typeorm'
 import * as uuid from 'uuid'
 import mime from 'mime-types'
 
-import { OssEntity } from 'src/common/entities/db/oss/oss.entity'
+import { OssEntity } from '@vue-nest/entities'
 import { AppHttpCode } from '@vue-nest/store'
 import { ResultData } from '../../common/utils/result'
 

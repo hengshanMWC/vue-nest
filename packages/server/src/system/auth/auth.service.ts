@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 
-import { UserEntity } from 'src/common/entities/db/user/user.entity'
+import { UserEntity } from '@vue-nest/entities'
 import { UserService } from '../user/user.service'
 
 @Injectable()

@@ -14,7 +14,7 @@ import { RedisService } from 'src/common/libs/redis/redis.service'
 import { validEmail, validPhone } from 'src/common/utils/validate'
 
 import { getRedisKey } from 'src/common/utils/helpers'
-import { UserEntity } from 'src/common/entities/db/user/user.entity'
+import { UserEntity } from '@vue-nest/entities'
 
 @Injectable()
 export class UserService {
