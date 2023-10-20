@@ -4,8 +4,8 @@ import { Exclude } from 'class-transformer'
 import { $enum } from 'ts-enum-util'
 
 import { UserType } from '@vue-nest/store'
+import type { UserStructureApi } from '@vue-nest/store'
 import { BaseEntity } from '../../base/entity'
-import type { UserStructureApi } from './interface'
 import { getUserEntityColumns, getUserEntityName } from './constant'
 
 const {

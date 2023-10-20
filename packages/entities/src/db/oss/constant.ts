@@ -1,8 +1,8 @@
+import type { OssStructureKeyList } from '@vue-nest/store'
 import type {
   GetBaseEntityData,
 } from '../../interface'
 import { createEntitiesFunc } from '../../utils'
-import type { OssStructureKeyList } from './interface'
 
 const getOssEntityData: GetBaseEntityData<OssStructureKeyList> = () => {
   return {

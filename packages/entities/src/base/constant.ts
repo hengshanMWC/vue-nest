@@ -1,5 +1,5 @@
+import type { BaseDataKeyList } from '@vue-nest/store'
 import type { GetBaseEntityColumns, GetBaseEntityData } from '../interface'
-import type { BaseDataKeyList } from './interface'
 
 export const getBseEntityData: GetBaseEntityData<BaseDataKeyList> = () => {
   return {

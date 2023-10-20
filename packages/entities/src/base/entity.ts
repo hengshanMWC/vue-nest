@@ -1,5 +1,5 @@
 import { Column, PrimaryColumn } from 'typeorm'
-import type { BaseDataApi } from './interface'
+import type { BaseDataApi } from '@vue-nest/store'
 import { getBaseEntityColumns } from './constant'
 
 const { id, isDeleted, createdBy, updatedBy, createdAt, updatedAt }

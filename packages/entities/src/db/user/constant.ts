@@ -1,9 +1,9 @@
 import { UserType } from '@vue-nest/store'
+import type { UserStructureKeyList } from '@vue-nest/store'
 import type {
   GetBaseEntityData,
 } from '../../interface'
 import { createEntitiesFunc } from '../../utils'
-import type { UserStructureKeyList } from './interface'
 
 const getUserEntityData: GetBaseEntityData<UserStructureKeyList> = () => {
   return {
