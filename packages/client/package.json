@@ -34,6 +34,7 @@
     "@types/lodash-es": "^4.17.9",
     "@vitalets/google-translate-api": "^9.2.0",
     "@vitejs/plugin-vue": "^4.3.4",
+    "@vue-nest/entities": "workspace:^",
     "@vue/test-utils": "^2.4.1",
     "@vue/tsconfig": "^0.4.0",
     "autoprefixer": "^10.4.16",

@@ -3,18 +3,23 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { OssEntity } from '@vue-nest/entities'
+import { ossRouterData } from '@vue-nest/store'
 import { ResultData } from '../../helpers/utils/result'
 
 import { ApiResult } from '../../helpers/decorators/api-result.decorator'
 import { OssService } from './oss.service'
 
+const {
+  base,
+  childrenGroup,
+} = ossRouterData
 @ApiTags('文件存储')
 @ApiBearerAuth()
-@Controller('oss')
+@Controller(base)
 export class OssController {
   constructor(private readonly ossService: OssService) {}
 
-  @Post('upload')
+  @Post(childrenGroup.POST_UPLOAD)
   @ApiOperation({ summary: '文件上传,返回 url 地址' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
