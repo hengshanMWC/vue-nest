@@ -3,9 +3,9 @@ import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger'
 
 import { ApiResult } from 'src/common/decorators/api-result.decorator'
 import { UserEntity } from 'src/common/entities/db/user/user.entity'
+import { UpdateUserDto } from '@vue-nest/store'
 import { ResultData } from '../../common/utils/result'
 import { UserService } from './user.service'
-import { UpdateUserDto } from './dto/update-user.dto'
 
 @ApiTags('用户账号')
 @ApiBearerAuth()

@@ -38,10 +38,10 @@ export class OssController {
   @UseInterceptors(FileInterceptor('file'))
   @ApiResult(OssEntity)
   async uploadFile(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() files: Express.Multer.File | Express.Multer.File[],
     @Body() params: { business: string },
     @Req() req,
   ): Promise<ResultData> {
-    return await this.ossService.create([file], params.business || '', req.user)
+    return await this.ossService.create(Array.isArray(files) ? files : [files], params.business || '', req.user)
   }
 }
