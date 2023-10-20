@@ -9,7 +9,7 @@ import * as uuid from 'uuid'
 import mime from 'mime-types'
 
 import { OssEntity } from '@vue-nest/entities'
-import { AppHttpCode } from '@vue-nest/store'
+import { AppHttpCode } from '@vue-nest/base'
 import { ResultData } from '../../helpers/utils/result'
 
 @Injectable()

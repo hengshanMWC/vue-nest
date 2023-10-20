@@ -8,7 +8,8 @@ import { JwtService } from '@nestjs/jwt'
 import ms from 'ms'
 
 import { ResultData } from 'src/helpers/utils/result'
-import { AppHttpCode, CreateTokenDto, CreateUserDto, RedisKeyPrefix, UpdateUserDto, UserType } from '@vue-nest/store'
+import { AppHttpCode, RedisKeyPrefix, UserType } from '@vue-nest/base'
+import { CreateTokenResultDto, CreateUserDto, UpdatePasswordDto, UpdateUserDto } from '@vue-nest/dtos'
 import { RedisService } from 'src/helpers/libs/redis/redis.service'
 
 import { validEmail, validPhone } from 'src/helpers/utils/validate'
@@ -146,8 +147,8 @@ export class UserService {
    * @reset 是否重置, false 则使用传入的 password 更新
    */
   async updatePassword(
+    dto: UpdatePasswordDto,
     userId: string,
-    password: string,
     reset: boolean,
     currUser: UserEntity,
   ): Promise<ResultData> {
@@ -168,7 +169,7 @@ export class UserService {
     }
     const newPassword = reset
       ? this.config.get<string>('user.initialPassword')
-      : password
+      : dto.password
     const user = {
       id: userId,
       password: await hash(newPassword, existing.salt),
@@ -237,7 +238,7 @@ export class UserService {
   /**
    * 生成 token 与 刷新 token
    */
-  genToken(payload: { id: string }): CreateTokenDto {
+  genToken(payload: { id: string }): CreateTokenResultDto {
     const accessToken = `Bearer ${this.jwtService.sign(payload)}`
     const refreshToken = this.jwtService.sign(payload, {
       expiresIn: this.config.get('jwt.refreshExpiresIn'),

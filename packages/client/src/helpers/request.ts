@@ -2,7 +2,7 @@ import axios from 'axios'
 import { storeToRefs } from 'pinia'
 import { createBusinessRequest } from '@/sdk'
 import appConfig from '@/config'
-import { fetchUpdateToken } from '@/api/user'
+import { updateToken } from '@/api/user'
 import { useUserStore } from '@/stores/modules/user'
 
 const config = {
@@ -11,7 +11,7 @@ const config = {
 }
 const request = axios.create(config)
 const refreshTokenRequest = axios.create(config)
-createBusinessRequest(request, fetchUpdateToken, {
+createBusinessRequest(request, updateToken, {
   error(error) {
     console.log('request', error)
   },

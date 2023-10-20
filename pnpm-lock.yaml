@@ -4,6 +4,15 @@ importers:
 
   .:
     dependencies:
+      '@vue-nest/base':
+        specifier: workspace:^
+        version: link:packages/base
+      '@vue-nest/dtos':
+        specifier: workspace:^
+        version: link:packages/dtos
+      '@vue-nest/routers':
+        specifier: workspace:^
+        version: link:packages/routers
       '@vue-nest/store':
         specifier: workspace:^
         version: link:packages/store
@@ -77,6 +86,15 @@ importers:
       vitest:
         specifier: ^0.34.6
         version: 0.34.6
+
+  packages/base:
+    devDependencies:
+      '@vitest/coverage-c8':
+        specifier: ^0.31.0
+        version: 0.31.4(vitest@0.34.6)
+      vite-tsconfig-paths:
+        specifier: ^4.2.1
+        version: 4.2.1(typescript@5.2.2)(vite@4.4.11)
 
   packages/client:
     dependencies:
@@ -175,7 +193,28 @@ importers:
         specifier: ^1.8.11
         version: 1.8.11(typescript@5.2.2)
 
+  packages/dtos:
+    devDependencies:
+      '@vitest/coverage-c8':
+        specifier: ^0.31.0
+        version: 0.31.4(vitest@0.34.6)
+      '@vue-nest/entities':
+        specifier: workspace:^
+        version: link:../entities
+      vite-tsconfig-paths:
+        specifier: ^4.2.1
+        version: 4.2.1(typescript@5.2.2)(vite@4.4.11)
+
   packages/entities:
+    devDependencies:
+      '@vitest/coverage-c8':
+        specifier: ^0.31.0
+        version: 0.31.4(vitest@0.34.6)
+      vite-tsconfig-paths:
+        specifier: ^4.2.1
+        version: 4.2.1(typescript@5.2.2)(vite@4.4.11)
+
+  packages/routers:
     devDependencies:
       '@vitest/coverage-c8':
         specifier: ^0.31.0
@@ -711,7 +750,7 @@ packages:
     peerDependencies:
       eslint: '>=7.4.0'
     dependencies:
-      '@antfu/eslint-config-basic': 0.43.1(@typescript-eslint/eslint-plugin@6.7.4)(@typescript-eslint/parser@6.7.4)(eslint@8.41.0)(typescript@5.2.2)
+      '@antfu/eslint-config-basic': 0.43.1(@typescript-eslint/eslint-plugin@6.7.4)(@typescript-eslint/parser@6.7.4)(eslint@8.49.0)(typescript@5.2.2)
       '@antfu/eslint-config-ts': 0.43.1(eslint@8.49.0)(typescript@5.2.2)
       eslint: 8.49.0
       eslint-plugin-vue: 9.17.0(eslint@8.49.0)
@@ -2209,7 +2248,7 @@ packages:
     dependencies:
       '@jridgewell/set-array': 1.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
-      '@jridgewell/trace-mapping': 0.3.17
+      '@jridgewell/trace-mapping': 0.3.20
     dev: true
 
   /@jridgewell/resolve-uri@3.1.0:
@@ -4346,7 +4385,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.3.8
+      semver: 7.5.4
     dev: true
 
   /bundle-require@4.0.2(esbuild@0.19.4):
@@ -10243,14 +10282,6 @@ packages:
 
   /semver@7.3.7:
     resolution: {integrity: sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-    dev: true
-
-  /semver@7.3.8:
-    resolution: {integrity: sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:

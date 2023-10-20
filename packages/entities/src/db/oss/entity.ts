@@ -1,8 +1,8 @@
 import { Column, Entity } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import { ApiProperty } from '@nestjs/swagger'
-import type { OssStructureApi } from '@vue-nest/store'
 import { BaseEntity } from '../../base/entity'
+import type { OssStructureApi } from './interface'
 import { getOssEntityColumns, getOssEntityName } from './constant'
 
 const {

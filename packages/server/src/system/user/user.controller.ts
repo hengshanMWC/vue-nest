@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Param, Put, Query, Req } from '@nestjs/common'
+import { Body, Controller, Get, Put, Query, Req } from '@nestjs/common'
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger'
 
 import { ApiResult } from 'src/helpers/decorators/api-result.decorator'
-import { UserEntity } from '@vue-nest/entities'
-import { UpdateUserDto, userRouterData } from '@vue-nest/store'
+import { CreateUserResultDto, UpdatePasswordDto, UpdateUserDto } from '@vue-nest/dtos'
+import { userRouterData } from '@vue-nest/routers'
 import { ResultData } from '../../helpers/utils/result'
 import { UserService } from './user.service'
 
@@ -20,7 +20,7 @@ export class UserController {
   @Get(childrenGroup.GET_INFO)
   @ApiOperation({ summary: '根据id查询用户信息' })
   @ApiQuery({ name: 'id' })
-  @ApiResult(UserEntity)
+  @ApiResult(CreateUserResultDto)
   async findOne(@Query('id') id: string, @Req() req): Promise<ResultData> {
     return await this.userService.findOne(id || req.user.id)
   }
@@ -35,10 +35,10 @@ export class UserController {
   @Put(childrenGroup.PUT_PASSWORD)
   @ApiOperation({ summary: '重置用户密码' })
   @ApiResult()
-  async resetPassword(
-    @Param('userId') userId: string,
+  async updatePassword(
+    @Body() dto: UpdatePasswordDto,
     @Req() req,
   ): Promise<ResultData> {
-    return await this.userService.updatePassword(userId, '', true, req.user)
+    return await this.userService.updatePassword(dto, req.user.id, false, req.user)
   }
 }

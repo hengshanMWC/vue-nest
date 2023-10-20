@@ -3,7 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { OssEntity } from '@vue-nest/entities'
-import { ossRouterData } from '@vue-nest/store'
+import { ossRouterData } from '@vue-nest/routers'
 import { ResultData } from '../../helpers/utils/result'
 
 import { ApiResult } from '../../helpers/decorators/api-result.decorator'

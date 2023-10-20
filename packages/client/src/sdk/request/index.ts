@@ -1,10 +1,10 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
-import type { CreateTokenDto } from '@vue-nest/store'
+import type { CreateTokenResultDto } from '@vue-nest/dtos'
 import { getRTExp, getToken, setToken } from '@/utils/cache'
 
 import type { ApiResult } from '@/api'
 
-export type RefreshTokenRequestResult = ApiResult<CreateTokenDto>
+export type RefreshTokenRequestResult = ApiResult<CreateTokenResultDto>
 export interface RequestEvent {
   error?: (error: Error) => void
   tokenExpire?: (error: AxiosError<any>) => void
