@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import type { UserEntity } from '@lib/entities'
+import { UserEntity } from '@lib/entities'
 import {
   IsEmail,
   IsMobilePhone,
@@ -50,4 +50,4 @@ export class CreateUserDto {
   readonly avatar?: string
 }
 
-export type CreateUserResultDto = typeof UserEntity
+export const CreateUserResultDto = UserEntity

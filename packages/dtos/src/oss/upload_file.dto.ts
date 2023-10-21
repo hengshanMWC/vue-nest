@@ -1,4 +1,4 @@
-import type { OssEntity } from '@lib/entities'
+import { OssEntity } from '@lib/entities'
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty } from 'class-validator'
 
@@ -11,4 +11,4 @@ export class CreateUploadFileDto<T> {
   business?: string
 }
 
-export type CreateUploadFileResultDto = typeof OssEntity
+export const CreateUploadFileResultDto = OssEntity

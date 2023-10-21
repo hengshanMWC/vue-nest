@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core'
 
 import { mw as requestIpMw } from 'request-ip'
 import { NestExpressApplication } from '@nestjs/platform-express'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 import helmet from 'helmet'
 import { ValidationPipe } from '@nestjs/common'
@@ -45,6 +46,22 @@ async function bootstrap() {
       crossOriginResourcePolicy: false,
     }),
   )
+
+  const swaggerOptions = new DocumentBuilder()
+    .setTitle('Vue Next App')
+    .setDescription('Vue Next App 接口文档')
+    .setVersion('3.0.0')
+    .addBearerAuth()
+    .build()
+  const document = SwaggerModule.createDocument(app, swaggerOptions)
+  // 项目依赖当前文档功能，最好不要改变当前地址
+  // 生产环境使用 nginx 可以将当前文档地址 屏蔽外部访问
+  SwaggerModule.setup(`${prefix}/docs`, app, document, {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
+    customSiteTitle: 'Vue Next API Docs',
+  })
 
   // 获取真实 ip
   app.use(requestIpMw({ attributeName: 'ip' }))
