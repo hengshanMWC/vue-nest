@@ -1,40 +1,36 @@
-import type { CreateUserDto, CreateUserResultDto, LoginUserDto, UpdatePasswordDto, UpdateUserDto } from '@vue-nest/dtos'
-import { userRouterData } from '@vue-nest/routers'
+import type { CreateUserDto, CreateUserResultDto, LoginUserDto, UpdatePasswordDto, UpdateUserDto } from '@lib/dtos'
+import { ROUTER_USER_GROUP_BASE } from '@lib/routers'
 import type { ApiResult } from '.'
 import { getRefreshToken } from '@/utils/cache'
 import { refreshTokenRequest, request } from '@/helpers/request'
 import type { RefreshTokenRequestResult } from '@/sdk'
 
-const {
-  childrenGroup,
-} = userRouterData
-
-export function register(params: CreateUserDto): ApiResult<typeof CreateUserResultDto> {
-  return request.post(childrenGroup.POST_REGISTER, params)
+export function register(data: CreateUserDto): ApiResult<CreateUserResultDto> {
+  return request.post(ROUTER_USER_GROUP_BASE.POST_REGISTER, data)
 }
 
-export function login(params: LoginUserDto): ApiResult {
-  return request.post(childrenGroup.POST_LOGIN, params)
+export function login(data: LoginUserDto): ApiResult {
+  return request.post(ROUTER_USER_GROUP_BASE.POST_LOGIN, data)
 }
 
-export function getUserInfo(id?: string): ApiResult<typeof CreateUserResultDto> {
-  return request.get(childrenGroup.GET_INFO, {
+export function getUserInfo(id?: string): ApiResult<CreateUserResultDto> {
+  return request.get(ROUTER_USER_GROUP_BASE.GET_INFO, {
     params: {
       id,
     },
   })
 }
 
-export function updateUserInfo(params: UpdateUserDto): ApiResult {
-  return request.put(childrenGroup.PUT_INFO, params)
+export function updateUserInfo(data: UpdateUserDto): ApiResult {
+  return request.put(ROUTER_USER_GROUP_BASE.PUT_INFO, data)
 }
 
-export function resetPassword(params: UpdatePasswordDto): ApiResult {
-  return request.put(childrenGroup.PUT_PASSWORD, params)
+export function resetPassword(data: UpdatePasswordDto): ApiResult {
+  return request.put(ROUTER_USER_GROUP_BASE.PUT_PASSWORD, data)
 }
 
 export function updateToken(): RefreshTokenRequestResult {
-  return refreshTokenRequest.post(childrenGroup.POST_UPDATE_TOKEN, {
+  return refreshTokenRequest.post(ROUTER_USER_GROUP_BASE.POST_UPDATE_TOKEN, {
     headers: { Authorization: `Bearer ${getRefreshToken()}` },
   })
 }

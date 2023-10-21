@@ -2,23 +2,19 @@ import { Body, Controller, Post, Req } from '@nestjs/common'
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { AllowAnon } from 'src/helpers/decorators/allow-anon.decorator'
-import { userRouterData } from '@vue-nest/routers'
-import { CreateTokenResultDto, CreateUserDto, CreateUserResultDto, LoginUserDto } from '@vue-nest/dtos'
+import { ROUTER_USER_BASE, ROUTER_USER_GROUP } from '@lib/routers'
+import { CreateTokenResultDto, CreateUserDto, CreateUserResultDto, LoginUserDto } from '@lib/dtos'
 import { ResultData } from '../../helpers/utils/result'
 import { ApiResult } from '../../helpers/decorators/api-result.decorator'
 
 import { UserService } from './user.service'
 
-const {
-  base,
-  childrenGroup,
-} = userRouterData
 @ApiTags('登录注册')
-@Controller(base)
+@Controller(ROUTER_USER_BASE)
 export class BaseController {
   constructor(private readonly userService: UserService) {}
 
-  @Post(childrenGroup.POST_REGISTER)
+  @Post(ROUTER_USER_GROUP.POST_REGISTER)
   @ApiOperation({ summary: '用户注册' })
   @ApiResult(CreateUserResultDto)
   @AllowAnon()
@@ -26,7 +22,7 @@ export class BaseController {
     return await this.userService.create(user)
   }
 
-  @Post(childrenGroup.POST_LOGIN)
+  @Post(ROUTER_USER_GROUP.POST_LOGIN)
   @ApiOperation({ summary: '登录' })
   @ApiResult(CreateTokenResultDto)
   @AllowAnon()
@@ -34,7 +30,7 @@ export class BaseController {
     return await this.userService.login(dto.account, dto.password)
   }
 
-  @Post(childrenGroup.POST_UPDATE_TOKEN)
+  @Post(ROUTER_USER_GROUP.POST_UPDATE_TOKEN)
   @ApiOperation({ summary: '刷新token' })
   @ApiResult(CreateTokenResultDto)
   @ApiBearerAuth()

@@ -19,7 +19,9 @@
   },
   "scripts": {
     "init": "pnpm i && npm run prepare",
-    "commit": "cz",
+    "start:all": "pnpm build:libs && pnpm start:items",
+    "start:items": "pnpm --filter=\"@item/*\" start",
+    "build:libs": "pnpm -r --filter=\"@lib/*\" build",
     "build": "pkgs run build",
     "test": "pkgs run test",
     "test:cov": "pkgs run test:cov",
@@ -28,6 +30,7 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
+    "commit": "cz",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
@@ -57,10 +60,10 @@
     "**/*.{js,cjs,mjs,ts,vue}": "pnpm format:all"
   },
   "dependencies": {
-    "@vue-nest/base": "workspace:^",
-    "@vue-nest/dtos": "workspace:^",
-    "@vue-nest/routers": "workspace:^",
-    "@vue-nest/store": "workspace:^",
+    "@lib/base": "workspace:^",
+    "@lib/dtos": "workspace:^",
+    "@lib/routers": "workspace:^",
+    "@lib/store": "workspace:^",
     "class-transformer": "^0.5.1",
     "ts-enum-util": "^4.0.2",
     "typeorm": "^0.3.17"

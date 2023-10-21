@@ -1,5 +1,5 @@
 {
-  "name": "@vue-nest/routers",
+  "name": "@lib/routers",
   "version": "0.0.1",
   "packageManager": "pnpm@8.5.1",
   "access": "public",
@@ -29,5 +29,8 @@
   "devDependencies": {
     "@vitest/coverage-c8": "^0.31.0",
     "vite-tsconfig-paths": "^4.2.1"
+  },
+  "dependencies": {
+    "path-to-regexp": "^6.2.1"
   }
 }

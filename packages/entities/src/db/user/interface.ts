@@ -1,4 +1,4 @@
-import type { UserType } from '@vue-nest/base'
+import type { UserType } from '@lib/base'
 
 export interface UserStructureApi {
   password: string

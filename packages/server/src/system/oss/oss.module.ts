@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { OssEntity } from '@vue-nest/entities'
+import { OssEntity } from '@lib/entities'
 import { OssController } from './oss.controller'
 import { OssService } from './oss.service'
 

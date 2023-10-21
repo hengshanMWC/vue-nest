@@ -1,5 +1,5 @@
 {
-  "name": "@vue-nest/entities",
+  "name": "@lib/entities",
   "version": "0.0.1",
   "packageManager": "pnpm@8.5.1",
   "access": "public",

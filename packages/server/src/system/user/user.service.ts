@@ -8,14 +8,14 @@ import { JwtService } from '@nestjs/jwt'
 import ms from 'ms'
 
 import { ResultData } from 'src/helpers/utils/result'
-import { AppHttpCode, RedisKeyPrefix, UserType } from '@vue-nest/base'
-import { CreateTokenResultDto, CreateUserDto, UpdatePasswordDto, UpdateUserDto } from '@vue-nest/dtos'
+import { AppHttpCode, RedisKeyPrefix, UserType } from '@lib/base'
+import { CreateTokenResultDto, CreateUserDto, UpdatePasswordDto, UpdateUserDto } from '@lib/dtos'
 import { RedisService } from 'src/helpers/libs/redis/redis.service'
 
 import { validEmail, validPhone } from 'src/helpers/utils/validate'
 
 import { getRedisKey } from 'src/helpers/utils/helpers'
-import { UserEntity } from '@vue-nest/entities'
+import { UserEntity } from '@lib/entities'
 
 @Injectable()
 export class UserService {

@@ -1,5 +1,5 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
-import type { CreateTokenResultDto } from '@vue-nest/dtos'
+import type { CreateTokenResultDto } from '@lib/dtos'
 import { getRTExp, getToken, setToken } from '@/utils/cache'
 
 import type { ApiResult } from '@/api'

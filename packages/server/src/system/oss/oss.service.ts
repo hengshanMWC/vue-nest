@@ -8,8 +8,8 @@ import { EntityManager } from 'typeorm'
 import * as uuid from 'uuid'
 import mime from 'mime-types'
 
-import { OssEntity } from '@vue-nest/entities'
-import { AppHttpCode } from '@vue-nest/base'
+import { OssEntity } from '@lib/entities'
+import { AppHttpCode } from '@lib/base'
 import { ResultData } from '../../helpers/utils/result'
 
 @Injectable()

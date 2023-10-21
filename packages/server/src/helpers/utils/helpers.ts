@@ -1,4 +1,4 @@
-import { RedisKeyPrefix } from '@vue-nest/base'
+import { RedisKeyPrefix } from '@lib/base'
 
 /**
  * 获取 模块前缀与唯一标识 整合后的 redis key

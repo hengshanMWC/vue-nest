@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Exclude } from 'class-transformer'
 import { $enum } from 'ts-enum-util'
 
-import { UserType } from '@vue-nest/base'
+import { UserType } from '@lib/base'
 
 import { BaseEntity } from '../../base/entity'
 import { getUserEntityColumns, getUserEntityName } from './constant'

@@ -1,4 +1,4 @@
-import { UserType } from '@vue-nest/base'
+import { UserType } from '@lib/base'
 import type {
   GetBaseEntityData,
 } from '../../interface'

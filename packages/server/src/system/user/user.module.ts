@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { JwtModule } from '@nestjs/jwt'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 
-import { UserEntity } from '@vue-nest/entities'
+import { UserEntity } from '@lib/entities'
 import { AuthModule } from '../auth/auth.module'
 
 import { UserService } from './user.service'

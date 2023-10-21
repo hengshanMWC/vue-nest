@@ -1,12 +1,9 @@
-import { createRouterProxy } from '../utils'
+import { routerMerge } from './utils'
 
-export const OSS_ROUTER = {
+export const ROUTER_OSS_GROUP = {
   POST_UPLOAD: 'upload',
 } as const
 
-export const ossRouterData = createRouterProxy({
-  base: 'oss',
-  childrenGroup: {
-    ...OSS_ROUTER,
-  },
-})
+export const ROUTER_OSS_BASE = 'oss'
+
+export const ROUTER_OSS_GROUP_BASE = routerMerge(ROUTER_OSS_BASE, ROUTER_OSS_GROUP)
