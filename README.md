@@ -38,5 +38,3 @@ server {
 }
 
 ```
-
-谷歌浏览器显示不安全，导入[mkcert证书](https://github.com/FiloSottile/mkcert/releases)
