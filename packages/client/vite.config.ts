@@ -14,7 +14,7 @@ export default defineConfig((env: ConfigEnv) => {
   const production = env.mode === 'production'
   return {
     build: {
-      outDir: fileURLToPath(new URL('../server/static/views', import.meta.url)),
+      outDir: fileURLToPath(new URL('../server/views', import.meta.url)),
       rollupOptions: {
         output: {
           // 禁用 eval
@@ -22,11 +22,6 @@ export default defineConfig((env: ConfigEnv) => {
         },
       },
     },
-    ...(production
-      ? {
-          base: 'static',
-        }
-      : {}),
     plugins: [
       vue(),
       /** 将 SVG 静态图转化为 Vue 组件 */

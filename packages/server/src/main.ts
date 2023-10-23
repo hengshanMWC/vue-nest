@@ -44,6 +44,11 @@ async function bootstrap() {
     helmet({
       crossOriginOpenerPolicy: { policy: 'same-origin-allow-popups' },
       crossOriginResourcePolicy: false,
+      contentSecurityPolicy: {
+        directives: {
+          imgSrc: ['https://vue-nest.com'],
+        },
+      },
     }),
   )
 
@@ -88,14 +93,13 @@ async function bootstrap() {
   // 获取配置端口
   const port = config.get<number>('app.port') || 8080
 
-  const staticPath = join(__dirname, '..', 'static')
-  app.useStaticAssets(staticPath)
-  app.setBaseViewsDir(join(staticPath, 'views'))
+  // app.useStaticAssets(join(__dirname, '..', 'public'))
+  // app.setBaseViewsDir(join(__dirname, '..', 'views'))
 
   await app.listen(port)
 
   const fileUploadLocationConfig
-    = config.get<string>('app.file.location') || './static'
+    = config.get<string>('app.file.location') || './public/upload'
   const fileUploadBastPath = normalize(
     isAbsolute(fileUploadLocationConfig)
       ? `${fileUploadLocationConfig}`

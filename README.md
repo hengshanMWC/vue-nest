@@ -1,39 +1,42 @@
-# introduce
+```bash
+sudo vim /etc/hosts
 
-@abmao/pkgs + pnpm = Monorepo，Support the following functions
-- [x] [@abmao/pkgs](https://github.com/hengshanMWC/pkgs) 🗂️
-- [x] build: webpack5 📦
-- [x] typescript 👽
-- [x] test: vitest 🔬
-- [x] docs: vitepress 🧪
-- [x] eslint、husky 🔦
-- [x] commit: commitizen 📤
-
-
-# init
-
+127.0.0.1    vue-nest.com
 ```
-git clone https://github.com/hengshanMWC/monorepo-template.git
-cd item-template
-npm run init
+```bash
+brew install mkcert
+mkcert vue-nest.com
 ```
 
-# publish test
+```bash
+// nginx.conf
+server {
+  listen    443 ssl;
 
-next, simulate the publish process
+  server_name vue-nest.com; # 设置域名，将请求映射到此配置
 
-## build local NPM source
+  # 以自己的实际文件路径为准
+  ssl_certificate      /opt/homebrew/etc/nginx/certs/vue-next.com.pem;
+  ssl_certificate_key  /opt/homebrew/etc/nginx/certs/vue-next.com-key.pem;
+
+  ssl_session_cache    shared:SSL:1m;
+  ssl_session_timeout  5m;
+
+  ssl_ciphers  HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers  on;
+
+  # 匹配任何以 静态资源，匹配成功则停止往下搜索正则
+  location ^~ /public/ {
+    root /Applications/code/word/my/vue-nest/packages/server;  # 静态资源目录的绝对路径
+  }
+  location ^~ /api/ {
+    proxy_pass http://localhost:8081;
+  }
+  location / {
+    proxy_pass http://localhost:8081/static/$request_uri;
+  }
+}
 
 ```
-npm install -g verdaccio
-verdaccio
-```
 
-Of course, if you want to use it formally, please modify it `.npmrc`
-
-If you want some of the packages to specify NPM source, you can modify the package Publishconfig. JSON registry
-
-## release
-```
-npm run release
-```
+谷歌浏览器显示不安全，导入[mkcert证书](https://github.com/FiloSottile/mkcert/releases)

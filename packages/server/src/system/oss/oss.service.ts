@@ -24,7 +24,7 @@ export class OssService {
     @InjectEntityManager()
     private readonly ossManager: EntityManager,
   ) {
-    const configLocation = this.config.get<string>('app.file.location') || '../upload'
+    const configLocation = this.config.get<string>('app.file.location') || './public/upload'
     this.basePath = path.normalize(
       path.isAbsolute(configLocation) ? `${configLocation}` : path.join(this.productLocation, `${configLocation}`),
     )

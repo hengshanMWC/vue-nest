@@ -6,7 +6,8 @@
   <n-avatar
     class="cursor-pointer"
     :size="30"
-    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    round
+    src="https://vue-nest.com/public/images/avatar.png"
   />
 </template>
 

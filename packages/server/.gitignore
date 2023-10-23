@@ -1,3 +1,4 @@
-static/views
-static/upload/*
+static
+views
+upload/*
 
