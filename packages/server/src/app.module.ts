@@ -26,7 +26,7 @@ import { JwtAuthGuard } from './helpers/guards/auth.guard'
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
-        const fileUploadLocationConfig = config.get<string>('app.file.location') || './static/upload'
+        const fileUploadLocationConfig = config.get<string>('app.file.location') || './static'
         const rootPath = path.isAbsolute(fileUploadLocationConfig)
           ? `${fileUploadLocationConfig}`
           : path.join(process.cwd(), `${fileUploadLocationConfig}`)

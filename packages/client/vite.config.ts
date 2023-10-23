@@ -7,13 +7,26 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import viteCompression from 'vite-plugin-compression'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig((env: ConfigEnv) => {
+  const production = env.mode === 'production'
   return {
     build: {
       outDir: fileURLToPath(new URL('../server/static/views', import.meta.url)),
+      rollupOptions: {
+        output: {
+          // 禁用 eval
+          intro: 'self',
+        },
+      },
     },
+    ...(production
+      ? {
+          base: 'static',
+        }
+      : {}),
     plugins: [
       vue(),
       /** 将 SVG 静态图转化为 Vue 组件 */
@@ -27,7 +40,13 @@ export default defineConfig((env: ConfigEnv) => {
         resolvers: [NaiveUiResolver()],
         dts: './typings/components.d.ts',
       }),
-      ...(env.mode === 'production'
+      // https://juejin.cn/post/7267184905187999759
+      VueI18nPlugin({
+        include: [fileURLToPath(new URL('./src/locales/lang/**.json', import.meta.url))],
+        runtimeOnly: false,
+        jitCompilation: true,
+      }),
+      ...(production
         ? [
             viteCompression({
               algorithm: 'gzip', // 压缩文件为 br 类型

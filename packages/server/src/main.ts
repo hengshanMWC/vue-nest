@@ -88,12 +88,14 @@ async function bootstrap() {
   // 获取配置端口
   const port = config.get<number>('app.port') || 8080
 
-  app.useStaticAssets(join(__dirname, '..', 'public'))
-  app.setBaseViewsDir(join(__dirname, '..', 'views'))
+  const staticPath = join(__dirname, '..', 'static')
+  app.useStaticAssets(staticPath)
+  app.setBaseViewsDir(join(staticPath, 'views'))
+
   await app.listen(port)
 
   const fileUploadLocationConfig
-    = config.get<string>('app.file.location') || './static/upload'
+    = config.get<string>('app.file.location') || './static'
   const fileUploadBastPath = normalize(
     isAbsolute(fileUploadLocationConfig)
       ? `${fileUploadLocationConfig}`

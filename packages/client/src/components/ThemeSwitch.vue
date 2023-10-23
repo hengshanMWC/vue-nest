@@ -5,7 +5,7 @@ import { useSettingStore } from '@/stores/modules/setting'
 import { ENUM_THEME } from '@/constant'
 
 const { themeRef } = storeToRefs(useSettingStore())
-const active = ref<boolean>(!!themeRef)
+const active = ref<boolean>(themeRef.value === ENUM_THEME.DARK)
 watch(active, (value) => {
   themeRef.value = value ? ENUM_THEME.DARK : ENUM_THEME.DEFAULT
 })

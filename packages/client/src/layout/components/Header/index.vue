@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import Logo from './Logo.vue'
+import Avatar from './Avatar.vue'
 import Locales from '@/components/Locales.vue'
 import ThemeSwitch from '@/components/ThemeSwitch.vue'
 
 const leftComponents = [Logo]
-const rightComponents = [Locales, ThemeSwitch]
+const rightComponents = [Locales, ThemeSwitch, Avatar]
 </script>
 
 <template>
