@@ -1,4 +1,6 @@
 export enum AppHttpCode {
+  SUCCESS = 200,
+  ERROR = 500,
   /** 公共错误 */
   /** 服务器出错 */
   SERVICE_ERROR = 500500,

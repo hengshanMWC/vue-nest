@@ -1,4 +1,3 @@
-import type { ResultDataApi } from '@lib/store'
-
 export * from './user'
-export type ApiResult<T = null> = Promise<ResultDataApi<T>>
+export * from './oss'
+export type ApiResult<T = null> = Promise<T>

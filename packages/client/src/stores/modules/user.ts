@@ -12,7 +12,7 @@ export const useUserStore = defineStore(
       avatar: 'https://vue-nest.com/public/images/not_user_avatar.png',
     })
 
-    const isLogo = computed(() => !!userInfo.id)
+    const isLogin = computed(() => !!userInfo.id)
 
     function logout() {
       userInfo.id = undefined
@@ -29,7 +29,7 @@ export const useUserStore = defineStore(
 
     return {
       userInfo,
-      isLogo,
+      isLogin,
       logout,
       loginModalShow,
     }

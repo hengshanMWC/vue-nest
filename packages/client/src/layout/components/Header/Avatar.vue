@@ -7,7 +7,7 @@ import { useUserStore } from '@/stores/modules/user'
 
 const userStore = useUserStore()
 const { logout } = userStore
-const { userInfo, isLogo } = storeToRefs(userStore)
+const { userInfo, isLogin, loginModalShow } = storeToRefs(userStore)
 const router = useRouter()
 const { t } = useI18n()
 
@@ -17,7 +17,7 @@ enum OPTIONS_KEY {
 }
 
 const options = computed<DropdownMixedOption[]>(() => {
-  return isLogo.value
+  return isLogin.value
     ? [
         {
           key: OPTIONS_KEY.USER_INFO,
@@ -43,6 +43,10 @@ function handleSelect(key: OPTIONS_KEY) {
       break
   }
 }
+
+function handleLogin() {
+  loginModalShow.value = true
+}
 </script>
 
 <template>
@@ -57,6 +61,7 @@ function handleSelect(key: OPTIONS_KEY) {
       color="transparent"
       round
       :src="userInfo.avatar"
+      @click="handleLogin"
     />
   </n-dropdown>
 </template>

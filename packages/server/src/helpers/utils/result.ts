@@ -1,13 +1,14 @@
+import { AppHttpCode } from '@lib/base'
 import { ApiProperty } from '@nestjs/swagger'
 
 export class ResultData {
-  constructor(code = 200, msg?: string, data?: any) {
+  constructor(code = AppHttpCode.SUCCESS, msg?: string, data?: any) {
     this.code = code
     this.msg = msg || 'ok'
     this.data = data || null
   }
 
-  @ApiProperty({ type: 'number', default: 200 })
+  @ApiProperty({ type: 'number', default: AppHttpCode.SUCCESS })
   code: number
 
   @ApiProperty({ type: 'string', default: 'ok' })
@@ -16,10 +17,10 @@ export class ResultData {
   data?: any
 
   static ok(data?: any, msg?: string): ResultData {
-    return new ResultData(200, msg, data)
+    return new ResultData(AppHttpCode.SUCCESS, msg, data)
   }
 
   static fail(code: number, msg?: string, data?: any): ResultData {
-    return new ResultData(code || 500, msg || 'fail', data)
+    return new ResultData(code || AppHttpCode.ERROR, msg || 'fail', data)
   }
 }

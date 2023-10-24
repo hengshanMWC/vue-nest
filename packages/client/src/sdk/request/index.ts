@@ -1,10 +1,14 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import type { CreateTokenResultDto } from '@lib/dtos'
+import { isUndefined } from 'lodash-es'
+import type { ResultDataApi } from '@lib/store'
+import { AppHttpCode } from '@lib/base'
+import errCode from 'err-code'
 import { getRTExp, getToken, setToken } from '@/utils/cache'
 
 import type { ApiResult } from '@/api'
 
-export type RefreshTokenRequestResult = ApiResult<CreateTokenResultDto>
+export type RefreshTokenRequestResult = ApiResult<ResultDataApi<CreateTokenResultDto>>
 export interface RequestEvent {
   error?: (error: Error) => void
   tokenExpire?: (error: AxiosError<any>) => void
@@ -32,9 +36,18 @@ export function createBusinessRequest(
     (response) => {
       const res = response?.data
       // res 有值
-      if (res || response.config?.responseType === 'blob')
-        return res
+      if (res || response.config?.responseType === 'blob') {
+        if (!(isUndefined(res.code) || isUndefined(res.code) || isUndefined(res.msg))) {
+          if (res.code === AppHttpCode.SUCCESS)
+            return res.data
 
+          else
+            return Promise.reject(errCode(new Error(res.msg), res.code))
+        }
+        else {
+          return res
+        }
+      }
       return null
     },
     async (error: AxiosError<any>) => {
@@ -48,7 +61,7 @@ export function createBusinessRequest(
           try {
             refreshTokenRequestResult = refreshTokenRequest()
             const res = await refreshTokenRequestResult
-            if (res?.code === 200) {
+            if (res?.code === AppHttpCode.SUCCESS) {
               const data = res.data
               setToken(data.accessToken, data.refreshToken)
               // 返回触发 401 接口正常结果

@@ -1,6 +1,7 @@
 import 'normalize.css/normalize.css'
 import './styles/tailwind.css'
-import './styles/index.css'
+
+// import './styles/index.css'
 
 import App from './App.vue'
 import router from './router'
@@ -15,5 +16,8 @@ app.use(router).use(createStore()).use(createLocales())
 const meta = document.createElement('meta')
 meta.name = 'naive-ui-style'
 document.head.appendChild(meta)
+
+// 优先级比naive-ui高
+import('./styles/index.css')
 
 app.mount('#app')

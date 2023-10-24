@@ -15,7 +15,9 @@ const naiveLocales = reactive<NLocaleApi>(NAIVE_UI_LOCALES[locale.value])
     :date-locale="naiveLocales.dateLocale"
     :theme="THEME_LIST[themeRef]"
   >
-    <ContainerVue />
+    <n-message-provider>
+      <ContainerVue />
+    </n-message-provider>
   </n-config-provider>
 </template>
 

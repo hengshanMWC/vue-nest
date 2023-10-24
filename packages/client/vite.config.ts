@@ -57,6 +57,7 @@ export default defineConfig((env: ConfigEnv) => {
     },
     optimizeDeps: {
       exclude: ['vue', 'axios', 'vue-router', 'vue-i18n'],
+      include: ['@lib/base', '@lib/routers'],
     },
     server: {
       cors: true,

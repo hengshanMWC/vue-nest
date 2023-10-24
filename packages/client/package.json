@@ -17,6 +17,7 @@
     "@vicons/ionicons5": "^0.12.0",
     "@vueuse/core": "^10.5.0",
     "axios": "^1.5.1",
+    "err-code": "^3.0.1",
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.35.0",
     "normalize.css": "^8.0.1",
