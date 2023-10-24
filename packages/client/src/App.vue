@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { NAIVE_UI_LOCALES, THEME_LIST } from './constant/const'
 import type { NLocaleApi } from './types'
 import { useSettingStore } from './stores/modules/setting'
+import ContainerVue from './Container.vue'
 
 const { locale, themeRef } = storeToRefs(useSettingStore())
 const naiveLocales = reactive<NLocaleApi>(NAIVE_UI_LOCALES[locale.value])
@@ -15,9 +15,7 @@ const naiveLocales = reactive<NLocaleApi>(NAIVE_UI_LOCALES[locale.value])
     :date-locale="naiveLocales.dateLocale"
     :theme="THEME_LIST[themeRef]"
   >
-    <n-dialog-provider>
-      <RouterView />
-    </n-dialog-provider>
+    <ContainerVue />
   </n-config-provider>
 </template>
 

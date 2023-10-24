@@ -7,5 +7,4 @@ type DeepReadonly<T> = {
 }
 
 declare interface Window {
-  $dialog: string
 }

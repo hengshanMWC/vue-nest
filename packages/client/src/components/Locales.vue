@@ -43,5 +43,4 @@ const options: DropdownMixedOption[] = [
 </template>
 
 <style scoped>
-.container {}
 </style>
