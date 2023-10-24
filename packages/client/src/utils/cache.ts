@@ -46,6 +46,6 @@ export function getRTExp(): number {
 export function clearLocalStorage() {
   const cacheKeyList = $enum(CacheKey).getValues()
   cacheKeyList.forEach((key) => {
-    localStorage.removeItem(CacheKey.TOKEN)
+    localStorage.removeItem(key)
   })
 }

@@ -4,13 +4,13 @@ import { ENUM_THEME, THEME } from '@/constant'
 import { getLocale, setStoreLangFlag } from '@/sdk'
 import { getLocales } from '@/locales'
 
-interface HandleSetting {
+interface HandleSettingStore {
   themeRef: RefValue<ENUM_THEME>
   setTheme: (type: ENUM_THEME) => void
   locale: RefValue<LOCALES_ENUM>
 }
 
-export const useSettingStore = defineStore<'setting', HandleSetting>(
+export const useSettingStore = defineStore<'setting', HandleSettingStore>(
   'setting',
   () => {
     // 主题

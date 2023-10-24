@@ -5,7 +5,7 @@ import { getRefreshToken } from '@/utils/cache'
 import { refreshTokenRequest, request } from '@/helpers/request'
 import type { RefreshTokenRequestResult } from '@/sdk'
 
-export function register(data: CreateUserDto): ApiResult<typeof CreateUserResultDto> {
+export function register(data: CreateUserDto): ApiResult<CreateUserResultDto> {
   return request.post(ROUTER_USER_GROUP_BASE.POST_REGISTER, data)
 }
 
@@ -13,7 +13,7 @@ export function login(data: LoginUserDto): ApiResult {
   return request.post(ROUTER_USER_GROUP_BASE.POST_LOGIN, data)
 }
 
-export function getUserInfo(id?: string): ApiResult<typeof CreateUserResultDto> {
+export function getUserInfo(id?: string): ApiResult<CreateUserResultDto> {
   return request.get(ROUTER_USER_GROUP_BASE.GET_INFO, {
     params: {
       id,

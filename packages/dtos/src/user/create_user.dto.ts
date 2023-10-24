@@ -50,4 +50,4 @@ export class CreateUserDto {
   readonly avatar?: string
 }
 
-export const CreateUserResultDto = UserEntity
+export class CreateUserResultDto extends UserEntity {}

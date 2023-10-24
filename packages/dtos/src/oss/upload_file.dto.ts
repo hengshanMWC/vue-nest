@@ -11,4 +11,4 @@ export class CreateUploadFileDto<T> {
   business?: string
 }
 
-export const CreateUploadFileResultDto = OssEntity
+export class CreateUploadFileResultDto extends OssEntity {}

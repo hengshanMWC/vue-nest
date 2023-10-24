@@ -15,9 +15,9 @@ export class UserController {
 
   @Get(ROUTER_USER_GROUP.GET_INFO)
   @ApiOperation({ summary: '根据id查询用户信息' })
-  @ApiQuery({ name: 'id' })
+  @ApiQuery({ name: 'id', required: false })
   @ApiResult(CreateUserResultDto)
-  async findOne(@Query('id') id: string, @Req() req): Promise<ResultData> {
+  async findOne(@Req() req, @Query('id') id?: string): Promise<ResultData> {
     return await this.userService.findOne(id || req.user.id)
   }
 
