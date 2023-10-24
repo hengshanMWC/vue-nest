@@ -41,13 +41,14 @@ const rightComponents = [Locales, ThemeSwitch, Avatar]
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   --tw-backdrop-blur: blur(8px);
+  box-shadow: 7px -6px 9px 0px;
 
   .arrange-boxs {
     @apply flex items-center;
   }
 
   .box-interval:not(:last-child) {
-    @apply mr-4;
+    @apply mr-6;
   }
 }
 </style>

@@ -10,7 +10,7 @@
     "source.fixAll.eslint": true
   },
   "i18n-ally.localesPaths": [
-    "src/locales/lang"
+    "./packages/client/src/locales/lang"
   ],
   "i18n-ally.sortKeys": true,
   "i18n-ally.enabledParsers": [

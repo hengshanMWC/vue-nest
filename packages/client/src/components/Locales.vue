@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Earth } from '@vicons/ionicons5'
 import { storeToRefs } from 'pinia'
+import type { DropdownMixedOption } from 'naive-ui/es/dropdown/src/interface'
 import { LOCALES_ENUM } from '@/constant'
 import { useSettingStore } from '@/stores/modules/setting'
 
@@ -8,7 +9,7 @@ const { locale } = storeToRefs(useSettingStore())
 function handleSelect(value: LOCALES_ENUM) {
   locale.value = value
 }
-const options = [
+const options: DropdownMixedOption[] = [
   {
     key: LOCALES_ENUM.EN_US,
     label: 'English',
