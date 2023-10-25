@@ -31,6 +31,7 @@ declare module 'vue' {
     NModal: typeof import('naive-ui')['NModal']
     NRow: typeof import('naive-ui')['NRow']
     NSwitch: typeof import('naive-ui')['NSwitch']
+    Register: typeof import('./../src/components/login/Register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ThemeSwitch: typeof import('./../src/components/ThemeSwitch.vue')['default']

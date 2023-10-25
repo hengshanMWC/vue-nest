@@ -41,7 +41,7 @@ const {
     if (resError.code === AppHttpCode.USER_PASSWORD_INVALID)
       message.info('帐号或密码错误')
     else
-      message.error('登录失败')
+      message.info('登录失败')
   },
 })
 
