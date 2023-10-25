@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useDark } from '@vueuse/core'
 import type { LOCALES_ENUM } from '@/constant'
 import { ENUM_THEME, THEME } from '@/constant'
 import { getLocale, setStoreLangFlag } from '@/sdk'
@@ -6,7 +7,7 @@ import { getLocales } from '@/locales'
 
 interface HandleSettingStore {
   themeRef: RefValue<ENUM_THEME>
-  setTheme: (type: ENUM_THEME) => void
+  isDarkRef: globalThis.WritableComputedRef<boolean>
   locale: RefValue<LOCALES_ENUM>
 }
 
@@ -14,15 +15,10 @@ export const useSettingStore = defineStore<'setting', HandleSettingStore>(
   'setting',
   () => {
     // 主题
-    const themeStorage = localStorage.getItem(THEME) as ENUM_THEME
-    const themeRef = ref<ENUM_THEME>(themeStorage || ENUM_THEME.DEFAULT)
-    watch(themeRef, (value) => {
-      localStorage.setItem(THEME, value)
+    const isDarkRef = useDark({
+      storageKey: THEME,
     })
-    function setTheme(type: ENUM_THEME) {
-      themeRef.value = type
-      localStorage.setItem(THEME, type)
-    }
+    const themeRef = computed<ENUM_THEME>(() => isDarkRef.value ? ENUM_THEME.DARK : ENUM_THEME.DEFAULT)
 
     // 国际化
     const locale = ref<LOCALES_ENUM>(getLocale())
@@ -33,8 +29,7 @@ export const useSettingStore = defineStore<'setting', HandleSettingStore>(
 
     return {
       themeRef,
-      setTheme,
-
+      isDarkRef,
       locale,
     }
   },

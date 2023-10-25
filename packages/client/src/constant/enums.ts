@@ -9,7 +9,7 @@ export enum LOCALES_ENUM {
 }
 
 export enum ENUM_THEME {
-  DEFAULT = 'default', // 默认
+  DEFAULT = 'light', // 默认
   DARK = 'dark', // 黑夜主题
 }
 
