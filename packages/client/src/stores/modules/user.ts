@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import type { CreateUserResultDto } from '@lib/dtos'
+import type { UserInfoResultDto } from '@lib/dtos'
 import { clearLocalStorage } from '@/utils/cache'
 import { useResetReactive } from '@/hook'
 
-type UserInfo = Pick<CreateUserResultDto, 'avatar'> & Partial<CreateUserResultDto>
+type UserInfo = Pick<UserInfoResultDto, 'avatar'> & Partial<UserInfoResultDto>
 
 export const useUserStore = defineStore(
   'user',

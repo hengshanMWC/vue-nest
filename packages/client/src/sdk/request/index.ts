@@ -37,9 +37,10 @@ export function createBusinessRequest(
       const res = response?.data
       // res 有值
       if (res || response.config?.responseType === 'blob') {
-        if (!(isUndefined(res.code) || isUndefined(res.code) || isUndefined(res.msg))) {
+        if (!(isUndefined(res.code) || isUndefined(res.msg))) {
+          console.log('res.code', res.code)
           if (res.code === AppHttpCode.SUCCESS)
-            return res.data
+            return res.data || null
 
           else
             return Promise.reject(errCode(new Error(res.msg), res.code))
@@ -92,6 +93,8 @@ export function createBusinessRequest(
         //   position: 'bottom-right',
         //   duration: 3000,
         // })
+        const data = error?.response?.data
+        return Promise.reject(errCode(new Error(data.msg), data.code, { data: data.error }))
       }
     },
   )

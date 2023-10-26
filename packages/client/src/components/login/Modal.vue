@@ -11,19 +11,27 @@ const info = computed(() => {
   if (loginShow.value) {
     return {
       title: '登录',
-      switchText: '注册',
+      switchText: '去注册',
     }
   }
   else {
     return {
       title: '注册',
-      switchText: '登录',
+      switchText: '去登录',
     }
   }
 })
 
+watch(loginModalShow, () => {
+  loginShow.value = true
+})
+
 function handleToggle() {
   toggle()
+}
+
+function handleLoginSuccess() {
+  loginModalShow.value = false
 }
 </script>
 
@@ -36,9 +44,9 @@ function handleToggle() {
     preset="dialog"
     :title="info.title"
   >
-    <KeepAlive>
-      <Login v-if="loginShow" />
-      <RegisterVue v-else />
+    <KeepAlive v-if="loginModalShow">
+      <Login v-if="loginShow" @success="handleLoginSuccess" />
+      <RegisterVue v-else @success="handleToggle" />
     </KeepAlive>
     <n-button class="width100 mt-5" round @click="handleToggle">
       {{ info.switchText }}

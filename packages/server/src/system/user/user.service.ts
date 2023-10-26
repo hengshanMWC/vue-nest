@@ -68,34 +68,41 @@ export class UserService {
     // 防止重复创建 start
     if (await this.findOneByAccount(dto.account))
       return ResultData.fail(
-        AppHttpCode.USER_CREATE_EXISTING,
+        AppHttpCode.USER_CREATE_EXISTING_ACCOUNT,
         '帐号已存在，请调整后重新注册！',
       )
     if (await this.userRepo.findOne({ where: { phoneNum: dto.phoneNum } }))
       return ResultData.fail(
-        AppHttpCode.USER_CREATE_EXISTING,
+        AppHttpCode.USER_CREATE_EXISTING_PHONE,
         '当前手机号已存在，请调整后重新注册',
       )
-    if (await this.userRepo.findOne({ where: { email: dto.email } }))
-      return ResultData.fail(
-        AppHttpCode.USER_CREATE_EXISTING,
-        '当前邮箱已存在，请调整后重新注册',
-      )
+    if (dto.email) {
+      if (await this.userRepo.findOne({ where: { email: dto.email } }))
+        return ResultData.fail(
+          AppHttpCode.USER_CREATE_EXISTING_EMAIL,
+          '当前邮箱已存在，请调整后重新注册',
+        )
+    }
+
     // 防止重复创建 end
     const salt = await genSalt()
     dto.password = await hash(dto.password, salt)
     // plainToInstance  忽略转换 @Exclude 装饰器
     const user = plainToInstance(
       UserEntity,
-      { salt, ...dto },
+      {
+        salt,
+        avatar: 'https://vue-nest.com/public/images/default_avatar.png',
+        ...dto,
+      },
       { ignoreDecorators: true },
     )
-    const result = await this.userManager.transaction(
+    await this.userManager.transaction(
       async (transactionalEntityManager) => {
         return await transactionalEntityManager.save<UserEntity>(user)
       },
     )
-    return ResultData.ok(instanceToPlain(result))
+    return ResultData.ok()
   }
 
   /**

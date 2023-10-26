@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { UserEntity } from '@lib/entities'
 import {
   IsEmail,
   IsMobilePhone,
@@ -49,5 +48,3 @@ export class CreateUserDto {
   @IsOptional()
   readonly avatar?: string
 }
-
-export class CreateUserResultDto extends UserEntity {}

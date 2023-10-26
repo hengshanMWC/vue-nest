@@ -11,6 +11,10 @@ import { fetchLogin, fetchUserInfo } from '@/api'
 import { setToken } from '@/utils/cache'
 import { useUserStore } from '@/stores/modules/user'
 
+const emit = defineEmits<{
+  (e: 'success'): void
+}>()
+
 const modelData = getLoginModel()
 
 const { userInfo, loginModalShow } = storeToRefs(useUserStore())
@@ -26,13 +30,19 @@ const disabled = computed(() => {
 const message = useMessage()
 
 const {
-  isLoading, isReady, execute: executeLogin,
+  isLoading, execute: executeLogin,
 } = useAsyncState(async () => {
   const {
     accessToken,
     refreshToken,
   } = await fetchLogin(modelRef.value)
   setToken(accessToken, refreshToken)
+
+  const data = await fetchUserInfo()
+  userInfo.value = data
+  loginModalShow.value = false
+
+  emit('success')
   return null
 }, null, {
   immediate: false,
@@ -43,14 +53,6 @@ const {
     else
       message.error('登录失败')
   },
-})
-
-watch(isReady, async (value) => {
-  if (value) {
-    const data = await fetchUserInfo()
-    userInfo.value = data
-    loginModalShow.value = false
-  }
 })
 
 function handleValidate(e: MouseEvent) {
@@ -75,13 +77,14 @@ function handleValidate(e: MouseEvent) {
     class="bg-white"
   >
     <n-form-item path="account" label="账号">
-      <n-input v-model:value="modelRef.account" @keydown.enter.prevent />
+      <n-input v-model:value="modelRef.account" :maxlength="200" />
     </n-form-item>
     <n-form-item path="password" label="密码">
       <n-input
         v-model:value="modelRef.password"
         type="password"
-        @keydown.enter.prevent
+        :maxlength="30"
+        show-password-on="mousedown"
       />
     </n-form-item>
     <n-button

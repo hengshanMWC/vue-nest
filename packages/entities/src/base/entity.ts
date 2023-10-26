@@ -1,28 +1,28 @@
-import { Column, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import type { BaseDataApi } from './interface'
 import { getBaseEntityColumns } from './constant'
 
-const { id, isDeleted, createdBy, updatedBy, createdAt, updatedAt }
+const { isDeleted, createdBy, updatedBy, createdAt, updatedAt }
   = getBaseEntityColumns()
 /**
  * base entity class with common fields
  */
 export abstract class BaseEntity implements BaseDataApi {
-  @PrimaryColumn(id.type)
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id!: string
 
   @Column(isDeleted)
   isDeleted!: boolean
 
   @Column(createdBy)
-  createdBy!: string
+  createdBy: string
 
   @Column(updatedBy)
-  updatedBy!: string
+  updatedBy: string
 
-  @Column(createdAt)
+  @CreateDateColumn(createdAt)
   createdAt!: Date
 
-  @Column(updatedAt)
+  @UpdateDateColumn(updatedAt)
   updatedAt?: Date
 }

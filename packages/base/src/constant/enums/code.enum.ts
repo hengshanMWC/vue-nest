@@ -12,8 +12,12 @@ export enum AppHttpCode {
   FILE_TYPE_ERROR = 100003,
   /** 文件超出大小 */
   FILE_SIZE_EXCEED_LIMIT = 100004,
-  /** 创建用户已存在，手机号，邮箱， 用户名等 */
-  USER_CREATE_EXISTING = 200001,
+  /** 创建用户已存在，用户名 */
+  USER_CREATE_EXISTING_ACCOUNT = 200001,
+  /** 创建用户已存在 手机号 */
+  USER_CREATE_EXISTING_PHONE = 200005,
+  /** 创建用户已存在 邮箱 */
+  USER_CREATE_EXISTING_EMAIL = 200006,
   /** 两次密码输入不一致, 账号密码不一致等 */
   USER_PASSWORD_INVALID = 200002,
   /** 帐号被禁用 */

@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { AllowAnon } from 'src/helpers/decorators/allow-anon.decorator'
 import { ROUTER_USER_BASE, ROUTER_USER_GROUP } from '@lib/routers'
-import { CreateTokenResultDto, CreateUserDto, CreateUserResultDto, LoginUserDto } from '@lib/dtos'
+import { CreateTokenResultDto, CreateUserDto, LoginUserDto } from '@lib/dtos'
 import { ResultData } from '../../helpers/utils/result'
 import { ApiResult } from '../../helpers/decorators/api-result.decorator'
 
@@ -16,7 +16,6 @@ export class BaseController {
 
   @Post(ROUTER_USER_GROUP.POST_REGISTER)
   @ApiOperation({ summary: '用户注册' })
-  @ApiResult(CreateUserResultDto)
   @AllowAnon()
   async create(@Body() user: CreateUserDto): Promise<ResultData> {
     return await this.userService.create(user)

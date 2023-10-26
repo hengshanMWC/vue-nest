@@ -10,16 +10,17 @@ export const getBseEntityData: GetBaseEntityData<BaseDataKeyList> = () => {
       isDeleted: {
         name: 'is_deleted',
         comment: 'wether it is deleted(0: no, 1: yes)',
-        nullable: true,
         default: () => false,
       },
       createdBy: {
         type: 'bigint',
+        nullable: true,
         name: 'created_by',
         comment: 'user ID of creator',
       },
       updatedBy: {
         type: 'bigint',
+        nullable: true,
         name: 'updated_by',
         comment: 'ID of use who last updated id',
       },
@@ -27,14 +28,12 @@ export const getBseEntityData: GetBaseEntityData<BaseDataKeyList> = () => {
         type: 'timestamp',
         name: 'created_at',
         comment: 'created timer',
-        default: () => 'CURRENT_TIMESTAMP',
       },
       updatedAt: {
         type: 'timestamp',
         name: 'updated_at',
         nullable: true,
         comment: 'updated time',
-        default: () => 'CURRENT_TIMESTAMP',
       },
     },
   }

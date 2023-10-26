@@ -3,56 +3,56 @@ import {
   type FormInst, useMessage,
 } from 'naive-ui'
 import { useAsyncState } from '@vueuse/core'
-import { storeToRefs } from 'pinia'
 import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
-import { getLoginModel, getLoginRules } from './utils'
-import { fetchLogin, fetchUserInfo } from '@/api'
-import { setToken } from '@/utils/cache'
-import { useUserStore } from '@/stores/modules/user'
+import { omit } from 'lodash-es'
+import { getRegisterModel, getRegisterRules } from './utils'
+import { fetchRegister } from '@/api'
 
-const modelData = getLoginModel()
+const emit = defineEmits<{
+  (e: 'success'): void
+}>()
 
-const { userInfo, loginModalShow } = storeToRefs(useUserStore())
+const modelData = getRegisterModel()
+
 const formRef = ref<FormInst | null>(null)
 const modelRef = ref(modelData)
 
 const disabled = computed(() => {
   return !Object
-    .keys(modelData)
+    .keys(omit(modelData, 'avatar', 'email'))
     .every(key => modelRef.value[key as keyof typeof modelData])
 })
 
 const message = useMessage()
 
 const {
-  isLoading, isReady, execute: executeLogin,
+  isLoading, execute: executeLogin,
 } = useAsyncState(async () => {
-  const {
-    accessToken,
-    refreshToken,
-  } = await fetchLogin(modelRef.value)
-  setToken(accessToken, refreshToken)
+  const reqData = modelRef.value
+  await fetchRegister(reqData)
+  handleSuccess()
   return null
 }, null, {
   immediate: false,
   onError(error) {
     const resError = error as ResultData<null>
     if (resError.code === AppHttpCode.USER_PASSWORD_INVALID)
-      message.info('帐号或密码错误')
+      message.info('两次密码输入不一致')
+    else if (resError.code === AppHttpCode.USER_CREATE_EXISTING_ACCOUNT)
+      message.info('帐号已存在，请调整后重新注册')
+    else if (resError.code === AppHttpCode.USER_CREATE_EXISTING_PHONE)
+      message.info('当前手机号已存在，请调整后重新注册')
+    else if (resError.code === AppHttpCode.USER_CREATE_EXISTING_EMAIL)
+      message.info('当前邮箱已存在，请调整后重新注册')
     else
-      message.info('登录失败')
+      message.info('注册失败')
   },
 })
-
-watch(isReady, async (value) => {
-  if (value) {
-    const data = await fetchUserInfo()
-    userInfo.value = data
-    loginModalShow.value = false
-  }
-})
-
+function handleSuccess() {
+  message.success('注册成功')
+  emit('success')
+}
 function handleValidate(e: MouseEvent) {
   e.preventDefault()
   formRef.value?.validate((errors) => {
@@ -61,7 +61,7 @@ function handleValidate(e: MouseEvent) {
     }
     else {
       console.log(errors)
-      message.error('登录失败')
+      message.error('注册失败')
     }
   })
 }
@@ -71,18 +71,34 @@ function handleValidate(e: MouseEvent) {
   <n-form
     ref="formRef"
     :model="modelRef"
-    :rules="getLoginRules()"
+    :rules="getRegisterRules(modelRef)"
     class="bg-white"
+    :disabled="isLoading"
   >
     <n-form-item path="account" label="账号">
-      <n-input v-model:value="modelRef.account" @keydown.enter.prevent />
+      <n-input v-model:value="modelRef.account" :maxlength="200" />
     </n-form-item>
     <n-form-item path="password" label="密码">
       <n-input
         v-model:value="modelRef.password"
         type="password"
-        @keydown.enter.prevent
+        :maxlength="30"
+        show-password-on="mousedown"
       />
+    </n-form-item>
+    <n-form-item path="confirmPassword" label="确认密码">
+      <n-input
+        v-model:value="modelRef.confirmPassword"
+        type="password"
+        :maxlength="30"
+        show-password-on="mousedown"
+      />
+    </n-form-item>
+    <n-form-item path="phoneNum" label="手机号">
+      <n-input v-model:value="modelRef.phoneNum" :maxlength="11" pattern="[0-9]" />
+    </n-form-item>
+    <n-form-item path="email" label="邮箱" type="email">
+      <n-input v-model:value="modelRef.email" :maxlength="200" />
     </n-form-item>
     <n-button
       :disabled="disabled"
@@ -92,7 +108,7 @@ function handleValidate(e: MouseEvent) {
       type="primary"
       @click="handleValidate"
     >
-      登录
+      注册
     </n-button>
   </n-form>
 </template>

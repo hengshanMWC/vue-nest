@@ -1,11 +1,11 @@
-import type { CreateTokenResultDto, CreateUserDto, CreateUserResultDto, LoginUserDto, UpdatePasswordDto, UpdateUserDto } from '@lib/dtos'
+import type { CreateTokenResultDto, CreateUserDto, LoginUserDto, UpdatePasswordDto, UpdateUserDto, UserInfoResultDto } from '@lib/dtos'
 import { ROUTER_USER_GROUP_BASE } from '@lib/routers'
 import type { ApiResult } from '.'
 import { getRefreshToken } from '@/utils/cache'
 import { refreshTokenRequest, request } from '@/helpers/request'
 import type { RefreshTokenRequestResult } from '@/sdk'
 
-export function fetchRegister(data: CreateUserDto): ApiResult<CreateUserResultDto> {
+export function fetchRegister(data: CreateUserDto): ApiResult {
   return request.post(ROUTER_USER_GROUP_BASE.POST_REGISTER, data)
 }
 
@@ -13,7 +13,7 @@ export function fetchLogin(data: LoginUserDto): ApiResult<CreateTokenResultDto> 
   return request.post(ROUTER_USER_GROUP_BASE.POST_LOGIN, data)
 }
 
-export function fetchUserInfo(id?: string): ApiResult<CreateUserResultDto> {
+export function fetchUserInfo(id?: string): ApiResult<UserInfoResultDto> {
   return request.get(ROUTER_USER_GROUP_BASE.GET_INFO, {
     params: {
       id,

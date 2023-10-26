@@ -2,7 +2,7 @@ import { Body, Controller, Get, Put, Query, Req } from '@nestjs/common'
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger'
 
 import { ApiResult } from 'src/helpers/decorators/api-result.decorator'
-import { CreateUserResultDto, UpdatePasswordDto, UpdateUserDto } from '@lib/dtos'
+import { UpdatePasswordDto, UpdateUserDto, UserInfoResultDto } from '@lib/dtos'
 import { ROUTER_USER_BASE, ROUTER_USER_GROUP } from '@lib/routers'
 import { ResultData } from '../../helpers/utils/result'
 import { UserService } from './user.service'
@@ -16,7 +16,7 @@ export class UserController {
   @Get(ROUTER_USER_GROUP.GET_INFO)
   @ApiOperation({ summary: '根据id查询用户信息' })
   @ApiQuery({ name: 'id', required: false })
-  @ApiResult(CreateUserResultDto)
+  @ApiResult(UserInfoResultDto)
   async findOne(@Req() req, @Query('id') id?: string): Promise<ResultData> {
     return await this.userService.findOne(id || req.user.id)
   }
