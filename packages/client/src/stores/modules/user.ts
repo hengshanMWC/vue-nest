@@ -13,19 +13,13 @@ export const useUserStore = defineStore(
       avatar: 'https://vue-nest.com/public/images/not_user_avatar.png',
     })
 
-    const isLogin = computed(() => !!userInfo.id)
-
     watch(userInfo, (data) => {
       if (!data?.id)
         clearLocalStorage()
     })
 
-    const loginModalShow = ref<boolean>(false)
-
     return {
       userInfo,
-      isLogin,
-      loginModalShow,
       reset,
     }
   },

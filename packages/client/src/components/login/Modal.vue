@@ -1,14 +1,17 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { useToggle } from '@vueuse/core'
+import type { UserInfoResultDto } from '@lib/dtos'
 import RegisterVue from './Register.vue'
-import { useUserStore } from '@/stores/modules/user'
+import { useLoginStore } from '@/stores/modules/login'
 
-const { loginModalShow } = storeToRefs(useUserStore())
+const loginStore = useLoginStore()
+const { loginSuccess, loginFail } = loginStore
+const { loginModalShow, isLogin } = storeToRefs(loginStore)
 
-const [loginShow, toggle] = useToggle(true)
+const [loginPageShow, toggle] = useToggle(true)
 const info = computed(() => {
-  if (loginShow.value) {
+  if (loginPageShow.value) {
     return {
       title: '登录',
       switchText: '去注册',
@@ -23,15 +26,17 @@ const info = computed(() => {
 })
 
 watch(loginModalShow, () => {
-  loginShow.value = true
+  loginPageShow.value = true
+  if (!isLogin)
+    loginFail(new Error('not login'))
 })
 
 function handleToggle() {
   toggle()
 }
 
-function handleLoginSuccess() {
-  loginModalShow.value = false
+function handleLoginSuccess(userInfo: UserInfoResultDto) {
+  loginSuccess(userInfo)
 }
 </script>
 
@@ -45,7 +50,7 @@ function handleLoginSuccess() {
     :title="info.title"
   >
     <KeepAlive v-if="loginModalShow">
-      <Login v-if="loginShow" @success="handleLoginSuccess" />
+      <Login v-if="loginPageShow" @success="handleLoginSuccess" />
       <RegisterVue v-else @success="handleToggle" />
     </KeepAlive>
     <n-button class="width100 mt-5" round @click="handleToggle">

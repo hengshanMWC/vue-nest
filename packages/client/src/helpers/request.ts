@@ -17,7 +17,7 @@ createBusinessRequest(request, fetchUpdateToken, {
   tokenExpire() {
     const userStore = useUserStore()
     userStore.reset()
-    userStore.loginModalShow = true
+    // userStore.loginModalShow = true
   },
 })
 

@@ -4,10 +4,16 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/modules/user'
+import { useLoginStore } from '@/stores/modules/login'
 
 const userStore = useUserStore()
 const { reset } = userStore
-const { userInfo, isLogin, loginModalShow } = storeToRefs(userStore)
+const { userInfo } = storeToRefs(userStore)
+
+const loginStore = useLoginStore()
+const { openLogin } = loginStore
+const { isLogin } = storeToRefs(loginStore)
+
 const router = useRouter()
 const { t } = useI18n()
 
@@ -45,7 +51,7 @@ function handleSelect(key: OPTIONS_KEY) {
 }
 
 function handleLogin() {
-  loginModalShow.value = true
+  openLogin()
 }
 </script>
 
