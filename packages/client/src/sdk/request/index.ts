@@ -4,7 +4,7 @@ import { isUndefined } from 'lodash-es'
 import type { ResultDataApi } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
 import errCode from 'err-code'
-import { getRTExp, getToken, setToken } from '@/utils/cache'
+import { getRTexpExpired, getToken, setToken } from '@/utils/cache'
 
 import type { ApiResult } from '@/api'
 
@@ -38,7 +38,6 @@ export function createBusinessRequest(
       // res 有值
       if (res || response.config?.responseType === 'blob') {
         if (!(isUndefined(res.code) || isUndefined(res.msg))) {
-          console.log('res.code', res.code)
           if (res.code === AppHttpCode.SUCCESS)
             return res.data || null
 
@@ -55,12 +54,16 @@ export function createBusinessRequest(
       const response = error.response
       const config = response?.config as AxiosRequestConfig
       if (response?.status === 401) {
-        if (getRTExp() <= Date.now()) {
+        if (getRTexpExpired()) {
           on.tokenExpire && on.tokenExpire(error)
         }
         else if (!refreshTokenRequestResult) {
           try {
             refreshTokenRequestResult = refreshTokenRequest()
+              .catch((error) => {
+                on.tokenExpire && on.tokenExpire(error)
+                return error
+              })
             const res = await refreshTokenRequestResult
             if (res?.code === AppHttpCode.SUCCESS) {
               const data = res.data

@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/modules/user'
 
 const userStore = useUserStore()
-const { logout } = userStore
+const { reset } = userStore
 const { userInfo, isLogin, loginModalShow } = storeToRefs(userStore)
 const router = useRouter()
 const { t } = useI18n()
@@ -39,7 +39,7 @@ function handleSelect(key: OPTIONS_KEY) {
       })
       break
     case OPTIONS_KEY.LOGOUT:
-      logout()
+      reset()
       break
   }
 }
@@ -61,7 +61,7 @@ function handleLogin() {
       color="transparent"
       round
       :src="userInfo.avatar"
-      @click="handleLogin"
+      @click="!isLogin && handleLogin()"
     />
   </n-dropdown>
 </template>

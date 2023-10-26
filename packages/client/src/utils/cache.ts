@@ -42,6 +42,12 @@ export function getRTExp(): number {
   const rtExpStr = localStorage.getItem(CacheKey.REFRESH_TOKEN_EXP)
   return rtExpStr ? Number(rtExpStr) : 0
 }
+export function getRTexpExpired() {
+  return getRTExp() <= Date.now()
+}
+export function getLoginActive() {
+  return getToken() && !getRTexpExpired()
+}
 
 export function clearLocalStorage() {
   const cacheKeyList = $enum(CacheKey).getValues()

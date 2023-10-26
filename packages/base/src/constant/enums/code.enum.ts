@@ -1,5 +1,7 @@
 export enum AppHttpCode {
   SUCCESS = 200,
+  // 拒绝
+  REJECT = 403,
   ERROR = 500,
   /** 公共错误 */
   /** 服务器出错 */
@@ -32,12 +34,4 @@ export enum AppHttpCode {
   ROLE_NOT_DEL = 300005,
   /** 无权限 */
   ROLE_NO_FORBIDDEN = 300403,
-  /** 菜单未找到 */
-  MENU_NOT_FOUND = 400004,
-  /** 部门不存在 */
-  DEPT_NOT_FOUND = 500004,
-  /** 岗位已存在 */
-  POST_REPEAT = 600001,
-  /** 岗位不存在 */
-  POST_NOT_FOUND = 600004,
 }

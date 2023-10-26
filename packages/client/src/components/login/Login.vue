@@ -8,7 +8,6 @@ import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
 import { getLoginModel, getLoginRules } from './utils'
 import { fetchLogin, fetchUserInfo } from '@/api'
-import { setToken } from '@/utils/cache'
 import { useUserStore } from '@/stores/modules/user'
 
 const emit = defineEmits<{
@@ -17,7 +16,7 @@ const emit = defineEmits<{
 
 const modelData = getLoginModel()
 
-const { userInfo, loginModalShow } = storeToRefs(useUserStore())
+const { loginModalShow } = storeToRefs(useUserStore())
 const formRef = ref<FormInst | null>(null)
 const modelRef = ref(modelData)
 
@@ -32,16 +31,9 @@ const message = useMessage()
 const {
   isLoading, execute: executeLogin,
 } = useAsyncState(async () => {
-  const {
-    accessToken,
-    refreshToken,
-  } = await fetchLogin(modelRef.value)
-  setToken(accessToken, refreshToken)
-
-  const data = await fetchUserInfo()
-  userInfo.value = data
+  await fetchLogin(modelRef.value)
+  await fetchUserInfo()
   loginModalShow.value = false
-
   emit('success')
   return null
 }, null, {

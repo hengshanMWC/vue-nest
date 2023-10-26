@@ -15,8 +15,9 @@ createBusinessRequest(request, fetchUpdateToken, {
     console.log('request', error)
   },
   tokenExpire() {
-    const { logout } = useUserStore()
-    logout()
+    const userStore = useUserStore()
+    userStore.reset()
+    userStore.loginModalShow = true
   },
 })
 
