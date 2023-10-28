@@ -63,7 +63,6 @@ function handleValidate(e: MouseEvent) {
     ref="formRef"
     :model="modelRef"
     :rules="getLoginRules()"
-    class="bg-white"
   >
     <n-form-item path="account" label="账号">
       <n-input v-model:value="modelRef.account" :maxlength="200" />

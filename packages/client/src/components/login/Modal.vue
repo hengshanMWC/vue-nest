@@ -2,8 +2,11 @@
 import { storeToRefs } from 'pinia'
 import { useToggle } from '@vueuse/core'
 import type { UserInfoResultDto } from '@lib/dtos'
+import { useMessage } from 'naive-ui'
 import RegisterVue from './Register.vue'
 import { useLoginStore } from '@/stores/modules/login'
+
+const message = useMessage()
 
 const loginStore = useLoginStore()
 const { loginSuccess, loginFail } = loginStore
@@ -26,8 +29,12 @@ const info = computed(() => {
 })
 
 watch(loginModalShow, () => {
+  if (loginModalShow.value)
+    return
+  // 设置会登录
   loginPageShow.value = true
-  if (!isLogin)
+  // 报未登录
+  if (!isLogin.value)
     loginFail(new Error('not login'))
 })
 
@@ -36,6 +43,7 @@ function handleToggle() {
 }
 
 function handleLoginSuccess(userInfo: UserInfoResultDto) {
+  message.success('登录成功')
   loginSuccess(userInfo)
 }
 </script>

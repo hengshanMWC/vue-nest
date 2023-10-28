@@ -72,7 +72,6 @@ function handleValidate(e: MouseEvent) {
     ref="formRef"
     :model="modelRef"
     :rules="getRegisterRules(modelRef)"
-    class="bg-white"
     :disabled="isLoading"
   >
     <n-form-item path="account" label="账号">
