@@ -12,7 +12,7 @@ export type RefreshTokenRequestResult = ApiResult<ResultDataApi<CreateTokenResul
 export interface RequestEvent {
   error?: (error: Error) => void
   tokenExpire?: (error: AxiosError<any>) => void
-  serverError?: (error: AxiosError<any>) => void
+  serverError?: (error: Error & errCode.Extensions) => void
 }
 export function createBusinessRequest(
   request: AxiosInstance,
@@ -88,7 +88,7 @@ export function createBusinessRequest(
         }
       }
       else {
-        on.tokenExpire && on.tokenExpire(error)
+        on.serverError && on.serverError(error)
         // ElNotification({
         //   title: '服务端错误',
         //   dangerouslyUseHTMLString: true,
