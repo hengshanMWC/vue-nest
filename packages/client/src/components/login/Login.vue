@@ -6,10 +6,12 @@ import { useAsyncState } from '@vueuse/core'
 import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
 import type { UserInfoResultDto } from '@lib/dtos'
+import { effect } from 'vue'
 import { getLoginModel, getLoginRules } from './utils'
 import { fetchLogin, fetchUserInfo } from '@/api'
 
 const emit = defineEmits<{
+  (e: 'update:loading', loading: boolean): void
   (e: 'success', userInfo: UserInfoResultDto): void
 }>()
 
@@ -44,6 +46,10 @@ const {
   },
 })
 
+effect(() => {
+  emit('update:loading', isLoading.value)
+})
+
 function handleValidate(e: MouseEvent) {
   e.preventDefault()
   formRef.value?.validate((errors) => {
@@ -63,7 +69,7 @@ function handleValidate(e: MouseEvent) {
     ref="formRef"
     :model="modelRef"
     :rules="getLoginRules()"
-    :disabled="!isLoading"
+    :disabled="isLoading"
   >
     <n-form-item path="account" label="账号">
       <n-input v-model:value="modelRef.account" :maxlength="200" />

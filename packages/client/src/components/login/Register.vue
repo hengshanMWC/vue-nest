@@ -6,10 +6,12 @@ import { useAsyncState } from '@vueuse/core'
 import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
 import { omit } from 'lodash-es'
+import { effect } from 'vue'
 import { getRegisterModel, getRegisterRules } from './utils'
 import { fetchRegister } from '@/api'
 
 const emit = defineEmits<{
+  (e: 'update:loading', loading: boolean): void
   (e: 'success'): void
 }>()
 
@@ -49,10 +51,16 @@ const {
       message.info('注册失败')
   },
 })
+
+effect(() => {
+  emit('update:loading', isLoading.value)
+})
+
 function handleSuccess() {
   message.success('注册成功')
   emit('success')
 }
+
 function handleValidate(e: MouseEvent) {
   e.preventDefault()
   formRef.value?.validate((errors) => {

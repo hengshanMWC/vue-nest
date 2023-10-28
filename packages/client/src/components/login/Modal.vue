@@ -6,6 +6,8 @@ import { useMessage } from 'naive-ui'
 import RegisterVue from './Register.vue'
 import { useLoginStore } from '@/stores/modules/login'
 
+const disabledRef = ref<boolean>(false)
+
 const message = useMessage()
 
 const loginStore = useLoginStore()
@@ -13,6 +15,7 @@ const { loginSuccess, loginFail } = loginStore
 const { loginModalShow, isLogin } = storeToRefs(loginStore)
 
 const [loginPageShow, toggle] = useToggle(true)
+
 const info = computed(() => {
   if (loginPageShow.value) {
     return {
@@ -58,10 +61,15 @@ function handleLoginSuccess(userInfo: UserInfoResultDto) {
     :title="info.title"
   >
     <KeepAlive v-if="loginModalShow">
-      <Login v-if="loginPageShow" @success="handleLoginSuccess" />
-      <RegisterVue v-else @success="handleToggle" />
+      <Login v-if="loginPageShow" v-model:loading="disabledRef" @success="handleLoginSuccess" />
+      <RegisterVue v-else v-model:loading="disabledRef" @success="handleToggle" />
     </KeepAlive>
-    <n-button class="width100 mt-5" round @click="handleToggle">
+    <n-button
+      class="width100 mt-5"
+      round
+      :disabled="disabledRef"
+      @click="handleToggle"
+    >
       {{ info.switchText }}
     </n-button>
   </n-modal>
