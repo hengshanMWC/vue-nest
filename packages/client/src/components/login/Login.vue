@@ -63,6 +63,7 @@ function handleValidate(e: MouseEvent) {
     ref="formRef"
     :model="modelRef"
     :rules="getLoginRules()"
+    :disabled="!isLoading"
   >
     <n-form-item path="account" label="账号">
       <n-input v-model:value="modelRef.account" :maxlength="200" />
