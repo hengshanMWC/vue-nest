@@ -53,13 +53,8 @@ effect(() => {
 function handleValidate(e: MouseEvent) {
   e.preventDefault()
   formRef.value?.validate((errors) => {
-    if (!errors) {
+    if (!errors)
       executeLogin()
-    }
-    else {
-      console.log(errors)
-      message.error('登录失败')
-    }
   })
 }
 </script>
@@ -70,6 +65,7 @@ function handleValidate(e: MouseEvent) {
     :model="modelRef"
     :rules="getLoginRules()"
     :disabled="isLoading"
+    @keyup.enter="handleValidate"
   >
     <n-form-item path="account" label="账号">
       <n-input v-model:value="modelRef.account" :maxlength="200" />

@@ -81,6 +81,7 @@ function handleValidate(e: MouseEvent) {
     :model="modelRef"
     :rules="getRegisterRules(modelRef)"
     :disabled="isLoading"
+    @keyup.enter="handleValidate"
   >
     <n-form-item path="account" label="账号">
       <n-input v-model:value="modelRef.account" :maxlength="200" />
