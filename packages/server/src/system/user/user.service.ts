@@ -216,7 +216,7 @@ export class UserService {
       )
     }
     const userInfo = instanceToPlain(dto)
-    delete userInfo.roleIds
+    delete userInfo.type
     const { affected } = await this.userManager.transaction(
       async (transactionalEntityManager) => {
         return await transactionalEntityManager.update<UserEntity>(

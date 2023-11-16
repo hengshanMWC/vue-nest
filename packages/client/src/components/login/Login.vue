@@ -7,7 +7,7 @@ import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
 import type { UserInfoResultDto } from '@lib/dtos'
 import { effect } from 'vue'
-import { getLoginModel, getLoginRules } from './utils'
+import { getLoginModel, getLoginRules } from '@/model/business'
 import { fetchLogin, fetchUserInfo } from '@/api'
 
 const emit = defineEmits<{

@@ -1,33 +1,14 @@
-import type { CreateUserDto, LoginUserDto } from '@lib/dtos'
+import { omit } from 'lodash-es'
+import type { CreateUserDto } from '@lib/dtos'
 import type { FormRules } from 'naive-ui'
+import { getUserModel } from '../base'
+import type { UserInfo } from '@/stores/modules/user'
 
-export function getLoginRules(): FormRules {
-  return {
-    account: [
-      {
-        required: true,
-        message: '请输入账号',
-        trigger: ['input', 'blur'],
-      },
-    ],
-    password: [
-      {
-        required: true,
-        message: '请输入密码',
-        trigger: ['input', 'blur'],
-      },
-    ],
-  }
+export function getRegisterModel(): CreateUserDto {
+  return omit(getUserModel(), 'avatar')
 }
 
-export function getLoginModel(): LoginUserDto {
-  return {
-    account: '',
-    password: '',
-  }
-}
-
-export function getRegisterRules(modelData: CreateUserDto): FormRules {
+export function getRegisterRules(modelData: UserInfo): FormRules {
   const accountMinLength = 5
   const passwordMinLength = 8
   return {
@@ -91,16 +72,5 @@ export function getRegisterRules(modelData: CreateUserDto): FormRules {
         trigger: ['input', 'blur'],
       },
     ],
-  }
-}
-
-export function getRegisterModel(): CreateUserDto {
-  return {
-    account: '',
-    password: '',
-    confirmPassword: '',
-    phoneNum: '',
-    email: '',
-    avatar: '',
   }
 }

@@ -3,7 +3,7 @@ import type { UserInfoResultDto } from '@lib/dtos'
 import { clearLocalStorage } from '@/utils/cache'
 import { useResetData } from '@/hook'
 
-type UserInfo = Pick<UserInfoResultDto, 'avatar'> & Partial<UserInfoResultDto>
+export type UserInfo = Pick<UserInfoResultDto, 'avatar'> & Partial<UserInfoResultDto>
 
 export const useUserStore = defineStore(
   'user',

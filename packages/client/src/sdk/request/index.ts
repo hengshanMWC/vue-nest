@@ -16,18 +16,18 @@ export interface RequestEvent {
 }
 export function createBusinessRequest(
   request: AxiosInstance,
-  refreshTokenRequest: () => RefreshTokenRequestResult,
+  refreshTokenRequest?: () => RefreshTokenRequestResult,
   on: RequestEvent = {},
 ) {
   let refreshTokenRequestResult: RefreshTokenRequestResult | null = null
   request.interceptors.request.use(async (config) => {
+    if (refreshTokenRequestResult)
+      await refreshTokenRequestResult
+
     const token = getToken()
 
     if (token && !config.headers.Authorization)
       config.headers.Authorization = token
-
-    if (refreshTokenRequestResult)
-      await refreshTokenRequestResult
 
     return config
   })
@@ -52,39 +52,41 @@ export function createBusinessRequest(
     },
     async (error: AxiosError<any>) => {
       const response = error.response
-      const config = response?.config as AxiosRequestConfig
       if (response?.status === 401) {
-        if (getRTexpExpired()) {
+        if (getRTexpExpired())
           on.tokenExpire && on.tokenExpire(error)
-        }
-        else if (!refreshTokenRequestResult) {
-          try {
-            refreshTokenRequestResult = refreshTokenRequest()
-              .catch((error) => {
-                on.tokenExpire && on.tokenExpire(error)
-                return error
-              })
-            const res = await refreshTokenRequestResult
-            if (res?.code === AppHttpCode.SUCCESS) {
-              const data = res.data
-              setToken(data.accessToken, data.refreshToken)
-              // 返回触发 401 接口正常结果
-              config.headers = { ...config.headers, Authorization: data.accessToken }
-              return await request(config)
+
+        const config = response?.config as AxiosRequestConfig
+        if (refreshTokenRequest) {
+          if (!refreshTokenRequestResult) {
+            try {
+              refreshTokenRequestResult = refreshTokenRequest()
+                .catch((error) => {
+                  on.tokenExpire && on.tokenExpire(error)
+                  return error
+                })
+              const res = await refreshTokenRequestResult
+              if (res?.code === AppHttpCode.SUCCESS) {
+                const data = res.data
+                setToken(data.accessToken, data.refreshToken)
+                // 返回触发 401 接口正常结果
+                config.headers = { ...config.headers, Authorization: data.accessToken }
+                return await request(config)
+              }
+            }
+            catch (error) {
+              on.error && on.error(error as Error)
+            }
+            finally {
+              refreshTokenRequestResult = null
             }
           }
-          catch (error) {
-            on.error && on.error(error as Error)
+          else {
+            // 刷新 token 期间，将其他请求存入队列，刷新成功之后重新请求一次
+            const res = await refreshTokenRequestResult
+            config.headers = { ...config.headers, Authorization: res.data.accessToken }
+            return await request(config)
           }
-          finally {
-            refreshTokenRequestResult = null
-          }
-        }
-        else {
-          // 刷新 token 期间，将其他请求存入队列，刷新成功之后重新请求一次
-          const res = await refreshTokenRequestResult
-          config.headers = { ...config.headers, Authorization: res.data.accessToken }
-          return await request(config)
         }
       }
       else {

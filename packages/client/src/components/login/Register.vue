@@ -7,7 +7,7 @@ import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
 import { omit } from 'lodash-es'
 import { effect } from 'vue'
-import { getRegisterModel, getRegisterRules } from './utils'
+import { getRegisterModel, getRegisterRules } from '@/model/business'
 import { fetchRegister } from '@/api'
 
 const emit = defineEmits<{
