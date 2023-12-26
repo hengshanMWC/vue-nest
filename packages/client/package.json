@@ -14,7 +14,7 @@
     "lint:prettier": "prettier --write  \"src/**/*.{js,json,css,scss,vue,html,md}\"",
     "lint:eslint": "eslint --fix \"{src,scripts,e2e}/**/*.{ts,tsx,js,vue}\" --ignore-path .gitignore",
     "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,postcss,css,scss,html}\"",
-    "format": "npm run lint:prettier && npm run lint:stylelint && npm run lint:eslint"
+    "format": "pnpm lint:prettier && pnpm lint:stylelint && pnpm lint:eslint"
   },
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
