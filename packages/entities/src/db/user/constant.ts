@@ -1,7 +1,5 @@
 import { UserType } from '@lib/base'
-import type {
-  GetBaseEntityData,
-} from '../../interface'
+import type { GetBaseEntityData } from '../../interface'
 import { createEntitiesFunc } from '../../utils'
 import type { UserStructureKeyList } from './interface'
 
@@ -66,8 +64,4 @@ const {
   getEntityName: getUserEntityName,
   getEntityColumns: getUserEntityColumns,
 } = createEntitiesFunc<UserStructureKeyList>(getUserEntityData)
-export {
-  getUserEntityName,
-  getUserEntityColumns,
-  getUserEntityData,
-}
+export { getUserEntityName, getUserEntityColumns, getUserEntityData }

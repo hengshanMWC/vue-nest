@@ -1,4 +1,11 @@
-import type { CreateTokenResultDto, CreateUserDto, LoginUserDto, UpdatePasswordDto, UpdateUserDto, UserInfoResultDto } from '@lib/dtos'
+import type {
+  CreateTokenResultDto,
+  CreateUserDto,
+  LoginUserDto,
+  UpdatePasswordDto,
+  UpdateUserDto,
+  UserInfoResultDto,
+} from '@lib/dtos'
 import { ROUTER_USER_GROUP_BASE } from '@lib/routers'
 import errCode from 'err-code'
 import { AppHttpCode } from '@lib/base'
@@ -12,26 +19,33 @@ export function fetchRegister(data: CreateUserDto): ApiResult {
   return request.post(ROUTER_USER_GROUP_BASE.POST_REGISTER, data)
 }
 
-export async function fetchLogin(data: LoginUserDto): ApiResult<CreateTokenResultDto> {
-  const res: CreateTokenResultDto = await request.post(ROUTER_USER_GROUP_BASE.POST_LOGIN, data)
-  const {
-    accessToken,
-    refreshToken,
-  } = res
+export async function fetchLogin(
+  data: LoginUserDto,
+): ApiResult<CreateTokenResultDto> {
+  const res: CreateTokenResultDto = await request.post(
+    ROUTER_USER_GROUP_BASE.POST_LOGIN,
+    data,
+  )
+  const { accessToken, refreshToken } = res
   setToken(accessToken, refreshToken)
   return res
 }
 
 export async function fetchUserInfo(id?: string): ApiResult<UserInfoResultDto> {
   if (!getLoginActive())
-    return Promise.reject(errCode(new Error('请先登录'), String(AppHttpCode.REJECT)))
+    return Promise.reject(
+      errCode(new Error('请先登录'), String(AppHttpCode.REJECT)),
+    )
 
   const { reset } = useUserStore()
-  const res: UserInfoResultDto = await request.get(ROUTER_USER_GROUP_BASE.GET_INFO, {
-    params: {
-      id,
+  const res: UserInfoResultDto = await request.get(
+    ROUTER_USER_GROUP_BASE.GET_INFO,
+    {
+      params: {
+        id,
+      },
     },
-  })
+  )
   reset(res)
   return res
 }

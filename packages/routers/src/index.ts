@@ -8,8 +8,7 @@ export function generatePath(routePath, params) {
   try {
     const path = toPath(params)
     return path
-  }
-  catch (error) {
+  } catch (error) {
     console.error('生成路由路径失败:', error.message)
     return null
   }

@@ -19,11 +19,9 @@ Body: ${JSON.stringify(req.body)}
 
   if (statusCode >= 500) {
     Logger.error(logFormat)
-  }
-  else if (statusCode >= 400) {
+  } else if (statusCode >= 400) {
     Logger.warn(logFormat)
-  }
-  else {
+  } else {
     Logger.access(logFormat)
     Logger.log(logFormat)
   }

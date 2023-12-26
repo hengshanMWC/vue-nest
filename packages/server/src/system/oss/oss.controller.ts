@@ -1,6 +1,20 @@
-import { Body, Controller, HttpCode, Post, Req, UploadedFile, UseInterceptors } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  Req,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger'
 
 import { OssEntity } from '@lib/entities'
 import { ROUTER_OSS_BASE, ROUTER_OSS_GROUP } from '@lib/routers'

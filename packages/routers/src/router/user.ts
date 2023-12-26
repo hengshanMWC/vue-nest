@@ -11,4 +11,7 @@ export const ROUTER_USER_GROUP = {
 
 export const ROUTER_USER_BASE = 'user'
 
-export const ROUTER_USER_GROUP_BASE = routerMerge(ROUTER_USER_BASE, ROUTER_USER_GROUP)
+export const ROUTER_USER_GROUP_BASE = routerMerge(
+  ROUTER_USER_BASE,
+  ROUTER_USER_GROUP,
+)

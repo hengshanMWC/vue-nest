@@ -41,6 +41,3 @@ const options: DropdownMixedOption[] = [
     </n-icon>
   </n-dropdown>
 </template>
-
-<style scoped>
-</style>

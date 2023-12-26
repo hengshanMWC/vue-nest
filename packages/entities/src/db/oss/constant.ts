@@ -1,6 +1,4 @@
-import type {
-  GetBaseEntityData,
-} from '../../interface'
+import type { GetBaseEntityData } from '../../interface'
 import { createEntitiesFunc } from '../../utils'
 import type { OssStructureKeyList } from './interface'
 
@@ -62,8 +60,4 @@ const {
   getEntityColumns: getOssEntityColumns,
 } = createEntitiesFunc<OssStructureKeyList>(getOssEntityData)
 
-export {
-  getOssEntityName,
-  getOssEntityColumns,
-  getOssEntityData,
-}
+export { getOssEntityName, getOssEntityColumns, getOssEntityData }

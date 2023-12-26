@@ -22,8 +22,7 @@ const info = computed(() => {
       title: '登录',
       switchText: '去注册',
     }
-  }
-  else {
+  } else {
     return {
       title: '注册',
       switchText: '去登录',
@@ -32,13 +31,11 @@ const info = computed(() => {
 })
 
 watch(loginModalShow, () => {
-  if (loginModalShow.value)
-    return
+  if (loginModalShow.value) return
   // 设置会登录
   loginPageShow.value = true
   // 报未登录
-  if (!isLogin.value)
-    loginFail(new Error('not login'))
+  if (!isLogin.value) loginFail(new Error('not login'))
 })
 
 function handleToggle() {
@@ -61,8 +58,16 @@ function handleLoginSuccess(userInfo: UserInfoResultDto) {
     :title="info.title"
   >
     <KeepAlive v-if="loginModalShow">
-      <Login v-if="loginPageShow" v-model:loading="disabledRef" @success="handleLoginSuccess" />
-      <RegisterVue v-else v-model:loading="disabledRef" @success="handleToggle" />
+      <Login
+        v-if="loginPageShow"
+        v-model:loading="disabledRef"
+        @success="handleLoginSuccess"
+      />
+      <RegisterVue
+        v-else
+        v-model:loading="disabledRef"
+        @success="handleToggle"
+      />
     </KeepAlive>
     <n-button
       class="width100 mt-5"

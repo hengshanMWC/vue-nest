@@ -9,15 +9,8 @@ import { BaseEntity } from '../../base/entity'
 import { getUserEntityColumns, getUserEntityName } from './constant'
 import type { UserStructureApi } from './interface'
 
-const {
-  password,
-  salt,
-  account,
-  phoneNum,
-  email,
-  avatar,
-  type,
-} = getUserEntityColumns()
+const { password, salt, account, phoneNum, email, avatar, type } =
+  getUserEntityColumns()
 @Entity(getUserEntityName())
 export class UserEntity extends BaseEntity implements UserStructureApi {
   @Exclude({ toPlainOnly: true }) // 输出屏蔽密码

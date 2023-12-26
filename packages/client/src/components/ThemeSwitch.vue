@@ -16,5 +16,3 @@ const { isDarkRef } = storeToRefs(useSettingStore())
     </template>
   </n-switch>
 </template>
-
-<style scoped></style>

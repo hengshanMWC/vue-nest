@@ -7,8 +7,7 @@ interface BaseEntityData<K extends KeyType> {
 }
 // 每个 entities 都要实现这些接口
 type GetBaseEntityData<K extends KeyType> = () => BaseEntityData<K>
-type GetBaseEntityName<K extends KeyType> =
-  () => BaseEntityData<K>['name']
+type GetBaseEntityName<K extends KeyType> = () => BaseEntityData<K>['name']
 type GetBaseEntityColumns<K extends KeyType> =
   () => BaseEntityData<K>['columns']
 interface BaseFuncGroup<K extends KeyType> {

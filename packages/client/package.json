@@ -11,7 +11,10 @@
     "test:e2e": "playwright test",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "format": "eslint --fix \"{src,scripts,e2e}/**/*.{ts,tsx,js,vue}\" --ignore-path .gitignore"
+    "lint:prettier": "prettier --write  \"src/**/*.{js,json,css,scss,vue,html,md}\"",
+    "lint:eslint": "eslint --fix \"{src,scripts,e2e}/**/*.{ts,tsx,js,vue}\" --ignore-path .gitignore",
+    "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,postcss,css,scss,html}\"",
+    "format": "npm run lint:prettier && npm run lint:stylelint && npm run lint:eslint"
   },
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
@@ -28,6 +31,8 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@abmao/eslint-config-vue": "^2.1.2",
+    "@abmao/stylelint-config-vue": "^0.0.2",
     "@antfu/eslint-config-vue": "^0.43.1",
     "@intlify/unplugin-vue-i18n": "^1.4.0",
     "@playwright/test": "^1.38.0",

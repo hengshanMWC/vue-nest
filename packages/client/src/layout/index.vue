@@ -8,5 +8,3 @@ import { AppMain, Header } from './components/index'
     <AppMain />
   </n-layout>
 </template>
-
-<style scoped></style>

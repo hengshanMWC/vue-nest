@@ -6,4 +6,7 @@ export const ROUTER_OSS_GROUP = {
 
 export const ROUTER_OSS_BASE = 'oss'
 
-export const ROUTER_OSS_GROUP_BASE = routerMerge(ROUTER_OSS_BASE, ROUTER_OSS_GROUP)
+export const ROUTER_OSS_GROUP_BASE = routerMerge(
+  ROUTER_OSS_BASE,
+  ROUTER_OSS_GROUP,
+)

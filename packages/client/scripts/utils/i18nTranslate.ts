@@ -16,8 +16,7 @@ function flattenObject(obj: NestedObject, prefix = ''): JsonObject {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         const nestedObj = flattenObject(obj[key] as NestedObject, nestedKey)
         result = { ...result, ...nestedObj }
-      }
-      else {
+      } else {
         result[nestedKey] = obj[key] as string
       }
     }
@@ -36,8 +35,7 @@ function unflattenObject(obj: JsonObject) {
         if (!Object.prototype.hasOwnProperty.call(nestedObj, nestedKey))
           nestedObj[nestedKey] = {}
 
-        if (i === nestedKeys.length - 1)
-          nestedObj[nestedKey] = obj[key]
+        if (i === nestedKeys.length - 1) nestedObj[nestedKey] = obj[key]
 
         nestedObj = nestedObj[nestedKey] as NestedObject
       }
@@ -77,8 +75,7 @@ async function translateRun(
         chunks.push(chunk)
         chunkValuesLength = 0
         chunk = []
-      }
-      else {
+      } else {
         chunk.push({ key, value })
         chunkValuesLength += valueLength + 5
       }

@@ -56,11 +56,7 @@ function handleLogin() {
 </script>
 
 <template>
-  <n-dropdown
-    trigger="hover"
-    :options="options"
-    @select="handleSelect"
-  >
+  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
     <n-avatar
       class="cursor-pointer"
       :size="38"
@@ -71,5 +67,3 @@ function handleLogin() {
     />
   </n-dropdown>
 </template>
-
-<style scoped></style>

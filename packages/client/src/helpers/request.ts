@@ -22,19 +22,15 @@ createBusinessRequest(request, fetchUpdateToken, {
     const message = useMessage()
     if (error.code === 500) {
       message.error('网络错误!')
-    }
-    else if (error.code === 404) {
+    } else if (error.code === 404) {
       message.error('接口404')
-    }
-    else if (error.code === 429) {
+    } else if (error.code === 429) {
       console.log('request are too fast')
       message.error('您太快了,请稍后重试!')
-    }
-    else if (error.code === 403) {
+    } else if (error.code === 403) {
       console.log('forbidden request')
       message.error('您无权访问')
-    }
-    else if (error.code === 400 || error.code === 422) {
+    } else if (error.code === 400 || error.code === 422) {
       message.error(error.response.data.message)
     }
   },
@@ -43,7 +39,4 @@ createBusinessRequest(request, fetchUpdateToken, {
   },
 })
 
-export {
-  request,
-  refreshTokenRequest,
-}
+export { request, refreshTokenRequest }

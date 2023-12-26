@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 import { $enum } from 'ts-enum-util'
 import { CacheKey } from '@/constant'
 
@@ -51,7 +51,7 @@ export function getLoginActive() {
 
 export function clearLocalStorage() {
   const cacheKeyList = $enum(CacheKey).getValues()
-  cacheKeyList.forEach((key) => {
+  cacheKeyList.forEach(key => {
     localStorage.removeItem(key)
   })
 }

@@ -11,14 +11,7 @@ function handleHome() {
 </script>
 
 <template>
-  <n-icon
-    class="cursor-pointer"
-    size="30"
-    title="Vue-Next"
-    @click="handleHome"
-  >
+  <n-icon class="cursor-pointer" size="30" title="Vue-Next" @click="handleHome">
     <LogoSvg />
   </n-icon>
 </template>
-
-<style scoped></style>

@@ -38,10 +38,12 @@ const rightComponents = [Locales, ThemeSwitch, Avatar]
 <style scoped>
 .header {
   height: var(--header-height);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(255 255 255 / 10%);
   backdrop-filter: blur(8px);
+
   --tw-backdrop-blur: blur(8px);
-  box-shadow: 7px -6px 9px 0px;
+
+  box-shadow: 7px -6px 9px 0;
 
   .arrange-boxs {
     @apply flex items-center;

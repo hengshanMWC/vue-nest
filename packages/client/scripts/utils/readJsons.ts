@@ -16,8 +16,7 @@ export async function readJsonFiles(directoryPath: string) {
         const data = await readFile(filePath, 'utf8')
         const jsonContent = JSON.parse(data)
         result[filePath] = jsonContent
-      }
-      catch (parseError) {
+      } catch (parseError) {
         console.log(`Error parsing JSON in ${file}:`, parseError)
       }
     }

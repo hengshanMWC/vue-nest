@@ -25,8 +25,7 @@
     "build": "pkgs run build",
     "test": "pkgs run test",
     "test:cov": "pkgs run test:cov",
-    "format": "eslint --fix \"scripts/**/*.{js,cjs,mjs,ts}\" --ignore-path .gitignore",
-    "format:all": "pnpm format & pkgs run format",
+    "format": "pkgs run format",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
@@ -35,7 +34,10 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@abmao/eslint-config-ts": "^2.1.2",
     "@abmao/pkgs": "latest",
+    "@abmao/prettier-config": "^1.0.0",
+    "@abmao/stylelint-config-vue": "^0.0.2",
     "@antfu/eslint-config-ts": "^0.43.1",
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
@@ -47,9 +49,13 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.41.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "esno": "^0.16.3",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.4",
+    "prettier": "^3.1.0",
+    "stylelint": "^15.11.0",
     "ts-loader": "^9.4.3",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
@@ -57,7 +63,7 @@
     "vitest": "^0.34.6"
   },
   "lint-staged": {
-    "**/*.{js,cjs,mjs,ts,vue}": "pnpm format:all"
+    "**/*.{js,cjs,mjs,ts,vue}": "pnpm format"
   },
   "dependencies": {
     "@lib/base": "workspace:^",

@@ -9,7 +9,12 @@ import ms from 'ms'
 
 import { ResultData } from 'src/helpers/utils/result'
 import { AppHttpCode, RedisKeyPrefix, UserType } from '@lib/base'
-import { CreateTokenResultDto, CreateUserDto, UpdatePasswordDto, UpdateUserDto } from '@lib/dtos'
+import {
+  CreateTokenResultDto,
+  CreateUserDto,
+  UpdatePasswordDto,
+  UpdateUserDto,
+} from '@lib/dtos'
 import { RedisService } from 'src/helpers/libs/redis/redis.service'
 
 import { validEmail, validPhone } from 'src/helpers/utils/validate'
@@ -97,11 +102,9 @@ export class UserService {
       },
       { ignoreDecorators: true },
     )
-    await this.userManager.transaction(
-      async (transactionalEntityManager) => {
-        return await transactionalEntityManager.save<UserEntity>(user)
-      },
-    )
+    await this.userManager.transaction(async transactionalEntityManager => {
+      return await transactionalEntityManager.save<UserEntity>(user)
+    })
     return ResultData.ok()
   }
 
@@ -114,12 +117,10 @@ export class UserService {
     if (validPhone(account)) {
       // 手机登录
       user = await this.userRepo.findOne({ where: { phoneNum: account } })
-    }
-    else if (validEmail(account)) {
+    } else if (validEmail(account)) {
       // 邮箱
       user = await this.userRepo.findOne({ where: { email: account } })
-    }
-    else {
+    } else {
       // 帐号
       user = await this.findOneByAccount(account)
     }
@@ -166,8 +167,8 @@ export class UserService {
         `用户不存在或已删除，${reset ? '重置' : '更新'}失败`,
       )
     if (
-      existing.type === UserType.SUPER_ADMIN
-      && currUser.type === UserType.ORDINARY_USER
+      existing.type === UserType.SUPER_ADMIN &&
+      currUser.type === UserType.ORDINARY_USER
     ) {
       return ResultData.fail(
         AppHttpCode.USER_FORBIDDEN_UPDATE,
@@ -182,7 +183,7 @@ export class UserService {
       password: await hash(newPassword, existing.salt),
     }
     const { affected } = await this.userManager.transaction(
-      async (transactionalEntityManager) => {
+      async transactionalEntityManager => {
         return await transactionalEntityManager.update<UserEntity>(
           UserEntity,
           userId,
@@ -207,8 +208,8 @@ export class UserService {
         '当前用户不存在或已删除',
       )
     if (
-      existing.type === UserType.SUPER_ADMIN
-      && currUser.type === UserType.ORDINARY_USER
+      existing.type === UserType.SUPER_ADMIN &&
+      currUser.type === UserType.ORDINARY_USER
     ) {
       return ResultData.fail(
         AppHttpCode.USER_FORBIDDEN_UPDATE,
@@ -218,7 +219,7 @@ export class UserService {
     const userInfo = instanceToPlain(dto)
     delete userInfo.type
     const { affected } = await this.userManager.transaction(
-      async (transactionalEntityManager) => {
+      async transactionalEntityManager => {
         return await transactionalEntityManager.update<UserEntity>(
           UserEntity,
           dto.id,
@@ -263,12 +264,10 @@ export class UserService {
   /** 校验 token */
   verifyToken(token: string): string {
     try {
-      if (!token)
-        return null
+      if (!token) return null
       const id = this.jwtService.verify(token.replace('Bearer ', ''))
       return id
-    }
-    catch (error) {
+    } catch (error) {
       return null
     }
   }

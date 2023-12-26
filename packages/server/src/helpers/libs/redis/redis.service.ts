@@ -19,8 +19,7 @@ export class RedisService {
    * @param seconds 可选，过期时间，单位 秒
    */
   async set(key: string, val: string, seconds?: number): Promise<'OK' | null> {
-    if (!seconds)
-      return await this.client.set(key, val)
+    if (!seconds) return await this.client.set(key, val)
     return await this.client.set(key, val, 'EX', seconds)
   }
 
@@ -29,22 +28,18 @@ export class RedisService {
    * @param key
    */
   async get(key: string): Promise<string> {
-    if (!key || key === '*')
-      return null
+    if (!key || key === '*') return null
     return await this.client.get(key)
   }
 
   async del(keys: string | string[]): Promise<number> {
-    if (!keys || keys === '*')
-      return 0
-    if (typeof keys === 'string')
-      keys = [keys]
+    if (!keys || keys === '*') return 0
+    if (typeof keys === 'string') keys = [keys]
     return await this.client.del(...keys)
   }
 
   async ttl(key: string): Promise<number | null> {
-    if (!key)
-      return null
+    if (!key) return null
     return await this.client.ttl(key)
   }
 
@@ -61,8 +56,7 @@ export class RedisService {
     field: string,
     value: string,
   ): Promise<string | number | null> {
-    if (!key || !field)
-      return null
+    if (!key || !field) return null
     return await this.client.hset(key, field, value)
   }
 
@@ -77,8 +71,7 @@ export class RedisService {
     data: Record<string, string | number | boolean>,
     expire?: number,
   ): Promise<number | any> {
-    if (!key || !data)
-      return 0
+    if (!key || !data) return 0
     const result = await this.client.hmset(key, data)
     if (expire) {
       await this.client.expire(key, expire)
@@ -92,8 +85,7 @@ export class RedisService {
    * @param field
    */
   async hget(key: string, field: string): Promise<number | string | null> {
-    if (!key || !field)
-      return 0
+    if (!key || !field) return 0
     return await this.client.hget(key, field)
   }
 
@@ -102,8 +94,7 @@ export class RedisService {
    * @param key
    */
   async hvals(key: string): Promise<string[]> {
-    if (!key)
-      return []
+    if (!key) return []
     return await this.client.hvals(key)
   }
 
@@ -120,8 +111,7 @@ export class RedisService {
     key: string,
     fields: string | string[],
   ): Promise<string[] | number> {
-    if (!key || fields.length === 0)
-      return 0
+    if (!key || fields.length === 0) return 0
     return await this.client.hdel(key, ...fields)
   }
 
@@ -130,11 +120,9 @@ export class RedisService {
    * @param key
    */
   async hdelAll(key: string): Promise<string[] | number> {
-    if (!key)
-      return 0
+    if (!key) return 0
     const fields = await this.client.hkeys(key)
-    if (fields.length === 0)
-      return 0
+    if (fields.length === 0) return 0
     return await this.hdel(key, fields)
   }
 
@@ -145,8 +133,7 @@ export class RedisService {
    * @param key
    */
   async lLength(key: string): Promise<number> {
-    if (!key)
-      return 0
+    if (!key) return 0
     return await this.client.llen(key)
   }
 
@@ -157,8 +144,7 @@ export class RedisService {
    * @param val
    */
   async lSet(key: string, index: number, val: string): Promise<'OK' | null> {
-    if (!key || index < 0)
-      return null
+    if (!key || index < 0) return null
     return await this.client.lset(key, index, val)
   }
 
@@ -168,8 +154,7 @@ export class RedisService {
    * @param index
    */
   async lIndex(key: string, index: number): Promise<string | null> {
-    if (!key || index < 0)
-      return null
+    if (!key || index < 0) return null
     return await this.client.lindex(key, index)
   }
 
@@ -184,8 +169,7 @@ export class RedisService {
     start: number,
     stop: number,
   ): Promise<string[] | null> {
-    if (!key)
-      return null
+    if (!key) return null
     return await this.client.lrange(key, start, stop)
   }
 
@@ -195,8 +179,7 @@ export class RedisService {
    * @param val
    */
   async lLeftPush(key: string, ...val: string[]): Promise<number> {
-    if (!key)
-      return 0
+    if (!key) return 0
     return await this.client.lpush(key, ...val)
   }
 
@@ -206,8 +189,7 @@ export class RedisService {
    * @param val
    */
   async lLeftPushIfPresent(key: string, ...val: string[]): Promise<number> {
-    if (!key)
-      return 0
+    if (!key) return 0
     return await this.client.lpushx(key, ...val)
   }
 
@@ -218,8 +200,7 @@ export class RedisService {
    * @param val
    */
   async lLeftInsert(key: string, pivot: string, val: string): Promise<number> {
-    if (!key || !pivot)
-      return 0
+    if (!key || !pivot) return 0
     return await this.client.linsert(key, 'BEFORE', pivot, val)
   }
 
@@ -230,8 +211,7 @@ export class RedisService {
    * @param val
    */
   async lRightInsert(key: string, pivot: string, val: string): Promise<number> {
-    if (!key || !pivot)
-      return 0
+    if (!key || !pivot) return 0
     return await this.client.linsert(key, 'AFTER', pivot, val)
   }
 
@@ -241,8 +221,7 @@ export class RedisService {
    * @param val
    */
   async lRightPush(key: string, ...val: string[]): Promise<number> {
-    if (!key)
-      return 0
+    if (!key) return 0
     return await this.client.lpush(key, ...val)
   }
 
@@ -252,8 +231,7 @@ export class RedisService {
    * @param val
    */
   async lRightPushIfPresent(key: string, ...val: string[]): Promise<number> {
-    if (!key)
-      return 0
+    if (!key) return 0
     return await this.client.rpushx(key, ...val)
   }
 
@@ -262,8 +240,7 @@ export class RedisService {
    * @param key
    */
   async lLeftPop(key: string): Promise<string> {
-    if (!key)
-      return null
+    if (!key) return null
     const result = await this.client.blpop(key)
     return result.length > 0 ? result[0] : null
   }
@@ -273,8 +250,7 @@ export class RedisService {
    * @param key
    */
   async lRightPop(key: string): Promise<string> {
-    if (!key)
-      return null
+    if (!key) return null
     const result = await this.client.brpop(key)
     return result.length > 0 ? result[0] : null
   }
@@ -286,8 +262,7 @@ export class RedisService {
    * @param stop
    */
   async lTrim(key: string, start: number, stop: number): Promise<'OK' | null> {
-    if (!key)
-      return null
+    if (!key) return null
     return await this.client.ltrim(key, start, stop)
   }
 
@@ -301,8 +276,7 @@ export class RedisService {
    * @param val
    */
   async lRemove(key: string, count: number, val: string): Promise<number> {
-    if (!key)
-      return 0
+    if (!key) return 0
     return await this.client.lrem(key, count, val)
   }
 
@@ -318,8 +292,7 @@ export class RedisService {
     destinationKey: string,
     timeout: number,
   ): Promise<string> {
-    if (!sourceKey || !destinationKey)
-      return null
+    if (!sourceKey || !destinationKey) return null
     return await this.client.brpoplpush(sourceKey, destinationKey, timeout)
   }
 }

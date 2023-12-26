@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import {
-  type FormInst, useMessage,
-} from 'naive-ui'
+import { type FormInst, useMessage } from 'naive-ui'
 import { useAsyncState } from '@vueuse/core'
 import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
@@ -21,30 +19,31 @@ const modelData = getLoginModel()
 const modelRef = ref(modelData)
 
 const disabled = computed(() => {
-  return !Object
-    .keys(modelData)
-    .every(key => modelRef.value[key as keyof typeof modelData])
+  return !Object.keys(modelData).every(
+    key => modelRef.value[key as keyof typeof modelData],
+  )
 })
 
 const message = useMessage()
 
-const {
-  isLoading, execute: executeLogin,
-} = useAsyncState(async () => {
-  await fetchLogin(modelRef.value)
-  const userInfo = await fetchUserInfo()
-  emit('success', userInfo)
-  return null
-}, null, {
-  immediate: false,
-  onError(error) {
-    const resError = error as ResultData<null>
-    if (resError.code === AppHttpCode.USER_PASSWORD_INVALID)
-      message.info('帐号或密码错误')
-    else
-      message.error('登录失败')
+const { isLoading, execute: executeLogin } = useAsyncState(
+  async () => {
+    await fetchLogin(modelRef.value)
+    const userInfo = await fetchUserInfo()
+    emit('success', userInfo)
+    return null
   },
-})
+  null,
+  {
+    immediate: false,
+    onError(error) {
+      const resError = error as ResultData<null>
+      if (resError.code === AppHttpCode.USER_PASSWORD_INVALID)
+        message.info('帐号或密码错误')
+      else message.error('登录失败')
+    },
+  },
+)
 
 effect(() => {
   emit('update:loading', isLoading.value)
@@ -52,9 +51,8 @@ effect(() => {
 
 function handleValidate(e: MouseEvent) {
   e.preventDefault()
-  formRef.value?.validate((errors) => {
-    if (!errors)
-      executeLogin()
+  formRef.value?.validate(errors => {
+    if (!errors) executeLogin()
   })
 }
 </script>

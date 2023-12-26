@@ -28,13 +28,12 @@ async function rollTranslate(
   agent?: Agent,
 ) {
   const jsonFIlePathReplaceRegExp = new RegExp(fromLocale, 'g')
-  return Object.keys(jsonContentList).map(async (key) => {
+  return Object.keys(jsonContentList).map(async key => {
     const targetPath = key.replace(jsonFIlePathReplaceRegExp, targetLocale)
     let targetContent = '{}'
     try {
       targetContent = await readFile(targetPath, 'utf8')
-    }
-    catch {
+    } catch {
       await writeFile(targetPath, targetContent, 'utf8')
     }
     const targetJson: NestedObject = JSON.parse(targetContent)

@@ -1,7 +1,6 @@
 import {
   ArgumentsHost,
   Catch,
-
   ExceptionFilter,
   HttpException,
 } from '@nestjs/common'
@@ -21,10 +20,9 @@ Request original url: ${request.originalUrl}
 Method: ${request.method}
 IP: ${request.ip}
 Status code: ${status}
-Response: ${
-      `${exception.toString()
-      }（${exceptionResponse?.message || exception.message}）`
-    }
+Response: ${`${exception.toString()}（${
+      exceptionResponse?.message || exception.message
+    }）`}
 ##############################################################################################################
 `
     Logger.info(logFormat)

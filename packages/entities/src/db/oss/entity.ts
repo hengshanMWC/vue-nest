@@ -5,15 +5,8 @@ import { BaseEntity } from '../../base/entity'
 import type { OssStructureApi } from './interface'
 import { getOssEntityColumns, getOssEntityName } from './constant'
 
-const {
-  userId,
-  userAccount,
-  url,
-  size,
-  type,
-  describes,
-  location,
-} = getOssEntityColumns()
+const { userId, userAccount, url, size, type, describes, location } =
+  getOssEntityColumns()
 @Entity(getOssEntityName())
 export class OssEntity extends BaseEntity implements OssStructureApi {
   @ApiProperty({ description: userId.comment })

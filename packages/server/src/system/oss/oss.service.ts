@@ -24,9 +24,12 @@ export class OssService {
     @InjectEntityManager()
     private readonly ossManager: EntityManager,
   ) {
-    const configLocation = this.config.get<string>('app.file.location') || './public/upload'
+    const configLocation =
+      this.config.get<string>('app.file.location') || './public/upload'
     this.basePath = path.normalize(
-      path.isAbsolute(configLocation) ? `${configLocation}` : path.join(this.productLocation, `${configLocation}`),
+      path.isAbsolute(configLocation)
+        ? `${configLocation}`
+        : path.join(this.productLocation, `${configLocation}`),
     )
     // 检测文件存储 文件夹是否存在
     // if (!fs.existsSync(this.basePath)) {
@@ -35,8 +38,7 @@ export class OssService {
     try {
       // fs.accessSync(this.basePath, fs.constants.F_OK | fs.constants.W_OK)
       fs.accessSync(this.basePath, fs.constants.W_OK)
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error, 'mwc')
       throw new Error(
         `文件存储路径配置 app.file.location = ${configLocation} (完整路径： ${this.basePath} ) 无写入权限`,
@@ -50,9 +52,11 @@ export class OssService {
     user: { id: string; account: string },
   ): Promise<ResultData> {
     const _files = Array.isArray(files) ? files : [files]
-    const ossList = _files.map((file) => {
+    const ossList = _files.map(file => {
       // 重新命名文件， uuid, 根据 mimeType 决定 文件扩展名， 直接拿后缀名不可靠
-      const newFileName = `${uuid.v4().replace(/-/g, '')}.${mime.extension(file.mimetype)}`
+      const newFileName = `${uuid.v4().replace(/-/g, '')}.${mime.extension(
+        file.mimetype,
+      )}`
       // const newFileName = `${uuid.v4().replace(/-/g, '')}.${file.originalname.split('.').pop().toLowerCase()}`
       // 文件存储路径
       const fileLocation = path.normalize(path.join(this.basePath, newFileName))
@@ -75,11 +79,16 @@ export class OssService {
       }
       return plainToInstance(OssEntity, ossFile)
     })
-    const result = await this.ossManager.transaction(async (transactionalEntityManager) => {
-      return await transactionalEntityManager.save<OssEntity>(ossList)
-    })
+    const result = await this.ossManager.transaction(
+      async transactionalEntityManager => {
+        return await transactionalEntityManager.save<OssEntity>(ossList)
+      },
+    )
     if (!result) {
-      return ResultData.fail(AppHttpCode.SERVICE_ERROR, '文件存储失败，请稍后重新上传')
+      return ResultData.fail(
+        AppHttpCode.SERVICE_ERROR,
+        '文件存储失败，请稍后重新上传',
+      )
     }
     return ResultData.ok(instanceToPlain(result))
   }

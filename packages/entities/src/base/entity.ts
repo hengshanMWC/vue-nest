@@ -1,9 +1,14 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 import type { BaseDataApi } from './interface'
 import { getBaseEntityColumns } from './constant'
 
-const { isDeleted, createdBy, updatedBy, createdAt, updatedAt }
-  = getBaseEntityColumns()
+const { isDeleted, createdBy, updatedBy, createdAt, updatedAt } =
+  getBaseEntityColumns()
 /**
  * base entity class with common fields
  */

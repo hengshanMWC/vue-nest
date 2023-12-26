@@ -3,6 +3,8 @@
     "Vue.volar",
     "Vue.vscode-typescript-vue-plugin",
     "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
     "dbaeumer.vscode-eslint",
     "bradlc.vscode-tailwindcss",
     "lokalise.i18n-ally",

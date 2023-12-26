@@ -35,6 +35,11 @@ export class UserController {
     @Body() dto: UpdatePasswordDto,
     @Req() req,
   ): Promise<ResultData> {
-    return await this.userService.updatePassword(dto, req.user.id, false, req.user)
+    return await this.userService.updatePassword(
+      dto,
+      req.user.id,
+      false,
+      req.user,
+    )
   }
 }

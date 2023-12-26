@@ -2,7 +2,6 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
-
   NestInterceptor,
 } from '@nestjs/common'
 import { Observable } from 'rxjs'
@@ -17,7 +16,7 @@ export class TransformInterceptor implements NestInterceptor {
   ): Observable<any> | Promise<Observable<any>> {
     const req = context.getArgByIndex(1).req
     return next.handle().pipe(
-      map((data) => {
+      map(data => {
         const logFormat = `
 ##############################################################################################################
 Request original url: ${req.originalUrl}

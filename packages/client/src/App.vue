@@ -20,5 +20,3 @@ const naiveLocales = reactive<NLocaleApi>(NAIVE_UI_LOCALES[locale.value])
     </n-message-provider>
   </n-config-provider>
 </template>
-
-<style scoped></style>

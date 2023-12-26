@@ -12,11 +12,9 @@ export function getURLSearchParams(
     {},
   )
 
-  if (isString(query))
-    return result[query]
+  if (isString(query)) return result[query]
 
-  if (isArray(query))
-    return pick(result, query)
+  if (isArray(query)) return pick(result, query)
 
   return result
 }

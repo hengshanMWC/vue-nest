@@ -29,9 +29,7 @@ export function getRegisterRules(modelData: UpdateUserDto): FormRules {
       {
         required: true,
         validator(rule, value: string) {
-          if (!value.length)
-            return new Error('请输入密码')
-
+          if (!value.length) return new Error('请输入密码')
           else if (value.length < passwordMinLength)
             return new Error('密码不能少于8位数')
 
@@ -44,8 +42,7 @@ export function getRegisterRules(modelData: UpdateUserDto): FormRules {
       {
         required: true,
         validator(rule, value: string) {
-          if (!value.length)
-            return new Error('请输入二次确认密码')
+          if (!value.length) return new Error('请输入二次确认密码')
           else if (value !== modelData.password)
             return new Error('两次密码输入不一致')
 

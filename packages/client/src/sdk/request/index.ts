@@ -8,7 +8,9 @@ import { getRTexpExpired, getToken, setToken } from '@/utils/cache'
 
 import type { ApiResult } from '@/api'
 
-export type RefreshTokenRequestResult = ApiResult<ResultDataApi<CreateTokenResultDto>>
+export type RefreshTokenRequestResult = ApiResult<
+  ResultDataApi<CreateTokenResultDto>
+>
 export interface RequestEvent {
   error?: (error: Error) => void
   tokenExpire?: (error: AxiosError<any>) => void
@@ -20,9 +22,8 @@ export function createBusinessRequest(
   on: RequestEvent = {},
 ) {
   let refreshTokenRequestResult: RefreshTokenRequestResult | null = null
-  request.interceptors.request.use(async (config) => {
-    if (refreshTokenRequestResult)
-      await refreshTokenRequestResult
+  request.interceptors.request.use(async config => {
+    if (refreshTokenRequestResult) await refreshTokenRequestResult
 
     const token = getToken()
 
@@ -33,18 +34,14 @@ export function createBusinessRequest(
   })
 
   request.interceptors.response.use(
-    (response) => {
+    response => {
       const res = response?.data
       // res 有值
       if (res || response.config?.responseType === 'blob') {
         if (!(isUndefined(res.code) || isUndefined(res.msg))) {
-          if (res.code === AppHttpCode.SUCCESS)
-            return res.data || null
-
-          else
-            return Promise.reject(errCode(new Error(res.msg), res.code))
-        }
-        else {
+          if (res.code === AppHttpCode.SUCCESS) return res.data || null
+          else return Promise.reject(errCode(new Error(res.msg), res.code))
+        } else {
           return res
         }
       }
@@ -53,43 +50,43 @@ export function createBusinessRequest(
     async (error: AxiosError<any>) => {
       const response = error.response
       if (response?.status === 401) {
-        if (getRTexpExpired())
-          on.tokenExpire && on.tokenExpire(error)
+        if (getRTexpExpired()) on.tokenExpire && on.tokenExpire(error)
 
         const config = response?.config as AxiosRequestConfig
         if (refreshTokenRequest) {
           if (!refreshTokenRequestResult) {
             try {
-              refreshTokenRequestResult = refreshTokenRequest()
-                .catch((error) => {
-                  on.tokenExpire && on.tokenExpire(error)
-                  return error
-                })
+              refreshTokenRequestResult = refreshTokenRequest().catch(error => {
+                on.tokenExpire && on.tokenExpire(error)
+                return error
+              })
               const res = await refreshTokenRequestResult
               if (res?.code === AppHttpCode.SUCCESS) {
                 const data = res.data
                 setToken(data.accessToken, data.refreshToken)
                 // 返回触发 401 接口正常结果
-                config.headers = { ...config.headers, Authorization: data.accessToken }
+                config.headers = {
+                  ...config.headers,
+                  Authorization: data.accessToken,
+                }
                 return await request(config)
               }
-            }
-            catch (error) {
+            } catch (error) {
               on.error && on.error(error as Error)
-            }
-            finally {
+            } finally {
               refreshTokenRequestResult = null
             }
-          }
-          else {
+          } else {
             // 刷新 token 期间，将其他请求存入队列，刷新成功之后重新请求一次
             const res = await refreshTokenRequestResult
-            config.headers = { ...config.headers, Authorization: res.data.accessToken }
+            config.headers = {
+              ...config.headers,
+              Authorization: res.data.accessToken,
+            }
             return await request(config)
           }
         }
-      }
-      else {
+      } else {
         on.serverError && on.serverError(error)
         // ElNotification({
         //   title: '服务端错误',
@@ -99,7 +96,9 @@ export function createBusinessRequest(
         //   duration: 3000,
         // })
         const data = error?.response?.data
-        return Promise.reject(errCode(new Error(data.msg), data.code, { data: data.error }))
+        return Promise.reject(
+          errCode(new Error(data.msg), data.code, { data: data.error }),
+        )
       }
     },
   )

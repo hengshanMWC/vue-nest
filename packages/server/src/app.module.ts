@@ -4,7 +4,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { RedisClientOptions } from '@liaoliaots/nestjs-redis'
 import { APP_GUARD } from '@nestjs/core'
-import { ServeStaticModule, ServeStaticModuleOptions } from '@nestjs/serve-static'
+import {
+  ServeStaticModule,
+  ServeStaticModuleOptions,
+} from '@nestjs/serve-static'
 import { UserModule } from './system/user/user.module'
 import { AuthModule } from './system/auth/auth.module'
 
@@ -26,7 +29,8 @@ import { JwtAuthGuard } from './helpers/guards/auth.guard'
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
-        const fileUploadLocationConfig = config.get<string>('app.file.location') || './public/upload'
+        const fileUploadLocationConfig =
+          config.get<string>('app.file.location') || './public/upload'
         const rootPath = path.isAbsolute(fileUploadLocationConfig)
           ? `${fileUploadLocationConfig}`
           : path.join(process.cwd(), `${fileUploadLocationConfig}`)
