@@ -34,7 +34,7 @@ async function bootstrap() {
   const config = app.get(ConfigService)
 
   // 设置 api 访问前缀
-  const prefix = config.get<string>('app.prefix')
+  const prefix = config.get<string>('app.prefix') || ''
   app.setGlobalPrefix(prefix)
 
   // web 安全，防常见漏洞
@@ -100,7 +100,7 @@ async function bootstrap() {
 
   const fileUploadLocationConfig = config.get<string>('app.file.location')
   const fileUploadBastPath = normalize(
-    isAbsolute(fileUploadLocationConfig)
+    isAbsolute(fileUploadLocationConfig || '')
       ? `${fileUploadLocationConfig}`
       : join(process.cwd(), `${fileUploadLocationConfig}`),
   )
