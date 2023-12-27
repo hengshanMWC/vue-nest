@@ -5,6 +5,7 @@ import type { ResultData } from '@lib/store'
 import { AppHttpCode } from '@lib/base'
 import { omit } from 'lodash-es'
 import { effect } from 'vue'
+import type { UserInfo } from '@/stores/modules/user'
 import { getRegisterModel, getRegisterRules } from '@/model/business'
 import { fetchRegister } from '@/api'
 
@@ -77,7 +78,7 @@ function handleValidate(e: MouseEvent) {
   <n-form
     ref="formRef"
     :model="modelRef"
-    :rules="getRegisterRules(modelRef)"
+    :rules="getRegisterRules(modelRef as UserInfo)"
     :disabled="isLoading"
     @keyup.enter="handleValidate"
   >

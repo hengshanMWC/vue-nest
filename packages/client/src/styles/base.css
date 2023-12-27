@@ -23,3 +23,6 @@
     padding: 0 2rem;
   }
 } */
+.input:-internal-autofill-selected {
+  background-color: inherit;
+}

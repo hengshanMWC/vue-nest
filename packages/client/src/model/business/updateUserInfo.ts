@@ -6,7 +6,8 @@ import { getUserModel } from '../base'
 export const upDateUserInfoKeyList = ['avatar']
 
 export function getRegisterModel(): UpdateUserDto {
-  return pick(getUserModel(), 'avatar')
+  // TODO(ts)
+  return pick(getUserModel(), 'avatar') as UpdateUserDto
 }
 
 export function getRegisterRules(modelData: UpdateUserDto): FormRules {
@@ -43,7 +44,8 @@ export function getRegisterRules(modelData: UpdateUserDto): FormRules {
         required: true,
         validator(rule, value: string) {
           if (!value.length) return new Error('请输入二次确认密码')
-          else if (value !== modelData.password)
+          // TODO(ts)
+          else if (value !== (modelData as any).password)
             return new Error('两次密码输入不一致')
 
           return true

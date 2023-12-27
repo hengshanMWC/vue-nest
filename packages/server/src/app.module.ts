@@ -15,6 +15,7 @@ import configuration from './config'
 import { RedisModule } from './helpers/libs/redis/redis.module'
 import { OssModule } from './system/oss/oss.module'
 import { JwtAuthGuard } from './helpers/guards/auth.guard'
+import { APP_FILE_LOCATION } from './constant/default'
 
 @Module({
   imports: [
@@ -30,18 +31,10 @@ import { JwtAuthGuard } from './helpers/guards/auth.guard'
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         const fileUploadLocationConfig =
-          config.get<string>('app.file.location') || './public/upload'
+          config.get<string>('app.file.location') || APP_FILE_LOCATION
         const rootPath = path.isAbsolute(fileUploadLocationConfig)
           ? `${fileUploadLocationConfig}`
           : path.join(process.cwd(), `${fileUploadLocationConfig}`)
-        console.log({
-          rootPath,
-          exclude: [`${config.get('app.prefix')}`],
-          serveRoot: config.get('app.file.serveRoot'),
-          serveStaticOptions: {
-            cacheControl: true,
-          },
-        })
         return [
           {
             rootPath,

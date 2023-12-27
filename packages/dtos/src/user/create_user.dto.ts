@@ -1,7 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
 import {
-  IsEmail,
-  IsMobilePhone,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -24,18 +22,17 @@ export class CreateUserDto {
 
   @ApiProperty({ description: '手机号', required: false })
   @IsString({ message: 'phoneNum 类型错误，正确类型 string' })
-  @IsMobilePhone(
-    'zh-CN',
-    { strictMode: false },
-    { message: '请输入正确的手机号' },
-  )
+  // @IsMobilePhone(
+  //   'zh-CN',
+  //   { strictMode: false },
+  //   { message: '请输入正确的手机号' },
+  // )
   @IsOptional()
   // @IsPhoneNumber('CH', { message: '请输入正确的手机号' })
-  readonly phoneNum?: string
+  readonly phoneNum: string
 
   @ApiProperty({ description: '邮箱', required: false })
   @IsString({ message: 'email 类型错误，正确类型 string' })
-  @IsEmail()
   @IsOptional()
   readonly email?: string
 

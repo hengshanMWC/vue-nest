@@ -98,8 +98,7 @@ async function bootstrap() {
 
   await app.listen(port)
 
-  const fileUploadLocationConfig =
-    config.get<string>('app.file.location') || './public/upload'
+  const fileUploadLocationConfig = config.get<string>('app.file.location')
   const fileUploadBastPath = normalize(
     isAbsolute(fileUploadLocationConfig)
       ? `${fileUploadLocationConfig}`

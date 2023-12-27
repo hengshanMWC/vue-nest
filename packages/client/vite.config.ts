@@ -37,7 +37,9 @@ export default defineConfig((env: ConfigEnv) => {
       }),
       // https://juejin.cn/post/7267184905187999759
       VueI18nPlugin({
-        include: [fileURLToPath(new URL('./src/locales/lang/**.json', import.meta.url))],
+        include: [
+          fileURLToPath(new URL('./src/locales/lang/**.json', import.meta.url)),
+        ],
         runtimeOnly: false,
         jitCompilation: true,
       }),

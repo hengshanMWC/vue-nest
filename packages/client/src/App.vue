@@ -7,6 +7,7 @@ import ContainerVue from './Container.vue'
 
 const { locale, themeRef } = storeToRefs(useSettingStore())
 const naiveLocales = reactive<NLocaleApi>(NAIVE_UI_LOCALES[locale.value])
+const themeOverrides = {}
 </script>
 
 <template>
@@ -14,6 +15,7 @@ const naiveLocales = reactive<NLocaleApi>(NAIVE_UI_LOCALES[locale.value])
     :locale="naiveLocales.locale"
     :date-locale="naiveLocales.dateLocale"
     :theme="THEME_LIST[themeRef]"
+    :theme-overrides="themeOverrides"
   >
     <n-message-provider>
       <ContainerVue />

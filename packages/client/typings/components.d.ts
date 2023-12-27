@@ -7,18 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Common: typeof import('./../src/components/modal/common.vue')['default']
     HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
     Locales: typeof import('./../src/components/Locales.vue')['default']
     Login: typeof import('./../src/components/login/Login.vue')['default']
-    LoginModal: typeof import('./../src/components/user/LoginModal.vue')['default']
     Modal: typeof import('./../src/components/login/Modal.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NButton: typeof import('naive-ui')['NButton']
-    NCard: typeof import('naive-ui')['NCard']
-    NCol: typeof import('naive-ui')['NCol']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
-    NDialogProvider: typeof import('naive-ui')['NDialogProvider']
     NDropdown: typeof import('naive-ui')['NDropdown']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
@@ -29,7 +24,6 @@ declare module 'vue' {
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NModal: typeof import('naive-ui')['NModal']
-    NRow: typeof import('naive-ui')['NRow']
     NSwitch: typeof import('naive-ui')['NSwitch']
     Register: typeof import('./../src/components/login/Register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

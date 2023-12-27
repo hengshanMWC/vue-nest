@@ -6,7 +6,7 @@ import { instanceToPlain, plainToInstance } from 'class-transformer'
 import { compare, genSalt, hash } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import ms from 'ms'
-
+import { isEmail } from 'class-validator'
 import { ResultData } from 'src/helpers/utils/result'
 import { AppHttpCode, RedisKeyPrefix, UserType } from '@lib/base'
 import {
@@ -21,6 +21,7 @@ import { validEmail, validPhone } from 'src/helpers/utils/validate'
 
 import { getRedisKey } from 'src/helpers/utils/helpers'
 import { UserEntity } from '@lib/entities'
+import { DEFAULT_AVATAR } from 'src/constant/default'
 
 @Injectable()
 export class UserService {
@@ -82,6 +83,12 @@ export class UserService {
         '当前手机号已存在，请调整后重新注册',
       )
     if (dto.email) {
+      if (isEmail(dto.email)) {
+        return ResultData.fail(
+          AppHttpCode.USER_CREATE_EXISTING_EMAIL,
+          '请输入正确的邮箱地址',
+        )
+      }
       if (await this.userRepo.findOne({ where: { email: dto.email } }))
         return ResultData.fail(
           AppHttpCode.USER_CREATE_EXISTING_EMAIL,
@@ -97,7 +104,7 @@ export class UserService {
       UserEntity,
       {
         salt,
-        avatar: 'https://vue-nest.com/public/images/default_avatar.png',
+        avatar: DEFAULT_AVATAR,
         ...dto,
       },
       { ignoreDecorators: true },

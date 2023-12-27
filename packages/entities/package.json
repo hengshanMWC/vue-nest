@@ -31,5 +31,8 @@
   "devDependencies": {
     "@vitest/coverage-c8": "^0.31.0",
     "vite-tsconfig-paths": "^4.2.1"
+  },
+  "dependencies": {
+    "@lib/base": "workspace:^"
   }
 }

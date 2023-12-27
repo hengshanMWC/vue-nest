@@ -21,7 +21,7 @@
     "init": "pnpm i && npm run prepare",
     "start:all": "pnpm build:libs && pnpm start:items",
     "start:items": "pnpm --filter=\"@item/*\" start",
-    "build:libs": "pnpm -r --filter=\"@lib/*\" build",
+    "build:libs": "pnpm --filter=\"@lib/base\" build & pnpm --filter=\"@lib/store\" build & pnpm --filter=\"@lib/routers\" build && pnpm --filter=\"@lib/entities\" build && pnpm --filter=\"@lib/dtos\" build",
     "build": "pkgs run build",
     "test": "pkgs run test",
     "test:cov": "pkgs run test:cov",
@@ -58,9 +58,9 @@
     "stylelint": "^15.11.0",
     "ts-loader": "^9.4.3",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9",
+    "vite": "^5.0.10",
     "vitepress": "1.0.0-alpha.29",
-    "vitest": "^0.34.6"
+    "vitest": "^1.1.0"
   },
   "lint-staged": {
     "**/*.{js,cjs,mjs,ts,vue}": "pnpm format"

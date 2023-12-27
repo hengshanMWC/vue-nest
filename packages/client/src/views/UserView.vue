@@ -42,7 +42,7 @@ const disabled = computed(() => {
   console.log('modelDataRef', modelDataRef.value)
   if (modelDataRef.value) {
     return !Object.keys(omit(modelData, 'email')).every(
-      key => modelDataRef.value[key as keyof typeof modelData],
+      key => (modelDataRef as any).value[key as keyof typeof modelData],
     )
   } else {
     return true
